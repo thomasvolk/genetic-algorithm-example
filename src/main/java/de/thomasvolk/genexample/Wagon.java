@@ -10,7 +10,4 @@ public class Wagon {
         this.sitzplatzListe = sitzplatzListe;
     }
 
-    public Collection<Sitzplatz> getSitzplatzListe() {
-        return sitzplatzListe;
-    }
 }

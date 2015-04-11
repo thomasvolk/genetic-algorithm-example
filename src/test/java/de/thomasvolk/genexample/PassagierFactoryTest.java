@@ -11,7 +11,9 @@ public class PassagierFactoryTest {
     @Test
     public void lesen() throws IOException {
         PassagierFactory factory = new PassagierFactory();
-        Collection<Passagier> pasagiere = factory.lese(getClass().getResourceAsStream("/passagiere.csv"));
-        assertEquals(98, pasagiere.size());
+        Collection<Passagier> pasagiere = factory.lese(getClass().getResourceAsStream("/passagiere.csv"), 10);
+        assertEquals(10, pasagiere.size());
+        pasagiere = factory.lese(getClass().getResourceAsStream("/passagiere.csv"), 100);
+        assertEquals(100, pasagiere.size());
     }
 }
