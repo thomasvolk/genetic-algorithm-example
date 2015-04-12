@@ -33,8 +33,8 @@ class NumberOrderingFitnessFunction extends FitnessFunction {
 
 public class SimpleGeneticTest {
     private static final int MAX_EVOLUTION = 1000;
-    public static int[] EXPECTED = {0,1,2,3,4,5,6,7,8,9};
-    public static int[] START = {7,5,2,4,0,6,3,1,9,8};
+    public static int[] EXPECTED = {0,0,1,2,3,4,5,6,7,8,9};
+    public static int[] START = {0,7,5,2,4,0,6,3,1,9,8};
 
 
     @Test
