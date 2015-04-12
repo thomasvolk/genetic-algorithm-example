@@ -33,18 +33,21 @@ class NumberOrderingFitnessFunction extends FitnessFunction {
 
 public class SimpleGeneticTest {
     private static final int MAX_EVOLUTION = 1000;
-    public static int[] EXPECTED = {0,0,1,2,3,4,5,6,7,8,9};
-    public static int[] START = {0,7,5,2,4,0,6,3,1,9,8};
+    public static int[] EXPECTED = {0,1,2,3,4,5,6,7,8,9};
+    public static int[] START = {7,5,2,4,0,6,3,1,9,8};
 
 
     @Test
     public void run() throws Exception {
         Genotype population = create(1000);
+        System.out.println("init");
+        System.out.println(getRepresetation(population.getFittestChromosome()));
+        System.out.println("start");
         for (int i = 0; i < MAX_EVOLUTION; i++) {
             population.evolve();
             IChromosome solution = population.getFittestChromosome();
             int fitnessValue = (int) solution.getFitnessValue();
-            if(i % 100 == 0) {
+            if(i % 10 == 0) {
                 System.out.println(getRepresetation(solution) + " - " + fitnessValue);
             }
             if (fitnessValue == EXPECTED.length) {
@@ -54,8 +57,7 @@ public class SimpleGeneticTest {
 
         IChromosome solution = population.getFittestChromosome();
         int fitnessValue = (int) solution.getFitnessValue();
-        System.out.println("-----------------------------------------------");
-        System.out.println("The solution has a fitness value of " + fitnessValue);
+        System.out.println("result - fitness-value: " + fitnessValue);
         System.out.println(getRepresetation(solution));
     }
 
@@ -66,7 +68,9 @@ public class SimpleGeneticTest {
     private static Genotype create(int popSize) throws InvalidConfigurationException {
         Configuration conf = new DefaultConfiguration();
         conf.getGeneticOperators().clear();
-        conf.addGeneticOperator(new SwappingMutationOperator(conf));
+        SwappingMutationOperator swap = new SwappingMutationOperator(conf);
+        swap.setStartOffset(0);
+        conf.addGeneticOperator(swap);
         conf.setPreservFittestIndividual(true);
         conf.setKeepPopulationSizeConstant(false);
         conf.setPopulationSize(popSize);
