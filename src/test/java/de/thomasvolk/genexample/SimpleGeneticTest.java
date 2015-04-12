@@ -34,7 +34,7 @@ class NumberOrderingFitnessFunction extends FitnessFunction {
 public class SimpleGeneticTest {
     private static final int MAX_EVOLUTION = 1000;
     public static int[] EXPECTED = {0,1,2,3,4,5,6,7,8,9};
-    public static int[] START = {7,5,2,4,0,6,3,1,9,8};
+    public static int[] START = {7,5,4,2,0,6,3,1,9,8};
 
 
     @Test
@@ -47,22 +47,21 @@ public class SimpleGeneticTest {
             population.evolve();
             IChromosome solution = population.getFittestChromosome();
             int fitnessValue = (int) solution.getFitnessValue();
-            if(i % 10 == 0) {
-                System.out.println(getRepresetation(solution) + " - " + fitnessValue);
-            }
+            System.out.println(getRepresetation(solution));
             if (fitnessValue == EXPECTED.length) {
                 break;
             }
         }
 
         IChromosome solution = population.getFittestChromosome();
-        int fitnessValue = (int) solution.getFitnessValue();
-        System.out.println("result - fitness-value: " + fitnessValue);
+        System.out.println("result");
         System.out.println(getRepresetation(solution));
     }
 
-    private String getRepresetation(IChromosome solution) {
-        return Arrays.stream(solution.getGenes()).map(g -> String.valueOf(g.getAllele())).reduce("", (s, g) -> s + " " + g);
+    private String getRepresetation(IChromosome chromosome) {
+        int fitnessValue = (int) chromosome.getFitnessValue();
+        return Arrays.stream(chromosome.getGenes()).map(g -> String.valueOf(g.getAllele())).reduce("", (s, g) -> s + " " + g) +
+                " -> fitness: " + fitnessValue;
     }
 
     private static Genotype create(int popSize) throws InvalidConfigurationException {
