@@ -10,7 +10,6 @@ import java.util.Arrays;
 import java.util.List;
 
 class NumberOrderingFitnessFunction extends FitnessFunction {
-
     private final int[] expected;
 
     NumberOrderingFitnessFunction(int[] expected) {
@@ -35,10 +34,9 @@ public class SimpleGeneticTest {
     public static int[] EXPECTED = {0,1,2,3,4,5,6,7,8,9};
     public static int[] START = {7,5,4,2,0,6,3,1,9,8};
 
-
     @Test
     public void run() throws Exception {
-        Genotype population = create(1000);
+        Genotype population = create(1000, START, new NumberOrderingFitnessFunction(EXPECTED));
         System.out.println("init");
         System.out.println(getRepresentation(population.getFittestChromosome()));
         System.out.println("start");
@@ -51,19 +49,12 @@ public class SimpleGeneticTest {
                 break;
             }
         }
-
         IChromosome solution = population.getFittestChromosome();
         System.out.println("result");
         System.out.println(getRepresentation(solution));
     }
 
-    private String getRepresentation(IChromosome chromosome) {
-        int fitnessValue = (int) chromosome.getFitnessValue();
-        return Arrays.stream(chromosome.getGenes()).map(g -> String.valueOf(g.getAllele())).reduce("", (s, g) -> s + " " + g) +
-                " -> fitness: " + fitnessValue;
-    }
-
-    private static Genotype create(int popSize) throws InvalidConfigurationException {
+    private static Genotype create(int popSize, int[] startGenes, FitnessFunction fitnessFunction) throws InvalidConfigurationException {
         Configuration conf = new DefaultConfiguration();
         conf.getGeneticOperators().clear();
         SwappingMutationOperator swap = new SwappingMutationOperator(conf);
@@ -73,19 +64,24 @@ public class SimpleGeneticTest {
         conf.setKeepPopulationSizeConstant(false);
         conf.setPopulationSize(popSize);
 
-        FitnessFunction myFunc = new NumberOrderingFitnessFunction(EXPECTED);
-        conf.setFitnessFunction(myFunc);
-        IChromosome sampleChromosome = new Chromosome(conf, new IntegerGene(conf), START.length);
+        conf.setFitnessFunction(fitnessFunction);
+        IChromosome sampleChromosome = new Chromosome(conf, new IntegerGene(conf), startGenes.length);
         conf.setSampleChromosome(sampleChromosome);
         Genotype genotype = Genotype.randomInitialGenotype(conf);
         List<IChromosome> chrmosomes = genotype.getPopulation().getChromosomes();
         for(IChromosome chromosome: chrmosomes) {
-            for (int i = 0; i < START.length; i++) {
+            for (int i = 0; i < startGenes.length; i++) {
                 Gene gene = chromosome.getGene(i);
-                gene.setAllele(START[i]);
+                gene.setAllele(startGenes[i]);
             }
         }
         return genotype;
+    }
+
+    private String getRepresentation(IChromosome chromosome) {
+        int fitnessValue = (int) chromosome.getFitnessValue();
+        return Arrays.stream(chromosome.getGenes()).map(g -> String.valueOf(g.getAllele())).reduce("", (s, g) -> s + " " + g) +
+                " -> fitness: " + fitnessValue;
     }
 
 
