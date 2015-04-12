@@ -14,5 +14,6 @@ public class SitzplatzFactoryTest {
         SitzplatzFactory factory = new SitzplatzFactory();
         Collection<Sitzplatz> sitzplatzListe = factory.lese(getClass().getResourceAsStream("/wagon.txt"));
         assertEquals(98, sitzplatzListe.size());
+        //sitzplatzListe.stream().forEach( s -> System.out.println(s));
     }
 }

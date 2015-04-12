@@ -6,10 +6,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 public class SitzplatzFactory {
 
-    public Sitzplatz erzeuge(int reihe, int position, int breite, char eigenschaft) {
+    public Sitzplatz erzeuge(int nummer, int reihe, int position, int breite, char eigenschaft) {
         boolean inFahrtrichtung;
         boolean abteil;
         switch (eigenschaft) {
@@ -35,7 +36,7 @@ public class SitzplatzFactory {
         int fensterRechts = breite - 1;
         int fensterLinks = 0;
         boolean fenster = position == fensterRechts || position == fensterLinks;
-        return new Sitzplatz(reihe, position, fenster, inFahrtrichtung, abteil);
+        return new Sitzplatz(nummer, reihe, position, fenster, inFahrtrichtung, abteil);
     }
 
     public Collection<Sitzplatz> lese(InputStream is) throws IOException {
@@ -44,15 +45,17 @@ public class SitzplatzFactory {
         Collection<Sitzplatz> sitzplatzListe = new ArrayList<>();
         int breite = lines.length;
         int position = breite - 1;
-        int reihe = 0;
         for(String line: lines) {
-            for(char eigenschaft: line.toCharArray()) {
-                Sitzplatz sitzplatz = erzeuge(reihe, position, breite, eigenschaft);
+            int reihe = 0;
+            for (char eigenschaft : line.toCharArray()) {
+                int nummer = (reihe * breite) + position + 1;
+                Sitzplatz sitzplatz = erzeuge(nummer, reihe, position, breite, eigenschaft);
                 sitzplatzListe.add(sitzplatz);
                 reihe++;
             }
             position--;
         }
-        return sitzplatzListe;
+        return sitzplatzListe.stream().sorted( (s1, s2) -> s1.getNummer() - s2.getNummer() ).collect(
+                Collectors.toCollection(ArrayList::new));
     }
 }

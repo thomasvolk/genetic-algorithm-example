@@ -32,4 +32,30 @@ public class Passagier {
     public int getFahrtRichtung() {
         return fahrtRichtung;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Passagier passagier = (Passagier) o;
+
+        return id == passagier.id;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return "Passagier{" +
+                "id=" + id +
+                ", fensterPlatz=" + fensterPlatz +
+                ", abteil=" + abteil +
+                ", fahrtRichtung=" + fahrtRichtung +
+                '}';
+    }
 }
