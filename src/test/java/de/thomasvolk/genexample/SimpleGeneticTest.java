@@ -3,13 +3,11 @@ package de.thomasvolk.genexample;
 import org.jgap.*;
 import org.jgap.impl.DefaultConfiguration;
 import org.jgap.impl.IntegerGene;
-import org.jgap.impl.SetGene;
+import org.jgap.impl.SwappingMutationOperator;
 import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Set;
 
 class NumberOrderingFitnessFunction extends FitnessFunction {
 
@@ -33,17 +31,22 @@ class NumberOrderingFitnessFunction extends FitnessFunction {
 
 
 public class SimpleGeneticTest {
-    private static final int MAX_EVOLUTION = 10000;
-    public static int[] EXPECTED = {0,1,2,3,4,5,6,7,8,9,10};
+    private static final int MAX_EVOLUTION = 1000;
+    public static int[] EXPECTED = {0,1,2,3,4,5,6,7,8,9};
+    public static int[] START = {7,5,2,4,0,6,3,1,9,8};
+
 
     @Test
     public void run() throws Exception {
-        Genotype population = create(1000);
+        Genotype population = create(10000);
         for (int i = 0; i < MAX_EVOLUTION; i++) {
             population.evolve();
             IChromosome solution = population.getFittestChromosome();
-            System.out.println(getRepresetation(solution));
-            if (((int)solution.getFitnessValue()) == EXPECTED.length) {
+            int fitnessValue = (int) solution.getFitnessValue();
+            if(i % 100 == 0) {
+                System.out.println(getRepresetation(solution) + " - " + fitnessValue);
+            }
+            if (fitnessValue == EXPECTED.length) {
                 break;
             }
         }
@@ -61,15 +64,18 @@ public class SimpleGeneticTest {
 
     private static Genotype create(int popSize) throws InvalidConfigurationException {
         Configuration conf = new DefaultConfiguration();
+        conf.getGeneticOperators().clear();
+        conf.addGeneticOperator(new SwappingMutationOperator(conf));
         conf.setPreservFittestIndividual(true);
+        conf.setKeepPopulationSizeConstant(true);
 
         FitnessFunction myFunc = new NumberOrderingFitnessFunction(EXPECTED);
         conf.setFitnessFunction(myFunc);
 
-        IChromosome sampleChromosome = new Chromosome(conf, 1);
+        IChromosome sampleChromosome = new Chromosome(conf, EXPECTED.length);
         Collection<Gene> genes = new ArrayList<>();
-        for (int e : EXPECTED) {
-            genes.add(new IntegerGene(conf, 0, EXPECTED.length - 1));
+        for (int e : START) {
+            genes.add(new IntegerGene(conf, e, e));
         }
         sampleChromosome.setGenes(genes.toArray(new Gene[genes.size()]));
         conf.setSampleChromosome(sampleChromosome);
