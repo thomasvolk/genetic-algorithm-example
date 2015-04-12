@@ -8,6 +8,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 class NumberOrderingFitnessFunction extends FitnessFunction {
 
@@ -38,7 +39,7 @@ public class SimpleGeneticTest {
 
     @Test
     public void run() throws Exception {
-        Genotype population = create(10000);
+        Genotype population = create(1000);
         for (int i = 0; i < MAX_EVOLUTION; i++) {
             population.evolve();
             IChromosome solution = population.getFittestChromosome();
@@ -67,21 +68,22 @@ public class SimpleGeneticTest {
         conf.getGeneticOperators().clear();
         conf.addGeneticOperator(new SwappingMutationOperator(conf));
         conf.setPreservFittestIndividual(true);
-        conf.setKeepPopulationSizeConstant(true);
+        conf.setKeepPopulationSizeConstant(false);
+        conf.setPopulationSize(popSize);
 
         FitnessFunction myFunc = new NumberOrderingFitnessFunction(EXPECTED);
         conf.setFitnessFunction(myFunc);
-
-        IChromosome sampleChromosome = new Chromosome(conf, EXPECTED.length);
-        Collection<Gene> genes = new ArrayList<>();
-        for (int e : START) {
-            genes.add(new IntegerGene(conf, e, e));
-        }
-        sampleChromosome.setGenes(genes.toArray(new Gene[genes.size()]));
+        IChromosome sampleChromosome = new Chromosome(conf, new IntegerGene(conf), START.length);
         conf.setSampleChromosome(sampleChromosome);
-        conf.setPopulationSize(popSize);
-
-        return Genotype.randomInitialGenotype(conf);
+        Genotype genotype = Genotype.randomInitialGenotype(conf);
+        List<IChromosome> chrmosomes = genotype.getPopulation().getChromosomes();
+        for(IChromosome chromosome: chrmosomes) {
+            for (int i = 0; i < START.length; i++) {
+                Gene gene = chromosome.getGene(i);
+                gene.setAllele(START[i]);
+            }
+        }
+        return genotype;
     }
 
 
