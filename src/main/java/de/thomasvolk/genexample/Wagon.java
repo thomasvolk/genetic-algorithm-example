@@ -13,6 +13,10 @@ public class Wagon {
     }
 
     public double getZufriedenheit(int[] passagierReihenfolge) {
+        if(passagierReihenfolge.length != passagierListe.size()) {
+            throw new IllegalStateException(String.format(
+                    "Reihenfolge Laenge=%s weicht von Passagier Anzahl %s ab.", passagierReihenfolge.length, passagierListe.size()));
+        }
         return 0.0;
     }
 
