@@ -31,27 +31,30 @@ class NumberOrderingFitnessFunction extends FitnessFunction {
 
 public class SimpleGeneticTest {
     private static final int MAX_EVOLUTION = 1000;
+    private static final int POPULATION_SIZE = 6;
     public static int[] EXPECTED = {0,1,2,3,4,5,6,7,8,9};
     public static int[] START = {7,5,4,2,0,6,3,1,9,8};
 
     @Test
     public void run() throws Exception {
-        Genotype population = create(1000, START, new NumberOrderingFitnessFunction(EXPECTED));
+        Genotype genotype = create(POPULATION_SIZE, START, new NumberOrderingFitnessFunction(EXPECTED));
         System.out.println("init");
-        System.out.println(getRepresentation(population.getFittestChromosome()));
-        System.out.println("start");
+        System.out.println(toString(genotype.getFittestChromosome()));
         for (int i = 0; i < MAX_EVOLUTION; i++) {
-            population.evolve();
-            IChromosome solution = population.getFittestChromosome();
+            System.out.println("evolution step: " + i);
+            genotype.evolve();
+            List<IChromosome> chromosomes = genotype.getPopulation().getChromosomes();
+            chromosomes.stream().forEach(c -> System.out.println("        " + toString(c)));
+            IChromosome solution = genotype.getFittestChromosome();
             int fitnessValue = (int) solution.getFitnessValue();
-            System.out.println(getRepresentation(solution));
+            System.out.println("fittest:" + toString(solution));
             if (fitnessValue == EXPECTED.length) {
                 break;
             }
         }
-        IChromosome solution = population.getFittestChromosome();
+        IChromosome solution = genotype.getFittestChromosome();
         System.out.println("result");
-        System.out.println(getRepresentation(solution));
+        System.out.println(toString(solution));
     }
 
     private static Genotype create(int popSize, int[] startGenes, FitnessFunction fitnessFunction) throws InvalidConfigurationException {
@@ -78,7 +81,7 @@ public class SimpleGeneticTest {
         return genotype;
     }
 
-    private String getRepresentation(IChromosome chromosome) {
+    private String toString(IChromosome chromosome) {
         int fitnessValue = (int) chromosome.getFitnessValue();
         return Arrays.stream(chromosome.getGenes()).map(g -> String.valueOf(g.getAllele())).reduce("", (s, g) -> s + " " + g) +
                 " -> fitness: " + fitnessValue;
