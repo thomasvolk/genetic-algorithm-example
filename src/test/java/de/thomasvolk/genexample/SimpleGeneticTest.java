@@ -5,9 +5,8 @@ import org.jgap.impl.DefaultConfiguration;
 import org.jgap.impl.IntegerGene;
 import org.jgap.impl.SwappingMutationOperator;
 import org.junit.Test;
-import java.util.ArrayList;
+
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 class NumberOrderingFitnessFunction extends FitnessFunction {
@@ -41,13 +40,13 @@ public class SimpleGeneticTest {
     public void run() throws Exception {
         Genotype population = create(1000);
         System.out.println("init");
-        System.out.println(getRepresetation(population.getFittestChromosome()));
+        System.out.println(getRepresentation(population.getFittestChromosome()));
         System.out.println("start");
         for (int i = 0; i < MAX_EVOLUTION; i++) {
             population.evolve();
             IChromosome solution = population.getFittestChromosome();
             int fitnessValue = (int) solution.getFitnessValue();
-            System.out.println(getRepresetation(solution));
+            System.out.println(getRepresentation(solution));
             if (fitnessValue == EXPECTED.length) {
                 break;
             }
@@ -55,10 +54,10 @@ public class SimpleGeneticTest {
 
         IChromosome solution = population.getFittestChromosome();
         System.out.println("result");
-        System.out.println(getRepresetation(solution));
+        System.out.println(getRepresentation(solution));
     }
 
-    private String getRepresetation(IChromosome chromosome) {
+    private String getRepresentation(IChromosome chromosome) {
         int fitnessValue = (int) chromosome.getFitnessValue();
         return Arrays.stream(chromosome.getGenes()).map(g -> String.valueOf(g.getAllele())).reduce("", (s, g) -> s + " " + g) +
                 " -> fitness: " + fitnessValue;
