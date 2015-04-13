@@ -9,29 +9,34 @@ public class Wagon {
     private final Passagier[] passagierListe;
     private int[] passagierReihenfolge;
 
+    private static int[] getInitialPassagierReihenfolge(Collection<Passagier> passagierListe) {
+        int[] passagierReihenfolge = new int[passagierListe.size()];
+        for(int i=0; i < passagierListe.size(); i++) {
+            passagierReihenfolge[i] = i;
+        }
+        return passagierReihenfolge;
+    }
+
     public Wagon(Collection<Sitzplatz> sitzplatzListe, Collection<Passagier> passagierListe) {
+        this(sitzplatzListe, passagierListe, getInitialPassagierReihenfolge(passagierListe));
+    }
+
+    public Wagon(Collection<Sitzplatz> sitzplatzListe, Collection<Passagier> passagierListe, int[] passagierReihenfolge) {
         this.sitzplatzListe = sitzplatzListe.toArray(new Sitzplatz[sitzplatzListe.size()]);
         this.passagierListe = passagierListe.toArray(new Passagier[passagierListe.size()]);
         if(sitzplatzListe.size() != passagierListe.size()) {
             throw new IllegalStateException(String.format(
                     "Sitzplatzanzah %s weicht von Passagieranzahl %s ab!", sitzplatzListe.size(), passagierListe.size()));
         }
-        passagierReihenfolge = new int[passagierListe.size()];
-        for(int i=0; i < passagierListe.size(); i++) {
-            passagierReihenfolge[i] = i;
+        if(passagierReihenfolge.length != passagierListe.size()) {
+            throw new IllegalStateException(String.format(
+                    "Laenge der Reihenfolge %s weicht von Passagieranzahl %s ab!", passagierReihenfolge.length, passagierListe.size()));
         }
+        this.passagierReihenfolge = passagierReihenfolge;
     }
 
     public int[] getPassagierReihenfolge() {
         return passagierReihenfolge;
-    }
-
-    public void setPassagierReihenfolge(int[] passagierReihenfolge) {
-        if(passagierReihenfolge.length != passagierListe.length) {
-            throw new IllegalStateException(String.format(
-                    "Laenge der Reihenfolge %s weicht von Passagieranzahl %s ab!", passagierReihenfolge.length, passagierListe.length));
-        }
-        this.passagierReihenfolge = passagierReihenfolge;
     }
 
     public double getZufriedenheit() {

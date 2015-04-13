@@ -28,7 +28,7 @@ public class Wertung {
 
     @Override
     public String toString() {
-        return "Wuensche{" +
+        return "Wertug{" +
                 "fensterPlatz=" + fensterPlatz +
                 ", abteil=" + abteil +
                 ", fahrtRichtung=" + fahrtRichtung +
