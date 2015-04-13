@@ -12,6 +12,11 @@ public class AbstractWagonTest {
     private final List<Sitzplatz> sitzPlaetze = new SitzplatzFactory().lese("GgGaA\nGgGaA\nGgGaA");
     //                                   Einfachgewichtung                   : 21223  10112  21223
     //                                          "          ohne Fahrtrichtung: 11122  00011  11122
+    /*
+    GgGaA
+    GgGaA
+    GgGaA
+     */
 
     public List<Sitzplatz> getSitzPlaetze() {
         return sitzPlaetze;
