@@ -35,7 +35,7 @@ public class Wagon {
     }
 
     public double getZufriedenheit() {
-        return 0.0;
+        return getSitzplatzVergabeListe().stream().map(SitzplatzVergabe::getZufriedenheit).reduce(0.0, (a, v) -> a + v);
     }
 
     public Collection<SitzplatzVergabe> getSitzplatzVergabeListe() {
