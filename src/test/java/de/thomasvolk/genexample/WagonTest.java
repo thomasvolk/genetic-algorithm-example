@@ -1,5 +1,6 @@
 package de.thomasvolk.genexample;
 
+import de.thomasvolk.genexample.algorithmus.FirstComeFirstServed;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -39,5 +40,21 @@ public class WagonTest {
                 new Wertung(Wertung.EINFACHE_GEWICHTUNG,Wertung.EINFACHE_GEWICHTUNG,Wertung.NULL_GEWICHTUNG));
         Wagon wagon = new Wagon(sitzPlaetze, passagiere);
         assertEquals(Wertung.EINFACHE_GEWICHTUNG * 16, wagon.getZufriedenheit(), 0);
+    }
+
+    @Test(expected = ArrayStoreException.class)
+    public void dubeltten() {
+        List<Passagier> passagiere = getPassagiere(0, ANZAHL_SITZPLAETZE, Wertung.NULL);
+        new Wagon(sitzPlaetze, passagiere, new int[] {0,1,2,3,4,5,12,7,8,9,10,11,12,13,14});
+    }
+
+
+    @Test
+    public void konvensionell() {
+        List<Passagier> passagiere = getPassagiere(0, ANZAHL_SITZPLAETZE, Wertung.NULL);
+        FirstComeFirstServed algorithmus = new FirstComeFirstServed(
+                sitzPlaetze.toArray(new Sitzplatz[sitzPlaetze.size()]),
+                passagiere.toArray(new Passagier[passagiere.size()]));
+        assertArrayEquals(new int[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14}, algorithmus.getPassagierReihenfolge());
     }
 }

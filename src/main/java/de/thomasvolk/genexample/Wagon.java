@@ -3,6 +3,9 @@ package de.thomasvolk.genexample;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Wagon {
     private final Sitzplatz[] sitzplatzListe;
@@ -28,15 +31,15 @@ public class Wagon {
             throw new IllegalStateException(String.format(
                     "Sitzplatzanzah %s weicht von Passagieranzahl %s ab!", sitzplatzListe.size(), passagierListe.size()));
         }
+        HashSet<Integer> sortierungSet = IntStream.of(passagierReihenfolge).mapToObj(i -> i).collect(Collectors.toCollection(HashSet::new));
         if(passagierReihenfolge.length != passagierListe.size()) {
-            throw new IllegalStateException(String.format(
+            throw new IndexOutOfBoundsException(String.format(
                     "Laenge der Reihenfolge %s weicht von Passagieranzahl %s ab!", passagierReihenfolge.length, passagierListe.size()));
         }
+        if(sortierungSet.size() != passagierListe.size()) {
+            throw new ArrayStoreException("Reihenfolge enthält dubletten!");
+        }
         this.passagierReihenfolge = passagierReihenfolge;
-    }
-
-    public int[] getPassagierReihenfolge() {
-        return passagierReihenfolge;
     }
 
     public double getZufriedenheit() {
@@ -45,8 +48,8 @@ public class Wagon {
 
     public Collection<SitzplatzVergabe> getSitzplatzVergabeListe() {
         Collection<SitzplatzVergabe> result = new ArrayList<>();
-        for(int i = 0; i < getPassagierReihenfolge().length; i++) {
-            int passagier = getPassagierReihenfolge()[i];
+        for(int i = 0; i < passagierReihenfolge.length; i++) {
+            int passagier = passagierReihenfolge[i];
             result.add(new SitzplatzVergabe(sitzplatzListe[i], passagierListe[passagier]));
         }
         return result;
