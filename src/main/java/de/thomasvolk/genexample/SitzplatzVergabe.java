@@ -10,15 +10,17 @@ class SitzplatzVergabe {
         this.passagier = passagier;
     }
 
-    public Sitzplatz getSitzplatz() {
-        return sitzplatz;
-    }
-
-    public Passagier getPassagier() {
-        return passagier;
-    }
-
     public double getZufriedenheit() {
-        return 0.0;
+        double value = 0.0;
+        if(sitzplatz.isAbteil()) {
+            value += passagier.getWertung().getAbteil();
+        }
+        if(sitzplatz.isFenster()) {
+            value += passagier.getWertung().getFensterPlatz();
+        }
+        if(sitzplatz.isInFahrtrichtung()) {
+            value += passagier.getWertung().getFahrtRichtung();
+        }
+        return value;
     }
 }

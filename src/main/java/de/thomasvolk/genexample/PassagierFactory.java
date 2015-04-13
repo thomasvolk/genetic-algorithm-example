@@ -10,7 +10,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -19,7 +18,8 @@ public class PassagierFactory {
     public static final String ABTEIL = "Abteil";
     public static final String FENSTERPLATZ = "Fensterplatz";
     public static final String IN_FAHRTRICHTUNG = "in Fahrtrichtung";
-    public static final String ID = "ID";
+    public static final int EINFACHE_GEWICHTUNG = 100;
+    public static final int NULL_GEWICHTUNG = 0;
 
     public List<Passagier> lese(InputStream is, int anzahl) throws IOException {
         List<Passagier> passagiere = new ArrayList<Passagier>();
@@ -29,16 +29,28 @@ public class PassagierFactory {
         while(records.hasNext() && i < anzahl) {
             CSVRecord record = records.next();
             i++;
-            String id = record.get(ID);
-            int fahrtrichtung = StringUtils.isEmpty(record.get(IN_FAHRTRICHTUNG).trim()) ? 0 : 1;
-            int fensterplatz = StringUtils.isEmpty(record.get(FENSTERPLATZ).trim()) ? 0 : 1;
-            int abteil = StringUtils.isEmpty(record.get(ABTEIL).trim()) ? 0 : 1;
-            passagiere.add(new Passagier(i, fensterplatz, abteil, fahrtrichtung));
+            int fahrtrichtung = getWertung(record.get(IN_FAHRTRICHTUNG));
+            int fensterplatz = getWertung(record.get(FENSTERPLATZ));
+            int abteil = getWertung(record.get(ABTEIL));
+            Passagier.Wertung wertung = new Passagier.Wertung(fensterplatz, abteil, fahrtrichtung);
+            passagiere.add(new Passagier(i, wertung));
         }
         while(i < anzahl) {
             i++;
             passagiere.add(new Passagier(i));
         }
         return passagiere;
+    }
+
+    private int getWertung(String inEingabe) {
+        String eingabe = inEingabe.trim();
+        if(StringUtils.isEmpty(eingabe)) {
+            return NULL_GEWICHTUNG;
+        }
+        try {
+            return Integer.valueOf(eingabe);
+        } catch (NumberFormatException e) {
+            return EINFACHE_GEWICHTUNG;
+        }
     }
 }
