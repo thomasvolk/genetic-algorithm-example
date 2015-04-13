@@ -8,7 +8,7 @@ public class Wertung {
     private final int abteil;
     private final int fahrtRichtung;
 
-    Wertung(int fensterPlatz, int abteil, int fahrtRichtung) {
+    public Wertung(int fensterPlatz, int abteil, int fahrtRichtung) {
         this.fensterPlatz = fensterPlatz;
         this.abteil = abteil;
         this.fahrtRichtung = fahrtRichtung;

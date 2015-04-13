@@ -22,11 +22,11 @@ public class FirstComeFirstServed {
     public int[] getPassagierReihenfolge() {
         List<Integer> passagierReihenfolge = new ArrayList<>();
         Set<SitzplatzVergabe> vergebenePlaetze = new HashSet<>();
-        for (Sitzplatz sp : sitzplatzListe) {
+        for (Passagier p : passagierListe) {
             SitzplatzVergabe besterPlatz = null;
             int index = 0;
             int ausgewaehlterPassagierIndex = 0;
-            for (Passagier p : passagierListe) {
+            for (Sitzplatz sp : sitzplatzListe) {
                 SitzplatzVergabe sitzplatzVergabe = new SitzplatzVergabe(sp, p);
                 if (!vergebenePlaetze.contains(sitzplatzVergabe) && !passagierReihenfolge.contains(index)) {
                     if (besterPlatz == null || sitzplatzVergabe.getZufriedenheit() > besterPlatz.getZufriedenheit()) {
