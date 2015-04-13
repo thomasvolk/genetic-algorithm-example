@@ -1,4 +1,4 @@
-package de.thomasvolk.genexample;
+package de.thomasvolk.genexample.test;
 
 import org.jgap.*;
 import org.jgap.impl.DefaultConfiguration;

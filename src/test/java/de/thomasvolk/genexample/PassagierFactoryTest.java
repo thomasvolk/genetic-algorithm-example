@@ -15,5 +15,6 @@ public class PassagierFactoryTest {
         assertEquals(10, pasagiere.size());
         pasagiere = factory.lese(getClass().getResourceAsStream("/passagiere.csv"), 100);
         assertEquals(100, pasagiere.size());
+
     }
 }

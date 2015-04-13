@@ -5,12 +5,12 @@ import org.apache.commons.io.IOUtils;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class SitzplatzFactory {
 
-    public Sitzplatz erzeuge(int nummer, int reihe, int position, int breite, char eigenschaft) {
+    private Sitzplatz erzeuge(int nummer, int reihe, int position, int breite, char eigenschaft) {
         boolean inFahrtrichtung;
         boolean abteil;
         switch (eigenschaft) {
@@ -31,7 +31,7 @@ public class SitzplatzFactory {
                 abteil = true;
                 break;
             default:
-                throw new IllegalStateException("unbekannte Eigenschaft: " + eigenschaft);
+                return null;
         }
         int fensterRechts = breite - 1;
         int fensterLinks = 0;
@@ -39,10 +39,10 @@ public class SitzplatzFactory {
         return new Sitzplatz(nummer, reihe, position, fenster, inFahrtrichtung, abteil);
     }
 
-    public Collection<Sitzplatz> lese(InputStream is) throws IOException {
+    public List<Sitzplatz> lese(InputStream is) throws IOException {
         String text = IOUtils.toString(is, "UTF-8").trim();
         String[] lines = text.split("\\n");
-        Collection<Sitzplatz> sitzplatzListe = new ArrayList<>();
+        List<Sitzplatz> sitzplatzListe = new ArrayList<>();
         int breite = lines.length;
         int position = breite - 1;
         for(String line: lines) {
@@ -50,7 +50,9 @@ public class SitzplatzFactory {
             for (char eigenschaft : line.toCharArray()) {
                 int nummer = (reihe * breite) + position + 1;
                 Sitzplatz sitzplatz = erzeuge(nummer, reihe, position, breite, eigenschaft);
-                sitzplatzListe.add(sitzplatz);
+                if(sitzplatz != null) {
+                    sitzplatzListe.add(sitzplatz);
+                }
                 reihe++;
             }
             position--;

@@ -12,6 +12,7 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 public class PassagierFactory {
 
@@ -20,8 +21,8 @@ public class PassagierFactory {
     public static final String IN_FAHRTRICHTUNG = "in Fahrtrichtung";
     public static final String ID = "ID";
 
-    public Collection<Passagier> lese(InputStream is, int anzahl) throws IOException {
-        Collection<Passagier> passagiere = new ArrayList<Passagier>();
+    public List<Passagier> lese(InputStream is, int anzahl) throws IOException {
+        List<Passagier> passagiere = new ArrayList<Passagier>();
         Reader in = new InputStreamReader(is);
         Iterator<CSVRecord> records = CSVFormat.EXCEL.withHeader().parse(in).iterator();
         int i = 0;
