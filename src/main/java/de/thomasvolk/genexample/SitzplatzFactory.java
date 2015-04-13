@@ -10,7 +10,8 @@ import java.util.stream.Collectors;
 
 public class SitzplatzFactory {
 
-    private Sitzplatz erzeuge(int nummer, int reihe, int position, int breite, char eigenschaft) {
+    private Sitzplatz erzeuge(int reihe, int position, int breite, char eigenschaft) {
+        int nummer = (reihe * breite) + position + 1;
         boolean inFahrtrichtung;
         boolean abteil;
         switch (eigenschaft) {
@@ -40,7 +41,10 @@ public class SitzplatzFactory {
     }
 
     public List<Sitzplatz> lese(InputStream is) throws IOException {
-        String text = IOUtils.toString(is, "UTF-8").trim();
+        return lese(IOUtils.toString(is, "UTF-8").trim());
+    }
+
+    public List<Sitzplatz> lese(String text) {
         String[] lines = text.split("\\n");
         List<Sitzplatz> sitzplatzListe = new ArrayList<>();
         int breite = lines.length;
@@ -48,8 +52,7 @@ public class SitzplatzFactory {
         for(String line: lines) {
             int reihe = 0;
             for (char eigenschaft : line.toCharArray()) {
-                int nummer = (reihe * breite) + position + 1;
-                Sitzplatz sitzplatz = erzeuge(nummer, reihe, position, breite, eigenschaft);
+                Sitzplatz sitzplatz = erzeuge(reihe, position, breite, eigenschaft);
                 if(sitzplatz != null) {
                     sitzplatzListe.add(sitzplatz);
                 }

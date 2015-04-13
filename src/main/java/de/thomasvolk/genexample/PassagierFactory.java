@@ -18,8 +18,6 @@ public class PassagierFactory {
     public static final String ABTEIL = "Abteil";
     public static final String FENSTERPLATZ = "Fensterplatz";
     public static final String IN_FAHRTRICHTUNG = "in Fahrtrichtung";
-    public static final int EINFACHE_GEWICHTUNG = 100;
-    public static final int NULL_GEWICHTUNG = 0;
 
     public List<Passagier> lese(InputStream is, int anzahl) throws IOException {
         List<Passagier> passagiere = new ArrayList<Passagier>();
@@ -32,12 +30,12 @@ public class PassagierFactory {
             int fahrtrichtung = getWertung(record.get(IN_FAHRTRICHTUNG));
             int fensterplatz = getWertung(record.get(FENSTERPLATZ));
             int abteil = getWertung(record.get(ABTEIL));
-            Passagier.Wertung wertung = new Passagier.Wertung(fensterplatz, abteil, fahrtrichtung);
+            Wertung wertung = new Wertung(fensterplatz, abteil, fahrtrichtung);
             passagiere.add(new Passagier(i, wertung));
         }
         while(i < anzahl) {
             i++;
-            passagiere.add(new Passagier(i));
+            passagiere.add(new Passagier(i, Wertung.NULL));
         }
         return passagiere;
     }
@@ -45,12 +43,12 @@ public class PassagierFactory {
     private int getWertung(String inEingabe) {
         String eingabe = inEingabe.trim();
         if(StringUtils.isEmpty(eingabe)) {
-            return NULL_GEWICHTUNG;
+            return Wertung.NULL_GEWICHTUNG;
         }
         try {
             return Integer.valueOf(eingabe);
         } catch (NumberFormatException e) {
-            return EINFACHE_GEWICHTUNG;
+            return Wertung.EINFACHE_GEWICHTUNG;
         }
     }
 }
