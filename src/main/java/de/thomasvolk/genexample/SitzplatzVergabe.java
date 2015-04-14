@@ -53,6 +53,7 @@ public class SitzplatzVergabe {
         return "SitzplatzVergabe{" +
                 "sitzplatz=" + sitzplatz.getNummer() +
                 ", passagier=" + passagier.getId() +
+                ", zufriedenheit=" + getZufriedenheit() +
                 '}';
     }
 }

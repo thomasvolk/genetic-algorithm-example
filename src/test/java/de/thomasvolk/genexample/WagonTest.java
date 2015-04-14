@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -39,6 +40,22 @@ public class WagonTest extends AbstractWagonTest {
     public void dubeltten() {
         List<Passagier> passagiere = getPassagiere(0, ANZAHL_SITZPLAETZE, Wertung.NULL);
         new Wagon(getSitzPlaetze(), passagiere, new int[] {0,1,2,3,4,5,12,7,8,9,10,11,12,13,14});
+    }
+
+    @Test
+    public void sortierung() {
+        List<Passagier> passagiere = getPassagiere(0, ANZAHL_SITZPLAETZE, Wertung.NULL);
+        Wagon wagon = new Wagon(getSitzPlaetze(), passagiere, new int[]{14, 0, 1, 2, 3, 4, 5, 12, 13, 8, 9, 10, 11, 6, 7});
+        List<SitzplatzVergabe> sitzplatzVergabeListe = wagon.getSitzplatzVergabeListe();
+        SitzplatzVergabe sitzplatzVergabe = sitzplatzVergabeListe.get(0);
+        assertEquals(0, sitzplatzVergabe.getPassagier().getId());
+        assertEquals(15, sitzplatzVergabe.getSitzplatz().getNummer());
+        sitzplatzVergabe = sitzplatzVergabeListe.get(14);
+        assertEquals(14, sitzplatzVergabe.getPassagier().getId());
+        assertEquals(8, sitzplatzVergabe.getSitzplatz().getNummer());
+        sitzplatzVergabe = sitzplatzVergabeListe.get(5);
+        assertEquals(5, sitzplatzVergabe.getPassagier().getId());
+        assertEquals(5, sitzplatzVergabe.getSitzplatz().getNummer());
     }
 
 }

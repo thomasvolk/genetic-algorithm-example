@@ -4,6 +4,7 @@ package de.thomasvolk.genexample;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -43,14 +44,16 @@ public class Wagon {
     }
 
     public double getZufriedenheit() {
+        System.out.println("----------------------------");
+        getSitzplatzVergabeListe().forEach( s -> System.out.println(s.toString()));
         return getSitzplatzVergabeListe().stream().map(SitzplatzVergabe::getZufriedenheit).reduce(0.0, (a, v) -> a + v);
     }
 
-    public Collection<SitzplatzVergabe> getSitzplatzVergabeListe() {
-        Collection<SitzplatzVergabe> result = new ArrayList<>();
+    public List<SitzplatzVergabe> getSitzplatzVergabeListe() {
+        List<SitzplatzVergabe> result = new ArrayList<>();
         for(int i = 0; i < passagierReihenfolge.length; i++) {
-            int passagier = passagierReihenfolge[i];
-            result.add(new SitzplatzVergabe(sitzplatzListe[i], passagierListe[passagier]));
+            int sitzplatz = passagierReihenfolge[i];
+            result.add(new SitzplatzVergabe(sitzplatzListe[sitzplatz], passagierListe[i]));
         }
         return result;
     }
