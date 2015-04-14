@@ -44,8 +44,6 @@ public class Wagon {
     }
 
     public double getZufriedenheit() {
-        System.out.println("----------------------------");
-        getSitzplatzVergabeListe().forEach( s -> System.out.println(s.toString()));
         return getSitzplatzVergabeListe().stream().map(SitzplatzVergabe::getZufriedenheit).reduce(0.0, (a, v) -> a + v);
     }
 
