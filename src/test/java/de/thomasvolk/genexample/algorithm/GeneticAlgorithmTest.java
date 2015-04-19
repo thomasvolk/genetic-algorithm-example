@@ -25,6 +25,7 @@ public class GeneticAlgorithmTest extends AbstractAlgorithmTest {
         int[] passagierReihenfolge = algorithmus.getPassagierReihenfolge();
         assertEquals(400, new Wagon(getSitzPlaetze(), passagiere).getZufriedenheit(), 0);
         assertArrayEquals(new int[]{12, 0, 2, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14}, passagierReihenfolge);
+        // TODO test a value range ...
         assertEquals(600, new Wagon(getSitzPlaetze(), passagiere, algorithmus.getPassagierReihenfolge()).getZufriedenheit(), 0);
     }
 
