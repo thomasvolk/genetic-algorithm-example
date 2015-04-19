@@ -12,13 +12,10 @@ import java.util.List;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
-public class FirstComeFirstServedTest extends AbstractAlgorithmTest {
-
+public class GeneticAlgorithmTest extends AbstractAlgorithmTest {
 
     protected Algorithmus getAlgorithmus(List<Passagier> passagiere) {
-        return new FirstComeFirstServed(
-                getSitzPlaetze().toArray(new Sitzplatz[getSitzPlaetze().size()]),
-                passagiere.toArray(new Passagier[passagiere.size()]));
+        throw new UnsupportedOperationException("not implemented jet");
     }
 
     @Test
@@ -30,7 +27,6 @@ public class FirstComeFirstServedTest extends AbstractAlgorithmTest {
         assertArrayEquals(new int[]{12, 0, 2, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14}, passagierReihenfolge);
         assertEquals(600, new Wagon(getSitzPlaetze(), passagiere, algorithmus.getPassagierReihenfolge()).getZufriedenheit(), 0);
     }
-
 
 
 }

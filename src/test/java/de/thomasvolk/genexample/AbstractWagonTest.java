@@ -16,6 +16,11 @@ public class AbstractWagonTest {
     GgGaA
     GgGaA
     GgGaA
+
+    2 5 8 11 14
+    1 4 7 10 13
+    0 3 6  9 12
+
      */
 
     public List<Sitzplatz> getSitzPlaetze() {

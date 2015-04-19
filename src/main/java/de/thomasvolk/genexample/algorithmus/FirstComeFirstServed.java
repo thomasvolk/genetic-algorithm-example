@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class FirstComeFirstServed {
+public class FirstComeFirstServed implements Algorithmus {
     private final Sitzplatz[] sitzplatzListe;
     private final Passagier[] passagierListe;
 
@@ -19,6 +19,7 @@ public class FirstComeFirstServed {
         this.passagierListe = passagierListe;
     }
 
+    @Override
     public int[] getPassagierReihenfolge() {
         List<Integer> passagierReihenfolge = new ArrayList<>();
         Set<SitzplatzVergabe> vergebenePlaetze = new HashSet<>();
