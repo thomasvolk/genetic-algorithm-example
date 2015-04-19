@@ -1,10 +1,7 @@
 package de.thomasvolk.genexample;
 
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -54,6 +51,10 @@ public class Wagon {
             result.add(new SitzplatzVergabe(sitzplatzListe[sitzplatz], passagierListe[i]));
         }
         return result;
+    }
+
+    public Wagon copy(int[] passagierReihenfolge) {
+       return new Wagon(Arrays.asList(sitzplatzListe), Arrays.asList(passagierListe), passagierReihenfolge);
     }
 
     @Override

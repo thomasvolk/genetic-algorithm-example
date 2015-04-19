@@ -12,7 +12,7 @@ import java.util.List;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
-public class FirstComeFirstServedTest extends AbstractAlgorithmTest {
+public class FirstComeFirstServedTest extends AbstractAlgorithmusTest {
 
 
     protected Algorithmus getAlgorithmus(List<Passagier> passagiere) {

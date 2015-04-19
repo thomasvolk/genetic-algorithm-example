@@ -3,7 +3,7 @@ package de.thomasvolk.genexample.algorithm;
 
 import de.thomasvolk.genexample.*;
 import de.thomasvolk.genexample.algorithmus.Algorithmus;
-import de.thomasvolk.genexample.algorithmus.FirstComeFirstServed;
+import de.thomasvolk.genexample.algorithmus.GeneticAlgorithmus;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -12,10 +12,10 @@ import java.util.List;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
-public class GeneticAlgorithmTest extends AbstractAlgorithmTest {
+public class GeneticAlgorithmusTest extends AbstractAlgorithmusTest {
 
     protected Algorithmus getAlgorithmus(List<Passagier> passagiere) {
-        throw new UnsupportedOperationException("not implemented jet");
+        return new GeneticAlgorithmus(passagiere.toArray(new Passagier[passagiere.size()]));
     }
 
     @Test
