@@ -10,24 +10,21 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class FirstComeFirstServed implements Algorithmus {
-    private final Sitzplatz[] sitzplatzListe;
-    private final Passagier[] passagierListe;
+public class FirstComeFirstServed extends AbstractAlgorithmus {
 
     public FirstComeFirstServed(Sitzplatz[] sitzplatzListe, Passagier[] passagierListe) {
-        this.sitzplatzListe = sitzplatzListe;
-        this.passagierListe = passagierListe;
+        super(passagierListe, sitzplatzListe);
     }
 
     @Override
     public int[] getPassagierReihenfolge() {
         List<Integer> passagierReihenfolge = new ArrayList<>();
         Set<SitzplatzVergabe> vergebenePlaetze = new HashSet<>();
-        for (Passagier p : passagierListe) {
+        for (Passagier p : getPassagierListe()) {
             SitzplatzVergabe besterPlatz = null;
             int index = 0;
             int ausgewaehlterPassagierIndex = 0;
-            for (Sitzplatz sp : sitzplatzListe) {
+            for (Sitzplatz sp : getSitzplatzListe()) {
                 SitzplatzVergabe sitzplatzVergabe = new SitzplatzVergabe(sp, p);
                 if (!vergebenePlaetze.contains(sitzplatzVergabe) && !passagierReihenfolge.contains(index)) {
                     if (besterPlatz == null || sitzplatzVergabe.getZufriedenheit() > besterPlatz.getZufriedenheit()) {
@@ -40,6 +37,6 @@ public class FirstComeFirstServed implements Algorithmus {
             vergebenePlaetze.add(besterPlatz);
             passagierReihenfolge.add(ausgewaehlterPassagierIndex);
         }
-        return ArrayUtils.toPrimitive(passagierReihenfolge.toArray(new Integer[passagierListe.length]));
+        return ArrayUtils.toPrimitive(passagierReihenfolge.toArray(new Integer[getPassagierListe().length]));
     }
 }

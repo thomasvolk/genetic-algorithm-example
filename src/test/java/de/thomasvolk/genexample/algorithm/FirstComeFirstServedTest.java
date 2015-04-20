@@ -15,15 +15,13 @@ import static org.junit.Assert.assertEquals;
 public class FirstComeFirstServedTest extends AbstractAlgorithmusTest {
 
 
-    protected Algorithmus getAlgorithmus(List<Passagier> passagiere) {
-        return new FirstComeFirstServed(
-                getSitzPlaetze().toArray(new Sitzplatz[getSitzPlaetze().size()]),
-                passagiere.toArray(new Passagier[passagiere.size()]));
+    protected Algorithmus getAlgorithmus(Passagier[]passagiere) {
+        return new FirstComeFirstServed(getSitzPlaetze(), passagiere);
     }
 
     @Test
     public void unterschiedlicheWertungen() throws IOException {
-        List<Passagier> passagiere = getPassagiere("fp,fr,ap\nfp,fr,\nfp,,");
+        Passagier[] passagiere = getPassagiere("fp,fr,ap\nfp,fr,\nfp,,");
         Algorithmus algorithmus = getAlgorithmus(passagiere);
         int[] passagierReihenfolge = algorithmus.getPassagierReihenfolge();
         assertEquals(400, new Wagon(getSitzPlaetze(), passagiere).getZufriedenheit(), 0);

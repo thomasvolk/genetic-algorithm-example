@@ -1,12 +1,12 @@
 package de.thomasvolk.genexample.algorithmus;
 
 import de.thomasvolk.genexample.Passagier;
+import de.thomasvolk.genexample.Sitzplatz;
 
-public class GeneticAlgorithmus implements Algorithmus {
-    private final Passagier[] passagierListe;
+public class GeneticAlgorithmus extends AbstractAlgorithmus {
 
-    public GeneticAlgorithmus(Passagier[] passagierListe) {
-        this.passagierListe = passagierListe;
+    public GeneticAlgorithmus(Passagier[] passagierListe, Sitzplatz[] sitzplatzListe) {
+        super(passagierListe, sitzplatzListe);
     }
 
     @Override

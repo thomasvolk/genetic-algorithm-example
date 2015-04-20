@@ -14,13 +14,13 @@ import static org.junit.Assert.assertEquals;
 
 public class GeneticAlgorithmusTest extends AbstractAlgorithmusTest {
 
-    protected Algorithmus getAlgorithmus(List<Passagier> passagiere) {
-        return new GeneticAlgorithmus(passagiere.toArray(new Passagier[passagiere.size()]));
+    protected Algorithmus getAlgorithmus(Passagier[] passagiere) {
+        return new GeneticAlgorithmus(passagiere, getSitzPlaetze());
     }
 
     @Test
     public void unterschiedlicheWertungen() throws IOException {
-        List<Passagier> passagiere = getPassagiere("fp,fr,ap\nfp,fr,\nfp,,");
+        Passagier[] passagiere = getPassagiere("fp,fr,ap\nfp,fr,\nfp,,");
         Algorithmus algorithmus = getAlgorithmus(passagiere);
         int[] passagierReihenfolge = algorithmus.getPassagierReihenfolge();
         assertEquals(400, new Wagon(getSitzPlaetze(), passagiere).getZufriedenheit(), 0);

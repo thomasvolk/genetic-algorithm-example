@@ -10,31 +10,31 @@ public class Wagon {
     private final Passagier[] passagierListe;
     private int[] passagierReihenfolge;
 
-    private static int[] getInitialPassagierReihenfolge(Collection<Passagier> passagierListe) {
-        int[] passagierReihenfolge = new int[passagierListe.size()];
-        for(int i=0; i < passagierListe.size(); i++) {
+    private static int[] getInitialPassagierReihenfolge(int length) {
+        int[] passagierReihenfolge = new int[length];
+        for(int i=0; i < length; i++) {
             passagierReihenfolge[i] = i;
         }
         return passagierReihenfolge;
     }
 
-    public Wagon(Collection<Sitzplatz> sitzplatzListe, Collection<Passagier> passagierListe) {
-        this(sitzplatzListe, passagierListe, getInitialPassagierReihenfolge(passagierListe));
+    public Wagon(Sitzplatz[] sitzplatzListe, Passagier[] passagierListe) {
+        this(sitzplatzListe, passagierListe, getInitialPassagierReihenfolge(passagierListe.length));
     }
 
-    public Wagon(Collection<Sitzplatz> sitzplatzListe, Collection<Passagier> passagierListe, int[] passagierReihenfolge) {
-        this.sitzplatzListe = sitzplatzListe.toArray(new Sitzplatz[sitzplatzListe.size()]);
-        this.passagierListe = passagierListe.toArray(new Passagier[passagierListe.size()]);
-        if(sitzplatzListe.size() != passagierListe.size()) {
+    public Wagon(Sitzplatz[] sitzplatzListe, Passagier[] passagierListe, int[] passagierReihenfolge) {
+        this.sitzplatzListe = sitzplatzListe;
+        this.passagierListe = passagierListe;
+        if(sitzplatzListe.length != passagierListe.length) {
             throw new IllegalStateException(String.format(
-                    "Sitzplatzanzah %s weicht von Passagieranzahl %s ab!", sitzplatzListe.size(), passagierListe.size()));
+                    "Sitzplatzanzah %s weicht von Passagieranzahl %s ab!", sitzplatzListe.length, passagierListe.length));
         }
         HashSet<Integer> sortierungSet = IntStream.of(passagierReihenfolge).mapToObj(i -> i).collect(Collectors.toCollection(HashSet::new));
-        if(passagierReihenfolge.length != passagierListe.size()) {
+        if(passagierReihenfolge.length != passagierListe.length) {
             throw new IndexOutOfBoundsException(String.format(
-                    "Laenge der Reihenfolge %s weicht von Passagieranzahl %s ab!", passagierReihenfolge.length, passagierListe.size()));
+                    "Laenge der Reihenfolge %s weicht von Passagieranzahl %s ab!", passagierReihenfolge.length, passagierListe.length));
         }
-        if(sortierungSet.size() != passagierListe.size()) {
+        if(sortierungSet.size() != passagierListe.length) {
             throw new ArrayStoreException("Reihenfolge enthält dubletten!");
         }
         this.passagierReihenfolge = passagierReihenfolge;
@@ -53,15 +53,22 @@ public class Wagon {
         return result;
     }
 
-    public Wagon copy(int[] passagierReihenfolge) {
-       return new Wagon(Arrays.asList(sitzplatzListe), Arrays.asList(passagierListe), passagierReihenfolge);
+    public Wagon copy(int[] newPassagierReihenfolge) {
+       return new Wagon(sitzplatzListe, passagierListe, newPassagierReihenfolge);
+    }
+
+    public Passagier[] getPassagierListe() {
+        return passagierListe;
+    }
+
+    public Sitzplatz[] getSitzplatzListe() {
+        return sitzplatzListe;
     }
 
     @Override
     public String toString() {
         return "Wagon{" +
-                "sitzplatzListe=" + sitzplatzListe +
-                ", passagierListe=" + passagierListe +
+                "passagierReihenfolge=" + Arrays.asList(passagierReihenfolge) +
                 '}';
     }
 }

@@ -12,11 +12,11 @@ import static org.junit.Assert.assertEquals;
 
 
 public abstract class AbstractAlgorithmusTest extends AbstractWagonTest {
-    protected abstract Algorithmus getAlgorithmus(List<Passagier> passagiere);
+    protected abstract Algorithmus getAlgorithmus(Passagier[] passagiere);
 
     @Test
     public void nullWertungen() {
-        List<Passagier> passagiere = getPassagiere(0, ANZAHL_SITZPLAETZE, Wertung.NULL);
+        Passagier[] passagiere = getPassagiere(0, ANZAHL_SITZPLAETZE, Wertung.NULL);
         Algorithmus algorithmus = getAlgorithmus(passagiere);
         assertArrayEquals(new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14}, algorithmus.getPassagierReihenfolge());
         Wagon wagon = new Wagon(getSitzPlaetze(), passagiere);
@@ -25,7 +25,7 @@ public abstract class AbstractAlgorithmusTest extends AbstractWagonTest {
 
     @Test
     public void einfacheWertungen() {
-        List<Passagier> passagiere = getPassagiere(0, ANZAHL_SITZPLAETZE,
+        Passagier[] passagiere = getPassagiere(0, ANZAHL_SITZPLAETZE,
                 new Wertung(Wertung.EINFACHE_GEWICHTUNG,Wertung.EINFACHE_GEWICHTUNG,Wertung.EINFACHE_GEWICHTUNG));
         Algorithmus algorithmus = getAlgorithmus(passagiere);
         Wagon wagon = new Wagon(getSitzPlaetze(), passagiere);

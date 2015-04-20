@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 
 public class AbstractWagonTest {
     protected static final int ANZAHL_SITZPLAETZE = 15;
-    private final List<Sitzplatz> sitzPlaetze = new SitzplatzFactory().lese("GgGaA\nGgGaA\nGgGaA");
+    private final Sitzplatz[] sitzPlaetze = new SitzplatzFactory().lese("GgGaA\nGgGaA\nGgGaA").toArray(new Sitzplatz[] {});
     //                                   Einfachgewichtung                   : 21223  10112  21223
     //                                          "          ohne Fahrtrichtung: 11122  00011  11122
     /*
@@ -23,20 +23,20 @@ public class AbstractWagonTest {
 
      */
 
-    public List<Sitzplatz> getSitzPlaetze() {
+    public Sitzplatz[] getSitzPlaetze() {
         return sitzPlaetze;
     }
 
-    protected List<Passagier> getPassagiere(String text) throws IOException {
+    protected Passagier[] getPassagiere(String text) throws IOException {
         return getPassagiere(text, ANZAHL_SITZPLAETZE);
     }
 
-    protected List<Passagier> getPassagiere(String text, int len) throws IOException {
+    protected Passagier[] getPassagiere(String text, int len) throws IOException {
         return new PassagierFactory().lese(new ByteArrayInputStream(("Fensterplatz,\"in Fahrtrichtung\",Abteil\n" +
-                text).getBytes()), len);
+                text).getBytes()), len).toArray(new Passagier[] {});
     }
 
-    protected ArrayList<Passagier> getPassagiere(int von, int bis, Wertung w) {
-        return IntStream.range(von, bis).mapToObj(i -> new Passagier(i, w)).collect(Collectors.toCollection(ArrayList::new));
+    protected Passagier[] getPassagiere(int von, int bis, Wertung w) {
+        return IntStream.range(von, bis).mapToObj(i -> new Passagier(i, w)).collect(Collectors.toCollection(ArrayList::new)).toArray(new Passagier[] {});
     }
 }
