@@ -44,6 +44,14 @@ public class Wagon {
         return getSitzplatzVergabeListe().stream().map(SitzplatzVergabe::getZufriedenheit).reduce(0.0, (a, v) -> a + v);
     }
 
+    public double getMaximaleZufriedenheit() {
+        return getSitzplatzVergabeListe().stream().map(SitzplatzVergabe::getPassagier).map(Passagier::getMaximaleZufriedenheit).reduce(0.0, (a, v) -> a + v);
+    }
+
+    public int[] getPassagierReihenfolge() {
+        return passagierReihenfolge;
+    }
+
     public List<SitzplatzVergabe> getSitzplatzVergabeListe() {
         List<SitzplatzVergabe> result = new ArrayList<>();
         for(int i = 0; i < passagierReihenfolge.length; i++) {
@@ -68,7 +76,12 @@ public class Wagon {
     @Override
     public String toString() {
         return "Wagon{" +
-                "passagierReihenfolge=" + Arrays.asList(passagierReihenfolge) +
+                "plaetze=" + getAnzahlPlaetze() +
+                ", passagierReihenfolge=" + Arrays.asList(passagierReihenfolge) +
                 '}';
+    }
+
+    public int getAnzahlPlaetze() {
+        return getSitzplatzListe().length;
     }
 }

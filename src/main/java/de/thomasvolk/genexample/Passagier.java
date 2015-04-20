@@ -17,6 +17,24 @@ public class Passagier {
         return wertung;
     }
 
+    public double getZufriedenheit(Sitzplatz sitzplatz) {
+        double value = 0.0;
+        if(sitzplatz.isAbteil()) {
+            value += getWertung().getAbteil();
+        }
+        if(sitzplatz.isFenster()) {
+            value += getWertung().getFensterPlatz();
+        }
+        if(sitzplatz.isInFahrtrichtung()) {
+            value += getWertung().getFahrtRichtung();
+        }
+        return value;
+    }
+
+    public double getMaximaleZufriedenheit() {
+        return getWertung().getFahrtRichtung() + getWertung().getFensterPlatz() + getWertung().getAbteil();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

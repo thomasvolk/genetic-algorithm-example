@@ -58,6 +58,7 @@ public class SimpleGeneticTest {
     }
 
     private static Genotype create(int popSize, int[] startGenes, FitnessFunction fitnessFunction) throws InvalidConfigurationException {
+        Configuration.reset();
         Configuration conf = new DefaultConfiguration();
         conf.getGeneticOperators().clear();
         SwappingMutationOperator swap = new SwappingMutationOperator(conf);
