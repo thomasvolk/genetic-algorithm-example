@@ -45,6 +45,4 @@ public class GeneticAlgorithmusTest extends AbstractAlgorithmusTest {
         assertEquals(400, new Wagon(getSitzPlaetze(), passagiere).getZufriedenheit(), 0);
         assertEquals(600, new Wagon(getSitzPlaetze(), passagiere, algorithmus.getPassagierReihenfolge()).getZufriedenheit(), 0);
     }
-
-
 }
