@@ -13,13 +13,15 @@ public class AbstractWagonTest {
     //                                   Einfachgewichtung                   : 21223  10112  21223
     //                                          "          ohne Fahrtrichtung: 11122  00011  11122
     /*
-    GgGaA
-    GgGaA
-    GgGaA
 
     2 5 8 11 14
     1 4 7 10 13
     0 3 6  9 12
+
+    GgGaA
+    GgGaA
+    GgGaA
+
 
      */
 
