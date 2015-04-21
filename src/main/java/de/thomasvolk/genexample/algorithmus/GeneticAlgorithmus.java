@@ -11,10 +11,36 @@ import org.jgap.impl.SwappingMutationOperator;
 import java.util.List;
 
 public class GeneticAlgorithmus extends AbstractAlgorithmus {
-    private static final int MAX_EVOLUTION = 1000;
-    private static final int POPULATION_SIZE = 6;
+    private int maxEvolutions = 1000;
+    private int populationSize = 6;
+
+    public static int[] getReihenfolge(IChromosome aSubject, int len) {
+        int[] passagierReihenfolge = new int[len];
+        for (int i = 0; i < len; i++) {
+            Integer allele = (Integer) aSubject.getGene(i).getAllele();
+            passagierReihenfolge[i] = allele;
+        }
+        return passagierReihenfolge;
+    }
+
     public GeneticAlgorithmus(Passagier[] passagierListe, Sitzplatz[] sitzplatzListe) {
         super(passagierListe, sitzplatzListe);
+    }
+
+    public int getMaxEvolutions() {
+        return maxEvolutions;
+    }
+
+    public void setMaxEvolutions(int maxEvolutions) {
+        this.maxEvolutions = maxEvolutions;
+    }
+
+    public int getPopulationSize() {
+        return populationSize;
+    }
+
+    public void setPopulationSize(int populationSize) {
+        this.populationSize = populationSize;
     }
 
     private static Genotype create(int popSize, int[] startGenes, FitnessFunction fitnessFunction) {
@@ -46,20 +72,11 @@ public class GeneticAlgorithmus extends AbstractAlgorithmus {
         }
     }
 
-    public static int[] getReihenfolge(IChromosome aSubject, int len) {
-        int[] passagierReihenfolge = new int[len];
-        for (int i = 0; i < len; i++) {
-            Integer allele = (Integer) aSubject.getGene(i).getAllele();
-            passagierReihenfolge[i] = allele;
-        }
-        return passagierReihenfolge;
-    }
-
     @Override
     public int[] getPassagierReihenfolge() {
         Wagon wagon = new Wagon(getSitzplatzListe(), getPassagierListe());
-        Genotype genotype = create(POPULATION_SIZE, wagon.getPassagierReihenfolge(), new GeneticFitnesFunction(wagon));
-        for (int i = 0; i < MAX_EVOLUTION; i++) {
+        Genotype genotype = create(getPopulationSize(), wagon.getPassagierReihenfolge(), new GeneticFitnesFunction(wagon));
+        for (int i = 0; i < getMaxEvolutions(); i++) {
             genotype.evolve();
             IChromosome solution = genotype.getFittestChromosome();
             double fitnessValue = solution.getFitnessValue();
