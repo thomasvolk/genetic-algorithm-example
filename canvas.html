@@ -28,7 +28,7 @@
       var height = (plaetze * 10);
 
       context.beginPath();
-      context.rect(xbase, ybase, xbase + width, ybase + height);
+      context.rect(xbase, ybase, width, height);
       
       context.fillStyle = '#e2e2e2';
       context.fill();
@@ -36,14 +36,22 @@
       context.strokeStyle = '#666666';
       context.stroke();
 
-      context.beginPath();
-      context.rect(xbase + 3, ybase + 3, xbase + 6, ybase + 6);
-      context.lineWidth = 1;
-      context.strokeStyle = '#000000';
-      context.stroke();
-      context.fillStyle = '#e26060';
-      context.fill();
 
+      for(var r = 0; r < sitzPlaetze.length; r++) {
+        var reihe = sitzPlaetze[r];
+        for(var p = 0; p < reihe.length; p++) {
+          var sitzPlatz = reihe[p];
+          context.beginPath();
+          var x = xbase + 2 + (r*10);
+          var y = ybase + 2 + (p*10);
+          context.rect(x, y, 6, 6);
+          context.lineWidth = 1;
+          context.strokeStyle = '#000000';
+          context.stroke();
+          context.fillStyle = '#e26060';
+          context.fill();
+        }
+      }
     </script>
   </body>
 </html>      
