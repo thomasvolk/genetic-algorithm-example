@@ -13,8 +13,12 @@
     <canvas id="myCanvas" width="830" height="600"></canvas>
     <script>
       var sitzPlaetze = [
-        [{id: 1}, {id: 2}, {id: 3}],
-        [{id: 4}, {id: 5}, {id: 5}],
+        [{id: 1, fr: true, a: false}, {id: 2, fr: true, a: false}, {id: 3, fr: true, a: false}, {id: 4, fr: true, a: false}],
+        [{id: 5, fr: true, a: false}, {id: 6, fr: true, a: false}, {id: 7, fr: true, a: false}, {id: 8, fr: true, a: false}],
+        [{id: 9, fr: false, a: false}, {id:10, fr: false, a: false}, {id:11, fr: false, a: false}, {id:12, fr: false, a: false}],
+        [{id:13, fr: false, a: false}, {id:14, fr: false, a: false}, {id:15, fr: false, a: false}, {id:16, fr: false, a: false}],
+        [{id:-1}, {id:18, fr: false, a: true}, {id:19, fr: false, a: true}, {id:20, fr: false, a: true}],
+        [{id:-1}, {id:22, fr: true, a: true}, {id:23, fr: true, a: true}, {id:24, fr: true, a: true}]
       ];
       var reihen = sitzPlaetze.length;
       var plaetze = reihen > 0 ? sitzPlaetze[0].length : 0;
@@ -22,17 +26,21 @@
       var canvas = document.getElementById('myCanvas');
       var context = canvas.getContext('2d');
 
+      var border = 2
+      var padding = 10;
+      var recSize = 20;
+      var recSpace = recSize + padding;
       var xbase = 10;
       var ybase = 10;
-      var width = (reihen * 10);
-      var height = (plaetze * 10);
+      var width = (reihen * recSpace) + padding;
+      var height = (plaetze * recSpace) + padding;
 
       context.beginPath();
       context.rect(xbase, ybase, width, height);
       
       context.fillStyle = '#e2e2e2';
       context.fill();
-      context.lineWidth = 2;
+      context.lineWidth = border;
       context.strokeStyle = '#666666';
       context.stroke();
 
@@ -41,15 +49,29 @@
         var reihe = sitzPlaetze[r];
         for(var p = 0; p < reihe.length; p++) {
           var sitzPlatz = reihe[p];
-          context.beginPath();
-          var x = xbase + 2 + (r*10);
-          var y = ybase + 2 + (p*10);
-          context.rect(x, y, 6, 6);
-          context.lineWidth = 1;
-          context.strokeStyle = '#000000';
-          context.stroke();
-          context.fillStyle = '#e26060';
-          context.fill();
+          if(sitzPlatz.id > 0) {
+            var recX = xbase + (r*recSpace);
+            var recY = ybase + ((reihe.length - 1) * recSpace) - (p*recSpace);
+            if(sitzPlatz.a) {
+              context.beginPath();
+              var p2 = padding/2;
+              context.rect(recX + p2, recY + p2, recSpace, recSpace);
+              context.lineWidth = 1;
+              context.strokeStyle = '#666666';
+              context.stroke();
+              context.fillStyle = '#666666';
+              context.fill();
+            }
+            var x = recX + padding;
+            var y = recY + padding;
+            context.beginPath();
+            context.rect(x, y, recSize, recSize);
+            context.lineWidth = 1;
+            context.strokeStyle = '#000000';
+            context.stroke();
+            context.fillStyle = '#e26060';
+            context.fill();
+          }
         }
       }
     </script>
