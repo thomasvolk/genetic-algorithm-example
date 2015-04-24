@@ -26,14 +26,18 @@
       var canvas = document.getElementById('myCanvas');
       var context = canvas.getContext('2d');
 
+      var xbase = 10;
+      var ybase = 10;
+
       var border = 2
       var padding = 5;
       var recSize = 20;
-      var recSpace = recSize + padding;
-      var xbase = 10;
-      var ybase = 10;
-      var width = (reihen * recSpace) + padding;
-      var height = (plaetze * recSpace) + padding;
+      var space = 15;
+      var recSpaceY = recSize + padding;
+      var recSpaceX = recSize + space + padding;
+
+      var width = (reihen * recSpaceX) + padding;
+      var height = (plaetze * recSpaceY) + padding;
 
       context.beginPath();
       context.rect(xbase, ybase, width, height);
@@ -50,19 +54,20 @@
         for(var p = 0; p < reihe.length; p++) {
           var sitzPlatz = reihe[p];
           if(sitzPlatz.id > 0) {
-            var recX = xbase + (r*recSpace);
-            var recY = ybase + ((reihe.length - 1) * recSpace) - (p*recSpace);
+            var recX = xbase + (r*recSpaceX);
+            var recY = ybase + ((reihe.length - 1) * recSpaceY) - (p*recSpaceY);
             if(sitzPlatz.a) {
               context.beginPath();
               var p2 = padding/2;
-              context.rect(recX + p2, recY + p2, recSpace, recSpace);
+              context.rect(recX + p2, recY + p2, recSpaceX, recSpaceY);
               context.lineWidth = 1;
               context.strokeStyle = '#666666';
               context.stroke();
               context.fillStyle = '#666666';
               context.fill();
             }
-            var x = recX + padding;
+            var xSpace = sitzPlatz.fr ? space : 0;
+            var x = recX + xSpace + padding;
             var y = recY + padding;
             context.beginPath();
             context.rect(x, y, recSize, recSize);
