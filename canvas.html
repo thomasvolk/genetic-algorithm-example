@@ -77,10 +77,10 @@
             context.fillStyle = '#e26060';
             context.fill();
             context.beginPath();
-            var centerOffet = (recSize/2);
+            var centerOffset = (recSize/2);
             var xOffset = sitzPlatz.fr ? recSize : 0;
             context.moveTo(x + xOffset, y);
-            context.quadraticCurveTo(x + centerOffet, y + centerOffet, x + xOffset, y + recSize);
+            context.quadraticCurveTo(x + centerOffset, y + centerOffset, x + xOffset, y + recSize);
             context.stroke();
             context.fillStyle = '#666666';
             context.fill();
