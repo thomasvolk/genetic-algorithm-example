@@ -46,7 +46,9 @@
           var reihe = sitzPlaetze[r];
           for(var p = 0; p < reihe.length; p++) {
             var sitzPlatz = reihe[p];
-            var sitzFarbe = '#e26060';
+            var red = parseInt(( 1.0 - sitzPlatz.z) * 255);
+            var green = parseInt(sitzPlatz.z * 255);
+            var sitzFarbe = 'rgb(' + red +  ', ' + green + ', 0)';
             if(sitzPlatz.id > 0) {
               var recX = xbase + (r*recSpaceX);
               var recY = ybase + ((reihe.length - 1) * recSpaceY) - (p*recSpaceY);
@@ -109,12 +111,12 @@
     <canvas id="myCanvas" width="830" height="600"></canvas>
     <script>
       var sitzPlaetze = [
-        [{id: 1, fr: true, a: false}, {id: 2, fr: true, a: false}, {id: 3, fr: true, a: false}, {id: 4, fr: true, a: false}],
-        [{id: 5, fr: true, a: false}, {id: 6, fr: true, a: false}, {id: 7, fr: true, a: false}, {id: 8, fr: true, a: false}],
-        [{id: 9, fr: false, a: false}, {id:10, fr: false, a: false}, {id:11, fr: false, a: false}, {id:12, fr: false, a: false}],
-        [{id:13, fr: false, a: false}, {id:14, fr: false, a: false}, {id:15, fr: false, a: false}, {id:16, fr: false, a: false}],
-        [{id:-1}, {id:18, fr: false, a: true}, {id:19, fr: false, a: true}, {id:20, fr: false, a: true}],
-        [{id:-1}, {id:22, fr: true, a: true}, {id:23, fr: true, a: true}, {id:124, fr: true, a: true}]
+        [{id: 1, fr: true, a: false, z: 0.8}, {id: 2, fr: true, a: false, z: 0.6}, {id: 3, fr: true, a: false, z: 0}, {id: 4, fr: true, a: false, z: 1.0}],
+        [{id: 5, fr: true, a: false, z: 1.0}, {id: 6, fr: true, a: false, z: 1.0}, {id: 7, fr: true, a: false, z: 1.0}, {id: 8, fr: true, a: false, z: 1.0}],
+        [{id: 9, fr: false, a: false, z: 1.0}, {id:10, fr: false, a: false, z: 1.0}, {id:11, fr: false, a: false, z: 1.0}, {id:12, fr: false, a: false, z: 1.0}],
+        [{id:13, fr: false, a: false, z: 1.0}, {id:14, fr: false, a: false, z: 1.0}, {id:15, fr: false, a: false, z: 1.0}, {id:16, fr: false, a: false, z: 1.0}],
+        [{id:-1}, {id:18, fr: false, a: true, z: 1.0}, {id:19, fr: false, a: true, z: 0.9}, {id:20, fr: false, a: true, z: 0.2}],
+        [{id:-1}, {id:22, fr: true, a: true, z: 1.0}, {id:23, fr: true, a: true, z: 0.4}, {id:124, fr: true, a: true, z: 1.0}]
       ];
       zeichneWagon(0, 0, sitzPlaetze);
     </script>
