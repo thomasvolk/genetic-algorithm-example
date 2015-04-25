@@ -9,10 +9,13 @@ import org.jgap.impl.IntegerGene;
 import org.jgap.impl.SwappingMutationOperator;
 
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.stream.Stream;
 
-public class GeneticAlgorithmus extends AbstractAlgorithmus {
+public class GeneticAlgorithmus extends AbstractAlgorithmus implements GenerationenProvider {
     private int maxEvolutions = 1000;
     private int populationSize = 6;
+    private GenerationHandler generationHandler;
 
     public static int[] getReihenfolge(IChromosome aSubject, int len) {
         int[] passagierReihenfolge = new int[len];
@@ -79,6 +82,12 @@ public class GeneticAlgorithmus extends AbstractAlgorithmus {
         for (int i = 0; i < getMaxEvolutions(); i++) {
             genotype.evolve();
             IChromosome solution = genotype.getFittestChromosome();
+            List<IChromosome> chromosomes = genotype.getPopulation().getChromosomes();
+            Stream<int[]> reihenfolgenGeneration = chromosomes.stream().map(c -> GeneticAlgorithmus.getReihenfolge(c, wagon.getAnzahlPlaetze()));
+            Stream<Wagon> wagonStream = reihenfolgenGeneration.map(r -> wagon.copy(r));
+            if(generationHandler != null) {
+                generationHandler.evolutionsSchritt(i, wagonStream);
+            }
             double fitnessValue = solution.getFitnessValue();
             if(fitnessValue == wagon.getMaximaleZufriedenheit()) {
                 break;
@@ -86,5 +95,10 @@ public class GeneticAlgorithmus extends AbstractAlgorithmus {
         }
         IChromosome solution = genotype.getFittestChromosome();
         return getReihenfolge(solution, wagon.getAnzahlPlaetze());
+    }
+
+    @Override
+    public void setGenerationHandler(GenerationHandler handler) {
+        this.generationHandler = handler;
     }
 }

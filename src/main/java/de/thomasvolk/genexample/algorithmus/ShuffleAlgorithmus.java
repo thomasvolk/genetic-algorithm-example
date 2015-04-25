@@ -12,9 +12,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Stream;
 
-public class ShuffleAlgorithmus extends AbstractAlgorithmus {
+public class ShuffleAlgorithmus extends AbstractAlgorithmus implements GenerationenProvider {
     private int maxIterations = 1000;
+    private GenerationenProvider.GenerationHandler generationHandler;
 
     public ShuffleAlgorithmus(Passagier[] passagierListe, Sitzplatz[] sitzplatzListe) {
         super(passagierListe, sitzplatzListe);
@@ -36,7 +38,11 @@ public class ShuffleAlgorithmus extends AbstractAlgorithmus {
         double hoechsteZufriedenheit = wagon.getZufriedenheit();
         for (int i = 0; i < getMaxIterations(); i++) {
             reihenfolge = shuffle(reihenfolge);
-            double zufriedenheit = wagon.copy(reihenfolge).getZufriedenheit();
+            Wagon genWagon = wagon.copy(reihenfolge);
+            if(generationHandler != null) {
+                generationHandler.evolutionsSchritt(i, Stream.of(genWagon));
+            }
+            double zufriedenheit = genWagon.getZufriedenheit();
             if(zufriedenheit > hoechsteZufriedenheit) {
                 hoechsteZufriedenheit = zufriedenheit;
                 bestShuffle = reihenfolge;
@@ -60,5 +66,10 @@ public class ShuffleAlgorithmus extends AbstractAlgorithmus {
         }
 
         return result;
+    }
+
+    @Override
+    public void setGenerationHandler(GenerationHandler handler) {
+        generationHandler = handler;
     }
 }
