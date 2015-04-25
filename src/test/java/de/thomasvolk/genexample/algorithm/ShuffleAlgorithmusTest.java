@@ -3,7 +3,7 @@ package de.thomasvolk.genexample.algorithm;
 
 import de.thomasvolk.genexample.model.Passagier;
 import de.thomasvolk.genexample.model.Wagon;
-import de.thomasvolk.genexample.Wertung;
+import de.thomasvolk.genexample.model.Wertung;
 import de.thomasvolk.genexample.algorithmus.Algorithmus;
 import de.thomasvolk.genexample.algorithmus.ShuffleAlgorithmus;
 import org.junit.Test;

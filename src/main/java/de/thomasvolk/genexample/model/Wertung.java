@@ -1,4 +1,4 @@
-package de.thomasvolk.genexample;
+package de.thomasvolk.genexample.model;
 
 public class Wertung {
     public static final Wertung NULL = new Wertung(0, 0, 0);

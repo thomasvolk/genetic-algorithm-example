@@ -1,7 +1,6 @@
 package de.thomasvolk.genexample.model;
 
 
-import de.thomasvolk.genexample.Wertung;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.lang3.StringUtils;

@@ -1,6 +1,5 @@
 package de.thomasvolk.genexample.model;
 
-import de.thomasvolk.genexample.Wertung;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
