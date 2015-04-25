@@ -1,15 +1,11 @@
-package de.thomasvolk.genexample;
+package de.thomasvolk.genexample.model;
 
-import de.thomasvolk.genexample.algorithmus.FirstComeFirstServed;
+import de.thomasvolk.genexample.Wertung;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class WagonTest extends AbstractWagonTest {
 

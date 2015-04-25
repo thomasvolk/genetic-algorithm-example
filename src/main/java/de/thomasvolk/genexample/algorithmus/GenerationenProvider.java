@@ -1,6 +1,6 @@
 package de.thomasvolk.genexample.algorithmus;
 
-import de.thomasvolk.genexample.Wagon;
+import de.thomasvolk.genexample.model.Wagon;
 
 import java.util.stream.Stream;
 

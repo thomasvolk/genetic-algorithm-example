@@ -1,11 +1,8 @@
 package de.thomasvolk.genexample.algorithm;
 
-import de.thomasvolk.genexample.*;
 import de.thomasvolk.genexample.algorithmus.Algorithmus;
-import de.thomasvolk.genexample.algorithmus.FirstComeFirstServed;
-import org.junit.Test;
-
-import java.util.List;
+import de.thomasvolk.genexample.model.AbstractWagonTest;
+import de.thomasvolk.genexample.model.Passagier;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;

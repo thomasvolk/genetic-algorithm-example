@@ -1,9 +1,14 @@
-package de.thomasvolk.genexample;
+package de.thomasvolk.genexample.model;
+
+import de.thomasvolk.genexample.Wertung;
+import de.thomasvolk.genexample.model.Passagier;
+import de.thomasvolk.genexample.model.PassagierFactory;
+import de.thomasvolk.genexample.model.Sitzplatz;
+import de.thomasvolk.genexample.model.SitzplatzFactory;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 

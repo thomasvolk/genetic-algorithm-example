@@ -26,6 +26,10 @@ public class Wertung {
         return fahrtRichtung;
     }
 
+    public boolean keineWertung() {
+        return  getAbteil() == 0 && getFahrtRichtung() == 0 && getFensterPlatz() == 0;
+    }
+
     @Override
     public String toString() {
         return "Wertug{" +

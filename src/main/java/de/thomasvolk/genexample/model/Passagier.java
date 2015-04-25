@@ -1,4 +1,6 @@
-package de.thomasvolk.genexample;
+package de.thomasvolk.genexample.model;
+
+import de.thomasvolk.genexample.Wertung;
 
 public class Passagier {
     private final int id;

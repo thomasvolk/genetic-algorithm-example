@@ -1,15 +1,10 @@
 package de.thomasvolk.genexample.algorithmus;
 
-import de.thomasvolk.genexample.Passagier;
-import de.thomasvolk.genexample.Sitzplatz;
-import de.thomasvolk.genexample.Wagon;
-import org.jgap.*;
-import org.jgap.impl.DefaultConfiguration;
-import org.jgap.impl.IntegerGene;
-import org.jgap.impl.SwappingMutationOperator;
+import de.thomasvolk.genexample.model.Passagier;
+import de.thomasvolk.genexample.model.Sitzplatz;
+import de.thomasvolk.genexample.model.Wagon;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;

@@ -4,10 +4,11 @@ package de.thomasvolk.genexample.algorithm;
 import de.thomasvolk.genexample.*;
 import de.thomasvolk.genexample.algorithmus.Algorithmus;
 import de.thomasvolk.genexample.algorithmus.GeneticAlgorithmus;
+import de.thomasvolk.genexample.model.Passagier;
+import de.thomasvolk.genexample.model.Wagon;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.List;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;

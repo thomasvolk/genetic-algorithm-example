@@ -1,5 +1,7 @@
-package de.thomasvolk.genexample;
+package de.thomasvolk.genexample.model;
 
+import de.thomasvolk.genexample.model.Sitzplatz;
+import de.thomasvolk.genexample.model.SitzplatzFactory;
 import org.junit.Test;
 
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package de.thomasvolk.genexample;
+package de.thomasvolk.genexample.model;
 
 
 import java.util.*;

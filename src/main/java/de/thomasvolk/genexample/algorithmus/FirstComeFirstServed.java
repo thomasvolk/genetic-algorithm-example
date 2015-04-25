@@ -1,8 +1,8 @@
 package de.thomasvolk.genexample.algorithmus;
 
-import de.thomasvolk.genexample.Passagier;
-import de.thomasvolk.genexample.Sitzplatz;
-import de.thomasvolk.genexample.SitzplatzVergabe;
+import de.thomasvolk.genexample.model.Passagier;
+import de.thomasvolk.genexample.model.Sitzplatz;
+import de.thomasvolk.genexample.model.SitzplatzVergabe;
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.ArrayList;
