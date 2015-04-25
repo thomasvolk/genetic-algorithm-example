@@ -46,6 +46,7 @@
           var reihe = sitzPlaetze[r];
           for(var p = 0; p < reihe.length; p++) {
             var sitzPlatz = reihe[p];
+            var sitzFarbe = '#e26060';
             if(sitzPlatz.id > 0) {
               var recX = xbase + (r*recSpaceX);
               var recY = ybase + ((reihe.length - 1) * recSpaceY) - (p*recSpaceY);
@@ -55,9 +56,9 @@
                 var p2 = padding/2;
                 context.rect(recX + p2, recY + p2, recSpaceX, recSpaceY);
                 context.lineWidth = 1;
-                context.strokeStyle = '#666666';
+                context.strokeStyle = '#aaa';
                 context.stroke();
-                context.fillStyle = '#666666';
+                context.fillStyle = '#aaa';
                 context.fill();
               }
               // sitzPlatz
@@ -68,9 +69,9 @@
               context.beginPath();
               context.rect(x, y, recSize, recSize);
               context.lineWidth = 1;
-              context.strokeStyle = '#000000';
+              context.strokeStyle = sitzFarbe;
               context.stroke();
-              context.fillStyle = '#e26060';
+              context.fillStyle = sitzFarbe;
               context.fill();
               // polster
               context.beginPath();
@@ -97,12 +98,6 @@
               context.fillStyle = '#000000';
               var xTextOffset = sitzPlatz.fr ? 0 : padding;
               context.fillText(sitzPlatz.id, x + xTextOffset + padding * 3, y + padding * 4);
-              // umrandung nachzeichnen
-              context.beginPath();
-              context.rect(x, y, recSize, recSize);
-              context.lineWidth = 1;
-              context.strokeStyle = '#000000';
-              context.stroke();
             }
           }
         }
