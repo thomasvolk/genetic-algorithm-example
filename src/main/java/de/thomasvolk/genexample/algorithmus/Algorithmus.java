@@ -1,8 +1,8 @@
 package de.thomasvolk.genexample.algorithmus;
 
-/**
- * Created by thomas on 19.04.15.
- */
+import de.thomasvolk.genexample.Report;
+import de.thomasvolk.genexample.model.Wagon;
+
 public interface Algorithmus {
-    int[] getPassagierReihenfolge();
+    Wagon getWagon(Report generator);
 }

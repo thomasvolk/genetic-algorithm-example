@@ -9,7 +9,7 @@ import org.jgap.*;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class GeneticAlgorithmus extends AbstractAlgorithmus implements GenerationenProvider {
+public class GeneticAlgorithmus extends AbstractAlgorithmus {
     private static class GeneticFitnesFunction extends FitnessFunction {
         private final Wagon wagon;
 
@@ -25,7 +25,7 @@ public class GeneticAlgorithmus extends AbstractAlgorithmus implements Generatio
     }
     private int maxEvolutions = 1000;
     private int populationSize = 6;
-    private GenerationHandler generationHandler;
+
 
     public GeneticAlgorithmus(Passagier[] passagierListe, Sitzplatz[] sitzplatzListe) {
         super(passagierListe, sitzplatzListe);
@@ -48,7 +48,7 @@ public class GeneticAlgorithmus extends AbstractAlgorithmus implements Generatio
     }
 
     @Override
-    public int[] getPassagierReihenfolge() {
+    public Wagon getWagon(Report report) {
         Wagon wagon = new Wagon(getSitzplatzListe(), getPassagierListe());
         Genotype genotype = JGapUtils.create(getPopulationSize(), wagon.getPassagierReihenfolge(), new GeneticFitnesFunction(wagon));
         for (int i = 0; i < getMaxEvolutions(); i++) {
@@ -57,20 +57,15 @@ public class GeneticAlgorithmus extends AbstractAlgorithmus implements Generatio
             List<IChromosome> chromosomes = genotype.getPopulation().getChromosomes();
             Stream<int[]> reihenfolgenGeneration = chromosomes.stream().map(c -> JGapUtils.asIntArray(c, wagon.getAnzahlPlaetze()));
             Stream<Wagon> wagonStream = reihenfolgenGeneration.map(r -> wagon.copy(r));
-            if(generationHandler != null) {
-                generationHandler.evolutionsSchritt(i, wagonStream);
-            }
+            report.evolutionsSchritt(i, wagonStream);
             double fitnessValue = solution.getFitnessValue();
             if(fitnessValue == wagon.getMaximaleZufriedenheit()) {
                 break;
             }
         }
         IChromosome solution = genotype.getFittestChromosome();
-        return JGapUtils.asIntArray(solution, wagon.getAnzahlPlaetze());
-    }
-
-    @Override
-    public void setGenerationHandler(GenerationHandler handler) {
-        this.generationHandler = handler;
+        Wagon besterWagon = wagon.copy(JGapUtils.asIntArray(solution, wagon.getAnzahlPlaetze()));
+        report.bestesErgebnis(besterWagon);
+        return besterWagon;
     }
 }

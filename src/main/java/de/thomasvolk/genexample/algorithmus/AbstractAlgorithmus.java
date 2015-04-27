@@ -19,4 +19,5 @@ public abstract class AbstractAlgorithmus implements Algorithmus {
     public Passagier[] getPassagierListe() {
         return passagierListe;
     }
+
 }

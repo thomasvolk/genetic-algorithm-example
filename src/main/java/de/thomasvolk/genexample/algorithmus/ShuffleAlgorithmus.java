@@ -1,5 +1,6 @@
 package de.thomasvolk.genexample.algorithmus;
 
+import de.thomasvolk.genexample.Report;
 import de.thomasvolk.genexample.model.Passagier;
 import de.thomasvolk.genexample.model.Sitzplatz;
 import de.thomasvolk.genexample.model.Wagon;
@@ -9,9 +10,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class ShuffleAlgorithmus extends AbstractAlgorithmus implements GenerationenProvider {
+public class ShuffleAlgorithmus extends AbstractAlgorithmus {
     private int maxIterations = 1000;
-    private GenerationenProvider.GenerationHandler generationHandler;
 
     public ShuffleAlgorithmus(Passagier[] passagierListe, Sitzplatz[] sitzplatzListe) {
         super(passagierListe, sitzplatzListe);
@@ -26,7 +26,7 @@ public class ShuffleAlgorithmus extends AbstractAlgorithmus implements Generatio
     }
 
     @Override
-    public int[] getPassagierReihenfolge() {
+    public Wagon getWagon(Report report) {
         Wagon wagon = new Wagon(getSitzplatzListe(), getPassagierListe());
         int[] reihenfolge =  wagon.getPassagierReihenfolge();
         int[] bestShuffle = reihenfolge;
@@ -34,9 +34,7 @@ public class ShuffleAlgorithmus extends AbstractAlgorithmus implements Generatio
         for (int i = 0; i < getMaxIterations(); i++) {
             reihenfolge = shuffle(reihenfolge);
             Wagon genWagon = wagon.copy(reihenfolge);
-            if(generationHandler != null) {
-                generationHandler.evolutionsSchritt(i, Stream.of(genWagon));
-            }
+            report.evolutionsSchritt(i, Stream.of(genWagon));
             double zufriedenheit = genWagon.getZufriedenheit();
             if(zufriedenheit > hoechsteZufriedenheit) {
                 hoechsteZufriedenheit = zufriedenheit;
@@ -46,7 +44,9 @@ public class ShuffleAlgorithmus extends AbstractAlgorithmus implements Generatio
                 break;
             }
         }
-        return bestShuffle;
+        Wagon besterWagon = wagon.copy(bestShuffle);
+        report.bestesErgebnis(wagon);
+        return besterWagon;
     }
 
     private int[] shuffle(int[] reihenfolge) {
@@ -61,10 +61,5 @@ public class ShuffleAlgorithmus extends AbstractAlgorithmus implements Generatio
         }
 
         return result;
-    }
-
-    @Override
-    public void setGenerationHandler(GenerationHandler handler) {
-        generationHandler = handler;
     }
 }

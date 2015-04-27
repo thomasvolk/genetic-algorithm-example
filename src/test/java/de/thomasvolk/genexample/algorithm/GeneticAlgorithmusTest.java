@@ -6,6 +6,7 @@ import de.thomasvolk.genexample.algorithmus.GeneticAlgorithmus;
 import de.thomasvolk.genexample.model.Passagier;
 import de.thomasvolk.genexample.model.Wagon;
 import de.thomasvolk.genexample.model.Wertung;
+import de.thomasvolk.genexample.report.NullReport;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -24,7 +25,7 @@ public class GeneticAlgorithmusTest extends AbstractAlgorithmusTest {
     public void nullWertungen() {
         Passagier[] passagiere = getPassagiere(0, ANZAHL_SITZPLAETZE, Wertung.NULL);
         Algorithmus algorithmus = getAlgorithmus(passagiere);
-        Wagon wagon = new Wagon(getSitzPlaetze(), passagiere, algorithmus.getPassagierReihenfolge());
+        Wagon wagon = algorithmus.getWagon(NullReport.INSTANCE);
         assertEquals(0, wagon.getZufriedenheit(), 0);
     }
 
@@ -35,7 +36,7 @@ public class GeneticAlgorithmusTest extends AbstractAlgorithmusTest {
         Algorithmus algorithmus = getAlgorithmus(passagiere);
         Wagon wagon = new Wagon(getSitzPlaetze(), passagiere);
         assertEquals(2500, wagon.getZufriedenheit(), 0);
-        assertEquals(2500, wagon.copy(algorithmus.getPassagierReihenfolge()).getZufriedenheit(), 0);
+        assertEquals(2500, algorithmus.getWagon(NullReport.INSTANCE).getZufriedenheit(), 0);
     }
 
 
@@ -44,6 +45,6 @@ public class GeneticAlgorithmusTest extends AbstractAlgorithmusTest {
         Passagier[] passagiere = getPassagiere("fp,fr,ap\nfp,fr,\nfp,,");
         Algorithmus algorithmus = getAlgorithmus(passagiere);
         assertEquals(400, new Wagon(getSitzPlaetze(), passagiere).getZufriedenheit(), 0);
-        assertEquals(600, new Wagon(getSitzPlaetze(), passagiere, algorithmus.getPassagierReihenfolge()).getZufriedenheit(), 0);
+        assertEquals(600, algorithmus.getWagon(NullReport.INSTANCE).getZufriedenheit(), 0);
     }
 }
