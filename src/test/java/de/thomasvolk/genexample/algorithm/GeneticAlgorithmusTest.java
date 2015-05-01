@@ -31,7 +31,7 @@ public class GeneticAlgorithmusTest extends AbstractAlgorithmusTest {
     public void prepare() throws IOException {
         tempdir = Files.createTempDirectory("GeneticAlgorithmusTest");
         System.out.println("Tempdir: " + tempdir);
-        report = new HtmlReport(tempdir.toString());
+        report = new HtmlReport(tempdir.toString(), 100);
     }
 
     @Test
