@@ -5,6 +5,11 @@
     <link rel="stylesheet" type="text/css" href="default.css">
   </head>
   <body>
-
+    <h2>Generation: <%=generation %></h2>
+    <ul>
+    <% (0..generation).each { i -> %>
+    <li><a href="">Generation $i</a></li>
+    <% } %>
+    </ul>
   </body>
 </html>      

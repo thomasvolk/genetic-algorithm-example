@@ -9,6 +9,7 @@ import org.apache.commons.io.FilenameUtils;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class HtmlReport implements Report {
@@ -68,7 +69,7 @@ public class HtmlReport implements Report {
 
     private void erzeugeGeneration(int num, Stream<Wagon> wagons) {
         Map<String, Object> binding = new HashMap<>();
-        binding.put("wagons", wagons);
+        binding.put("wagons", wagons.collect(Collectors.toList()));
         binding.put("generation", num);
         generationTemplate.generiere(binding, getPath(getGenerationDateiname(num)));
     }
