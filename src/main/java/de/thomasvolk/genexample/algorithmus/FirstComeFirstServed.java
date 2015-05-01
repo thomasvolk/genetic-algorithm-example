@@ -41,7 +41,7 @@ public class FirstComeFirstServed extends AbstractAlgorithmus {
         }
         Wagon wagon = new Wagon(getSitzplatzListe(), getPassagierListe(),
                 ArrayUtils.toPrimitive(passagierReihenfolge.toArray(new Integer[getPassagierListe().length])));
-        report.bestesErgebnis(wagon);
+        report.bestesErgebnis(0, wagon);
         return wagon;
     }
 }

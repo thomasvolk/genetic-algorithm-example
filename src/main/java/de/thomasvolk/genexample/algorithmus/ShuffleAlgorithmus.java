@@ -31,7 +31,8 @@ public class ShuffleAlgorithmus extends AbstractAlgorithmus {
         int[] reihenfolge =  wagon.getPassagierReihenfolge();
         int[] bestShuffle = reihenfolge;
         double hoechsteZufriedenheit = wagon.getZufriedenheit();
-        for (int i = 0; i < getMaxIterations(); i++) {
+        int i = 0;
+        for (; i < getMaxIterations(); i++) {
             reihenfolge = shuffle(reihenfolge);
             Wagon genWagon = wagon.copy(reihenfolge);
             report.evolutionsSchritt(i, Stream.of(genWagon));
@@ -45,7 +46,7 @@ public class ShuffleAlgorithmus extends AbstractAlgorithmus {
             }
         }
         Wagon besterWagon = wagon.copy(bestShuffle);
-        report.bestesErgebnis(wagon);
+        report.bestesErgebnis(i, wagon);
         return besterWagon;
     }
 

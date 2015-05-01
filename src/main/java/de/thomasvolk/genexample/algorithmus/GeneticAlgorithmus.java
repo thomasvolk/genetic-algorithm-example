@@ -51,7 +51,8 @@ public class GeneticAlgorithmus extends AbstractAlgorithmus {
     public Wagon getWagon(Report report) {
         Wagon wagon = new Wagon(getSitzplatzListe(), getPassagierListe());
         Genotype genotype = JGapUtils.create(getPopulationSize(), wagon.getPassagierReihenfolge(), new GeneticFitnesFunction(wagon));
-        for (int i = 0; i < getMaxEvolutions(); i++) {
+        int i = 0;
+        for (; i < getMaxEvolutions(); i++) {
             genotype.evolve();
             IChromosome solution = genotype.getFittestChromosome();
             List<IChromosome> chromosomes = genotype.getPopulation().getChromosomes();
@@ -65,7 +66,7 @@ public class GeneticAlgorithmus extends AbstractAlgorithmus {
         }
         IChromosome solution = genotype.getFittestChromosome();
         Wagon besterWagon = wagon.copy(JGapUtils.asIntArray(solution, wagon.getAnzahlPlaetze()));
-        report.bestesErgebnis(besterWagon);
+        report.bestesErgebnis(i, besterWagon);
         return besterWagon;
     }
 }

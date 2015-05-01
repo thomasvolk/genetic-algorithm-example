@@ -6,5 +6,5 @@ import java.util.stream.Stream;
 
 public interface Report {
     void evolutionsSchritt(int num, Stream<Wagon> wagons);
-    void bestesErgebnis(Wagon wagon);
+    void bestesErgebnis(int num, Wagon wagon);
 }

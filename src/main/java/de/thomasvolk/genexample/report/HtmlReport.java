@@ -4,12 +4,11 @@ import de.thomasvolk.genexample.Report;
 import de.thomasvolk.genexample.model.Wagon;
 import groovy.lang.Writable;
 import groovy.text.SimpleTemplateEngine;
-import groovy.text.Template;
-import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.FilenameUtils;
 
 import java.io.*;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.stream.Stream;
 
 public class HtmlReport implements Report {
@@ -20,12 +19,25 @@ public class HtmlReport implements Report {
             this.name = name;
         }
 
-        public void generiere(Map<String, Object> binding, Writer out) throws IOException {
-            InputStreamReader reader = new InputStreamReader(getClass().getResourceAsStream("report/" + name));
-            SimpleTemplateEngine templateEngine = new SimpleTemplateEngine();
-            groovy.text.Template template = templateEngine.createTemplate(reader);
-            Writable writable = template.make(binding);
-            writable.writeTo(out);
+        public void generiere(Map<String, Object> binding, Writer out) {
+            try(InputStreamReader reader = new InputStreamReader(getClass().getResourceAsStream("/report/" + name))) {
+                SimpleTemplateEngine templateEngine = new SimpleTemplateEngine();
+                groovy.text.Template template = templateEngine.createTemplate(reader);
+                Writable writable = template.make(binding);
+                writable.writeTo(out);
+            }
+            catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        public void generiere(Map<String, Object> binding, String pfad) {
+            try(FileWriter fileWriter = new FileWriter(pfad)) {
+                generiere(binding, fileWriter);
+            }
+            catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
     private final String zielPfad;
@@ -36,13 +48,23 @@ public class HtmlReport implements Report {
         this.zielPfad = zielPfad;
     }
 
-    @Override
-    public void evolutionsSchritt(int num, Stream<Wagon> wagons) {
-
+    protected String getGenerationDateiname(int num) {
+        return String.format("generation_%010d.html", num);
     }
 
     @Override
-    public void bestesErgebnis(Wagon wagon) {
+    public void evolutionsSchritt(int num, Stream<Wagon> wagons) {
+        Map<String, Object> binding = new HashMap<>();
+        binding.put("wagons", wagons);
+        binding.put("generation", num);
+        generationTemplate.generiere(binding, FilenameUtils.concat(zielPfad, getGenerationDateiname(num)));
+    }
 
+    @Override
+    public void bestesErgebnis(int num, Wagon wagon) {
+        Map<String, Object> binding = new HashMap<>();
+        binding.put("wagon", wagon);
+        binding.put("generation", num);
+        generationTemplate.generiere(binding, FilenameUtils.concat(zielPfad, "index.html"));
     }
 }

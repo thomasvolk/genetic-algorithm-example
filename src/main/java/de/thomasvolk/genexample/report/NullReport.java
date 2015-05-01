@@ -17,7 +17,7 @@ public final class NullReport implements Report {
     }
 
     @Override
-    public void bestesErgebnis(Wagon wagon) {
+    public void bestesErgebnis(int num, Wagon wagon) {
 
     }
 }
