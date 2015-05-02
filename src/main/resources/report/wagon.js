@@ -1,5 +1,6 @@
 wagon = {}
-wagon.zeichnen = function(canvasId, startX, startY, sitzPlaetze) {
+wagon.zeichnen = function(canvasId, startX, startY, wagon) {
+    var sitzPlaetze = wagon.wagon.sitzPlaetze;
     var reihen = sitzPlaetze.length;
     var plaetze = reihen > 0 ? sitzPlaetze[0].length : 0;
 
@@ -42,7 +43,7 @@ wagon.zeichnen = function(canvasId, startX, startY, sitzPlaetze) {
           var green = parseInt(sitzPlatz.z * 255);
           sitzFarbe = 'rgb(' + red +  ', ' + green + ', 0)';
         }
-        if(sitzPlatz.id > 0) {
+        if(sitzPlatz.sid > 0) {
           var recX = xbase + (r*recSpaceX);
           var recY = ybase + ((reihe.length - 1) * recSpaceY) - (p*recSpaceY);
           if(sitzPlatz.a) {
@@ -92,7 +93,7 @@ wagon.zeichnen = function(canvasId, startX, startY, sitzPlaetze) {
           context.textAlign = 'center';
           context.fillStyle = '#000000';
           var xTextOffset = sitzPlatz.fr ? 0 : padding;
-          context.fillText(sitzPlatz.id, x + xTextOffset + padding * 3, y + padding * 4);
+          context.fillText(sitzPlatz.sid, x + xTextOffset + padding * 3, y + padding * 4);
         }
       }
     }

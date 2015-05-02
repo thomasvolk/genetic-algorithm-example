@@ -25,9 +25,9 @@ public class HtmlReport implements Report {
             this.extension = FilenameUtils.getExtension(name);
         }
 
-        public void generiere(Generation gen, Writer out) {
+        public void generiere(Generation gen, String newName, Writer out) {
             Map<String, Object> binding = new HashMap<>();
-            binding.put("templateName", name);
+            binding.put("templateName", newName);
             binding.put("generation", gen);
             binding.put("generationen", generationen);
             binding.put("startWagon", startWagon);
@@ -43,7 +43,7 @@ public class HtmlReport implements Report {
 
         public void generiere(Generation gen, String newName) {
             try (FileWriter fileWriter = new FileWriter(getTargetPath(newName + "." + extension))) {
-                generiere(gen, fileWriter);
+                generiere(gen, newName, fileWriter);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
