@@ -3,12 +3,15 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="default.css">
+    <script src="wagon.js"></script>
   </head>
   <body>
-    <h2>Generation: <%=generation %></h2>
+    <h1>Ergebnis</h1>
+    <b>Generation: <%=generation %></b>
+    <h2>Generationen</h2>
     <ul>
-    <% (0..generation).each { i -> %>
-    <li><a href="">Generation $i</a></li>
+    <% generationen.each { g -> %>
+    <li><a href="$g.dateiname">Generation $g.nummer</a></li>
     <% } %>
     </ul>
   </body>
