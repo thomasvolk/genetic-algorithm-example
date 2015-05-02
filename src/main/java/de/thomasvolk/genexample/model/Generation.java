@@ -1,14 +1,16 @@
 package de.thomasvolk.genexample.model;
 
+import java.util.Collection;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Generation {
     private final int nummer;
-    private final Stream<Wagon> wagons;
+    private final Collection<Wagon> wagons;
     private final double zufriedenheit;
     private final Wagon besterWagon;
 
-    public Generation(int nummer, Stream<Wagon> wagons, double zufriedenheit, Wagon besterWagon) {
+    public Generation(int nummer, Collection<Wagon> wagons, double zufriedenheit, Wagon besterWagon) {
         this.nummer = nummer;
         this.wagons = wagons;
         this.zufriedenheit = zufriedenheit;
@@ -23,7 +25,7 @@ public class Generation {
         return nummer;
     }
 
-    public Stream<Wagon> getWagons() {
+    public Collection<Wagon> getWagons() {
         return wagons;
     }
 

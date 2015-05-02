@@ -4,10 +4,7 @@ import de.thomasvolk.genexample.model.*;
 import de.thomasvolk.genexample.report.Report;
 import org.apache.commons.lang3.ArrayUtils;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class FirstComeFirstServed extends AbstractAlgorithmus {
@@ -40,7 +37,7 @@ public class FirstComeFirstServed extends AbstractAlgorithmus {
         }
         Wagon wagon = new Wagon(getSitzplatzListe(), getPassagierListe(),
                 ArrayUtils.toPrimitive(passagierReihenfolge.toArray(new Integer[getPassagierListe().length])));
-        report.ende(new Generation(0, Stream.of(wagon), wagon.getZufriedenheit(), wagon));
+        report.ende(new Generation(0, Collections.singleton(wagon), wagon.getZufriedenheit(), wagon));
         return wagon;
     }
 }

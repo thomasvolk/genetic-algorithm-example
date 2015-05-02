@@ -58,6 +58,7 @@ public class Wagon {
             int sitzplatz = passagierReihenfolge[i];
             result.add(new SitzplatzVergabe(sitzplatzListe[sitzplatz], passagierListe[i]));
         }
+        result.sort((sv1, sv2) -> sv1.getSitzplatz().getNummer() - sv2.getSitzplatz().getNummer());
         return result;
     }
 

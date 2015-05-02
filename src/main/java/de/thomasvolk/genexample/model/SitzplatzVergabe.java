@@ -10,6 +10,15 @@ public class SitzplatzVergabe {
         this.passagier = passagier;
     }
 
+    public double getZufriedenheitFaktor() {
+        if(getPassagier().getMaximaleZufriedenheit() == 0.0) {
+            return -1;
+        }
+        else {
+            return getZufriedenheit() / getPassagier().getMaximaleZufriedenheit();
+        }
+    }
+
     public double getZufriedenheit() {
         double value = 0.0;
         if(sitzplatz.isAbteil()) {

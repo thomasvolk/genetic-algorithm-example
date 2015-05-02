@@ -8,6 +8,7 @@ import de.thomasvolk.genexample.model.Wagon;
 import org.jgap.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class GeneticAlgorithmus extends AbstractGenerationAlgorithmus {
@@ -50,6 +51,6 @@ public class GeneticAlgorithmus extends AbstractGenerationAlgorithmus {
         Stream<Wagon> wagonStream = reihenfolgenGeneration.map(r -> getWagon().copy(r));
         double zufriedenheit = solution.getFitnessValue();
         Wagon besterWagon = getWagon().copy(JGapUtils.asIntArray(solution, getWagon().getAnzahlPlaetze()));
-        return new Generation(generation, wagonStream, zufriedenheit, besterWagon);
+        return new Generation(generation, wagonStream.collect(Collectors.toList()), zufriedenheit, besterWagon);
     }
 }

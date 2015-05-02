@@ -27,7 +27,7 @@ public class ShuffleAlgorithmus extends AbstractGenerationAlgorithmus {
         reihenfolge = shuffle(reihenfolge);
         Wagon genWagon = getWagon().copy(reihenfolge);
         double zufriedenheit = genWagon.getZufriedenheit();
-        Generation generation = new Generation(nummer, Stream.of(genWagon), zufriedenheit, genWagon);
+        Generation generation = new Generation(nummer, Collections.singleton(genWagon), zufriedenheit, genWagon);
         if(zufriedenheit > hoechsteZufriedenheit) {
             hoechsteZufriedenheit = zufriedenheit;
             bestShuffle = reihenfolge;
