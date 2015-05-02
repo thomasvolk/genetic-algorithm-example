@@ -2,45 +2,14 @@ package de.thomasvolk.genexample.report;
 
 import de.thomasvolk.genexample.model.Generation;
 import de.thomasvolk.genexample.model.Wagon;
-import groovy.lang.Writable;
-import groovy.text.SimpleTemplateEngine;
 import org.apache.commons.io.FilenameUtils;
 
-import java.io.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 public class HtmlReport implements Report {
-    public static class Template {
-        private final String name;
-
-        public Template(String name) {
-            this.name = name;
-        }
-
-        public void generiere(Map<String, Object> binding, Writer out) {
-            try(InputStreamReader reader = new InputStreamReader(getClass().getResourceAsStream("/report/" + name))) {
-                SimpleTemplateEngine templateEngine = new SimpleTemplateEngine();
-                groovy.text.Template template = templateEngine.createTemplate(reader);
-                Writable writable = template.make(binding);
-                writable.writeTo(out);
-            }
-            catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-
-        public void generiere(Map<String, Object> binding, String pfad) {
-            try(FileWriter fileWriter = new FileWriter(pfad)) {
-                generiere(binding, fileWriter);
-            }
-            catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-    }
     private final String zielPfad;
     private final int schritte;
     private final Template generationTemplate = new Template("generation.html");

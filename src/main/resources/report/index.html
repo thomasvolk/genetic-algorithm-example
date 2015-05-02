@@ -4,9 +4,21 @@
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="default.css">
     <script src="wagon.js"></script>
+    <script>
+      startWagon=<%
+       def jb = new groovy.json.JsonBuilder()
+       jb.wagon {
+         sitzPlaetze( startWagon.sitzplatzVergabeListe.collect { sv -> [ id: sv.sitzplatz.nummer ] }  )
+       }
+       print jb.toPrettyString()
+      %>
+
+    </script>
   </head>
   <body>
-    <h1>Ergebnis</h1>
+    <h1>Ergebnisse</h1>
+    <h2>Start</h2>
+    <h2>Ende</h2>
     <b>Generation: <%=generation %></b>
     <h2>Generationen</h2>
     <ul>

@@ -27,6 +27,7 @@ public abstract class AbstractGenerationAlgorithmus extends AbstractAlgorithmus 
 
     @Override
     public Wagon berechneWagon(Report report) {
+        report.start(getWagon());
         int nummer = 0;
         Generation gen = null;
         for (; nummer < getMaxEvolutions(); nummer++) {
