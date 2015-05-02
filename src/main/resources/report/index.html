@@ -4,16 +4,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="default.css">
     <script src="wagon.js"></script>
-    <script>
-      startWagon=<%
-       def jb = new groovy.json.JsonBuilder()
-       jb.wagon {
-         sitzPlaetze( startWagon.sitzplatzVergabeListe.collect { sv -> [ id: sv.sitzplatz.nummer ] }  )
-       }
-       print jb.toPrettyString()
-      %>
-
-    </script>
+    <script src="index.js"></script>
   </head>
   <body>
     <h1>Ergebnisse</h1>
