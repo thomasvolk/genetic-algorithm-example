@@ -9,7 +9,7 @@ import org.jgap.*;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class GeneticAlgorithmus extends AbstractAlgorithmus {
+public class GeneticAlgorithmus extends AbstractGenerationAlgorithmus {
     private static class GeneticFitnesFunction extends FitnessFunction {
         private final Wagon wagon;
 
@@ -23,20 +23,14 @@ public class GeneticAlgorithmus extends AbstractAlgorithmus {
             return wagon.copy(passagierReihenfolge).getZufriedenheit();
         }
     }
-    private int maxEvolutions = 1000;
+
     private int populationSize = 6;
+    private Genotype genotype;
 
 
     public GeneticAlgorithmus(Passagier[] passagierListe, Sitzplatz[] sitzplatzListe) {
         super(passagierListe, sitzplatzListe);
-    }
-
-    public int getMaxEvolutions() {
-        return maxEvolutions;
-    }
-
-    public void setMaxEvolutions(int maxEvolutions) {
-        this.maxEvolutions = maxEvolutions;
+        this.genotype = JGapUtils.create(getPopulationSize(), getWagon().getPassagierReihenfolge(), new GeneticFitnesFunction(getWagon()));
     }
 
     public int getPopulationSize() {
@@ -47,26 +41,14 @@ public class GeneticAlgorithmus extends AbstractAlgorithmus {
         this.populationSize = populationSize;
     }
 
-    @Override
-    public Wagon getWagon(Report report) {
-        Wagon wagon = new Wagon(getSitzplatzListe(), getPassagierListe());
-        Genotype genotype = JGapUtils.create(getPopulationSize(), wagon.getPassagierReihenfolge(), new GeneticFitnesFunction(wagon));
-        int i = 0;
-        for (; i < getMaxEvolutions(); i++) {
-            genotype.evolve();
-            IChromosome solution = genotype.getFittestChromosome();
-            List<IChromosome> chromosomes = genotype.getPopulation().getChromosomes();
-            Stream<int[]> reihenfolgenGeneration = chromosomes.stream().map(c -> JGapUtils.asIntArray(c, wagon.getAnzahlPlaetze()));
-            Stream<Wagon> wagonStream = reihenfolgenGeneration.map(r -> wagon.copy(r));
-            report.evolutionsSchritt(i, wagonStream);
-            double fitnessValue = solution.getFitnessValue();
-            if(fitnessValue == wagon.getMaximaleZufriedenheit()) {
-                break;
-            }
-        }
+    protected Generation getGeneration(int generation) {
+        genotype.evolve();
         IChromosome solution = genotype.getFittestChromosome();
-        Wagon besterWagon = wagon.copy(JGapUtils.asIntArray(solution, wagon.getAnzahlPlaetze()));
-        report.bestesErgebnis(i, besterWagon);
-        return besterWagon;
+        List<IChromosome> chromosomes = genotype.getPopulation().getChromosomes();
+        Stream<int[]> reihenfolgenGeneration = chromosomes.stream().map(c -> JGapUtils.asIntArray(c, getWagon().getAnzahlPlaetze()));
+        Stream<Wagon> wagonStream = reihenfolgenGeneration.map(r -> getWagon().copy(r));
+        double zufriedenheit = solution.getFitnessValue();
+        Wagon besterWagon = getWagon().copy(JGapUtils.asIntArray(solution, getWagon().getAnzahlPlaetze()));
+        return new Generation(generation, wagonStream, zufriedenheit, besterWagon);
     }
 }

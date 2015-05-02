@@ -1,6 +1,7 @@
 package de.thomasvolk.genexample.report;
 
 import de.thomasvolk.genexample.Report;
+import de.thomasvolk.genexample.algorithmus.Generation;
 import de.thomasvolk.genexample.model.Wagon;
 import groovy.lang.Writable;
 import groovy.text.SimpleTemplateEngine;
@@ -11,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class HtmlReport implements Report {
@@ -43,27 +43,6 @@ public class HtmlReport implements Report {
             }
         }
     }
-    private static class Generation {
-        private final int nummer;
-        private final Stream<Wagon> wagons;
-
-        Generation(int nummer, Stream<Wagon> wagons) {
-            this.nummer = nummer;
-            this.wagons = wagons;
-        }
-
-        int getNummer() {
-            return nummer;
-        }
-
-        Stream<Wagon> getWagons() {
-            return wagons;
-        }
-
-        String getDateiname() {
-            return String.format("generation_%010d.html", nummer);
-        }
-    }
     private final String zielPfad;
     private final int schritte;
     private final Template generationTemplate = new Template("generation.html");
@@ -72,6 +51,7 @@ public class HtmlReport implements Report {
     private final Template cssTemplate = new Template("default.css");
     private Generation letzteGeneration;
     private Collection<Generation> generationen = new ArrayList<>();
+    private Wagon startWagon;
 
     public HtmlReport(String zielPfad) {
         this(zielPfad, 1);
@@ -94,9 +74,13 @@ public class HtmlReport implements Report {
     }
 
     @Override
-    public void evolutionsSchritt(int num, Stream<Wagon> wagons) {
-        Generation gen = new Generation(num, wagons);
-        if(num % schritte == 0) {
+    public void start(Wagon wagon) {
+        startWagon = wagon;
+    }
+
+    @Override
+    public void evolutionsSchritt(Generation gen) {
+        if(gen.getNummer() % schritte == 0) {
             erzeugeGeneration(gen);
             letzteGeneration = null;
         }
@@ -106,14 +90,14 @@ public class HtmlReport implements Report {
     }
 
     @Override
-    public void bestesErgebnis(int num, Wagon wagon) {
+    public void ende(Generation gen) {
         if(letzteGeneration != null) {
             erzeugeGeneration(letzteGeneration);
         }
         Map<String, Object> binding = new HashMap<>();
-        binding.put("wagon", wagon);
-        binding.put("generation", num);
+        binding.put("generation", gen);
         binding.put("generationen", generationen);
+        binding.put("startWagon", startWagon);
         indexTemplate.generiere(binding, getPath("index.html"));
         wagonJsTemplate.generiere(binding, getPath("wagon.js"));
         cssTemplate.generiere(binding, getPath("default.css"));

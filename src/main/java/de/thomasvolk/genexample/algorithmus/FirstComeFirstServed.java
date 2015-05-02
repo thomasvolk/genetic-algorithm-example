@@ -11,15 +11,17 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Stream;
 
 public class FirstComeFirstServed extends AbstractAlgorithmus {
 
     public FirstComeFirstServed(Sitzplatz[] sitzplatzListe, Passagier[] passagierListe) {
-        super(passagierListe, sitzplatzListe);
+        super(sitzplatzListe, passagierListe);
     }
 
     @Override
-    public Wagon getWagon(Report report) {
+    public Wagon berechneWagon(Report report) {
+        report.start(getWagon());
         List<Integer> passagierReihenfolge = new ArrayList<>();
         Set<SitzplatzVergabe> vergebenePlaetze = new HashSet<>();
         for (Passagier p : getPassagierListe()) {
@@ -41,7 +43,7 @@ public class FirstComeFirstServed extends AbstractAlgorithmus {
         }
         Wagon wagon = new Wagon(getSitzplatzListe(), getPassagierListe(),
                 ArrayUtils.toPrimitive(passagierReihenfolge.toArray(new Integer[getPassagierListe().length])));
-        report.bestesErgebnis(0, wagon);
+        report.ende(new Generation(0, Stream.of(wagon), wagon.getZufriedenheit(), wagon));
         return wagon;
     }
 }

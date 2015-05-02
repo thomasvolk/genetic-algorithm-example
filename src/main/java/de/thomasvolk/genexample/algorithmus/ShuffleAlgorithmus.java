@@ -1,6 +1,5 @@
 package de.thomasvolk.genexample.algorithmus;
 
-import de.thomasvolk.genexample.Report;
 import de.thomasvolk.genexample.model.Passagier;
 import de.thomasvolk.genexample.model.Sitzplatz;
 import de.thomasvolk.genexample.model.Wagon;
@@ -10,44 +9,29 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class ShuffleAlgorithmus extends AbstractAlgorithmus {
-    private int maxIterations = 1000;
+public class ShuffleAlgorithmus extends AbstractGenerationAlgorithmus {
+    private int[] reihenfolge;
+    private int[] bestShuffle;
+    private double hoechsteZufriedenheit;
 
     public ShuffleAlgorithmus(Passagier[] passagierListe, Sitzplatz[] sitzplatzListe) {
         super(passagierListe, sitzplatzListe);
+        reihenfolge =  getWagon().getPassagierReihenfolge();
+        bestShuffle = reihenfolge;
+        hoechsteZufriedenheit = getWagon().getZufriedenheit();
+
     }
 
-    public int getMaxIterations() {
-        return maxIterations;
-    }
-
-    public void setMaxIterations(int maxIterations) {
-        this.maxIterations = maxIterations;
-    }
-
-    @Override
-    public Wagon getWagon(Report report) {
-        Wagon wagon = new Wagon(getSitzplatzListe(), getPassagierListe());
-        int[] reihenfolge =  wagon.getPassagierReihenfolge();
-        int[] bestShuffle = reihenfolge;
-        double hoechsteZufriedenheit = wagon.getZufriedenheit();
-        int i = 0;
-        for (; i < getMaxIterations(); i++) {
-            reihenfolge = shuffle(reihenfolge);
-            Wagon genWagon = wagon.copy(reihenfolge);
-            report.evolutionsSchritt(i, Stream.of(genWagon));
-            double zufriedenheit = genWagon.getZufriedenheit();
-            if(zufriedenheit > hoechsteZufriedenheit) {
-                hoechsteZufriedenheit = zufriedenheit;
-                bestShuffle = reihenfolge;
-            }
-            if(zufriedenheit == wagon.getMaximaleZufriedenheit()) {
-                break;
-            }
+    protected Generation getGeneration(int nummer) {
+        reihenfolge = shuffle(reihenfolge);
+        Wagon genWagon = getWagon().copy(reihenfolge);
+        double zufriedenheit = genWagon.getZufriedenheit();
+        Generation generation = new Generation(nummer, Stream.of(genWagon), zufriedenheit, genWagon);
+        if(zufriedenheit > hoechsteZufriedenheit) {
+            hoechsteZufriedenheit = zufriedenheit;
+            bestShuffle = reihenfolge;
         }
-        Wagon besterWagon = wagon.copy(bestShuffle);
-        report.bestesErgebnis(i, wagon);
-        return besterWagon;
+        return generation;
     }
 
     private int[] shuffle(int[] reihenfolge) {

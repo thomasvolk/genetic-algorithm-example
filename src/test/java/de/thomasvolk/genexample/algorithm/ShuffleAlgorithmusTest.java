@@ -24,7 +24,7 @@ public class ShuffleAlgorithmusTest extends AbstractAlgorithmusTest {
     public void nullWertungen() {
         Passagier[] passagiere = getPassagiere(0, ANZAHL_SITZPLAETZE, Wertung.NULL);
         Algorithmus algorithmus = getAlgorithmus(passagiere);
-        Wagon wagon = algorithmus.getWagon(NullReport.INSTANCE);
+        Wagon wagon = algorithmus.berechneWagon(NullReport.INSTANCE);
         assertEquals(0, wagon.getZufriedenheit(), 0);
     }
 
@@ -35,7 +35,7 @@ public class ShuffleAlgorithmusTest extends AbstractAlgorithmusTest {
         Algorithmus algorithmus = getAlgorithmus(passagiere);
         Wagon wagon = new Wagon(getSitzPlaetze(), passagiere);
         assertEquals(2500, wagon.getZufriedenheit(), 0);
-        assertEquals(2500, algorithmus.getWagon(NullReport.INSTANCE).getZufriedenheit(), 0);
+        assertEquals(2500, algorithmus.berechneWagon(NullReport.INSTANCE).getZufriedenheit(), 0);
     }
 
 
@@ -44,6 +44,6 @@ public class ShuffleAlgorithmusTest extends AbstractAlgorithmusTest {
         Passagier[] passagiere = getPassagiere("fp,fr,ap\nfp,fr,\nfp,,");
         Algorithmus algorithmus = getAlgorithmus(passagiere);
         assertEquals(400, new Wagon(getSitzPlaetze(), passagiere).getZufriedenheit(), 0);
-        assertEquals(600, algorithmus.getWagon(NullReport.INSTANCE).getZufriedenheit(), 0);
+        assertEquals(600, algorithmus.berechneWagon(NullReport.INSTANCE).getZufriedenheit(), 0);
     }
 }

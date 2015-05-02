@@ -2,6 +2,7 @@ package de.thomasvolk.genexample.report;
 
 
 import de.thomasvolk.genexample.Report;
+import de.thomasvolk.genexample.algorithmus.Generation;
 import de.thomasvolk.genexample.model.Wagon;
 
 import java.util.stream.Stream;
@@ -12,12 +13,17 @@ public final class NullReport implements Report {
     }
 
     @Override
-    public void evolutionsSchritt(int num, Stream<Wagon> wagons) {
+    public void start(Wagon wagon) {
 
     }
 
     @Override
-    public void bestesErgebnis(int num, Wagon wagon) {
+    public void evolutionsSchritt(Generation gen) {
+
+    }
+
+    @Override
+    public void ende(Generation generation) {
 
     }
 }
