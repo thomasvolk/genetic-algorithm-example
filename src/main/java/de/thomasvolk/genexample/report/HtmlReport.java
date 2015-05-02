@@ -1,7 +1,6 @@
 package de.thomasvolk.genexample.report;
 
-import de.thomasvolk.genexample.Report;
-import de.thomasvolk.genexample.algorithmus.Generation;
+import de.thomasvolk.genexample.model.Generation;
 import de.thomasvolk.genexample.model.Wagon;
 import groovy.lang.Writable;
 import groovy.text.SimpleTemplateEngine;
@@ -12,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Stream;
 
 public class HtmlReport implements Report {
     public static class Template {
@@ -70,7 +68,7 @@ public class HtmlReport implements Report {
         Map<String, Object> binding = new HashMap<>();
         binding.put("generation", generation);
         generationen.add(generation);
-        generationTemplate.generiere(binding, getPath(generation.getDateiname()));
+        generationTemplate.generiere(binding, getPath("generation_" + generation.getName() + ".html"));
     }
 
     @Override

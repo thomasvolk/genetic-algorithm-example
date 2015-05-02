@@ -11,7 +11,7 @@
     <h2>Generationen</h2>
     <ul>
     <% generationen.each { g -> %>
-    <li><a href="$g.dateiname">Generation $g.nummer</a></li>
+    <li><a href="generation_${g.name}.html">Generation $g.nummer</a></li>
     <% } %>
     </ul>
   </body>

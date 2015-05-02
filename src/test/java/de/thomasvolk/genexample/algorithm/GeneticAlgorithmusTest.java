@@ -1,7 +1,7 @@
 package de.thomasvolk.genexample.algorithm;
 
 
-import de.thomasvolk.genexample.Report;
+import de.thomasvolk.genexample.report.Report;
 import de.thomasvolk.genexample.algorithmus.Algorithmus;
 import de.thomasvolk.genexample.algorithmus.GeneticAlgorithmus;
 import de.thomasvolk.genexample.model.Passagier;

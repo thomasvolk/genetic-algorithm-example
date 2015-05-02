@@ -1,11 +1,8 @@
 package de.thomasvolk.genexample.report;
 
 
-import de.thomasvolk.genexample.Report;
-import de.thomasvolk.genexample.algorithmus.Generation;
+import de.thomasvolk.genexample.model.Generation;
 import de.thomasvolk.genexample.model.Wagon;
-
-import java.util.stream.Stream;
 
 public final class NullReport implements Report {
     public static final Report INSTANCE = new NullReport();

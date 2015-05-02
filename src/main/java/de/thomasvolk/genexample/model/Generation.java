@@ -1,6 +1,4 @@
-package de.thomasvolk.genexample.algorithmus;
-
-import de.thomasvolk.genexample.model.Wagon;
+package de.thomasvolk.genexample.model;
 
 import java.util.stream.Stream;
 
@@ -33,8 +31,8 @@ public class Generation {
         return besterWagon;
     }
 
-    public String getDateiname() {
-        return String.format("generation_%010d.html", getNummer());
+    public String getName() {
+        return String.format("%010d", getNummer());
     }
 
 }

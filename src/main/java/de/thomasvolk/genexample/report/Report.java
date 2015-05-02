@@ -1,9 +1,7 @@
-package de.thomasvolk.genexample;
+package de.thomasvolk.genexample.report;
 
-import de.thomasvolk.genexample.algorithmus.Generation;
+import de.thomasvolk.genexample.model.Generation;
 import de.thomasvolk.genexample.model.Wagon;
-
-import java.util.stream.Stream;
 
 public interface Report {
     void start(Wagon wagon);
