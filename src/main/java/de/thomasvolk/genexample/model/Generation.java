@@ -1,20 +1,18 @@
 package de.thomasvolk.genexample.model;
 
 import java.util.Collection;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Generation {
     private final int nummer;
-    private final Collection<Wagon> wagons;
+    private final Collection<WagonBesetzung> wagonBesetzungs;
     private final double zufriedenheit;
-    private final Wagon besterWagon;
+    private final WagonBesetzung besterWagonBesetzung;
 
-    public Generation(int nummer, Collection<Wagon> wagons, double zufriedenheit, Wagon besterWagon) {
+    public Generation(int nummer, Collection<WagonBesetzung> wagonBesetzungs, double zufriedenheit, WagonBesetzung besterWagon) {
         this.nummer = nummer;
-        this.wagons = wagons;
+        this.wagonBesetzungs = wagonBesetzungs;
         this.zufriedenheit = zufriedenheit;
-        this.besterWagon = besterWagon;
+        this.besterWagonBesetzung = besterWagon;
     }
 
     public double getZufriedenheit() {
@@ -25,12 +23,12 @@ public class Generation {
         return nummer;
     }
 
-    public Collection<Wagon> getWagons() {
-        return wagons;
+    public Collection<WagonBesetzung> getWagonBesetzungs() {
+        return wagonBesetzungs;
     }
 
-    public Wagon getBesterWagon() {
-        return besterWagon;
+    public WagonBesetzung getBesterWagonBesetzung() {
+        return besterWagonBesetzung;
     }
 
     public String getName() {

@@ -3,12 +3,11 @@ package de.thomasvolk.genexample.algorithmus;
 import de.thomasvolk.genexample.model.Generation;
 import de.thomasvolk.genexample.model.Passagier;
 import de.thomasvolk.genexample.model.Sitzplatz;
-import de.thomasvolk.genexample.model.Wagon;
+import de.thomasvolk.genexample.model.WagonBesetzung;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class ShuffleAlgorithmus extends AbstractGenerationAlgorithmus {
     private int[] reihenfolge;
@@ -17,17 +16,17 @@ public class ShuffleAlgorithmus extends AbstractGenerationAlgorithmus {
 
     public ShuffleAlgorithmus(Passagier[] passagierListe, Sitzplatz[] sitzplatzListe) {
         super(passagierListe, sitzplatzListe);
-        reihenfolge =  getWagon().getPassagierReihenfolge();
+        reihenfolge =  getWagonBesetzung().getPassagierReihenfolge();
         bestShuffle = reihenfolge;
-        hoechsteZufriedenheit = getWagon().getZufriedenheit();
+        hoechsteZufriedenheit = getWagonBesetzung().getZufriedenheit();
 
     }
 
     protected Generation getGeneration(int nummer) {
         reihenfolge = shuffle(reihenfolge);
-        Wagon genWagon = getWagon().copy(reihenfolge);
-        double zufriedenheit = genWagon.getZufriedenheit();
-        Generation generation = new Generation(nummer, Collections.singleton(genWagon), zufriedenheit, genWagon);
+        WagonBesetzung genWagonBesetzung = getWagonBesetzung().copy(reihenfolge);
+        double zufriedenheit = genWagonBesetzung.getZufriedenheit();
+        Generation generation = new Generation(nummer, Collections.singleton(genWagonBesetzung), zufriedenheit, genWagonBesetzung);
         if(zufriedenheit > hoechsteZufriedenheit) {
             hoechsteZufriedenheit = zufriedenheit;
             bestShuffle = reihenfolge;

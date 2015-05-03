@@ -5,7 +5,6 @@ import de.thomasvolk.genexample.report.Report;
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.*;
-import java.util.stream.Stream;
 
 public class FirstComeFirstServed extends AbstractAlgorithmus {
 
@@ -14,8 +13,8 @@ public class FirstComeFirstServed extends AbstractAlgorithmus {
     }
 
     @Override
-    public Wagon berechneWagon(Report report) {
-        report.start(getWagon());
+    public WagonBesetzung berechneWagon(Report report) {
+        report.start(getWagonBesetzung());
         List<Integer> passagierReihenfolge = new ArrayList<>();
         Set<SitzplatzVergabe> vergebenePlaetze = new HashSet<>();
         for (Passagier p : getPassagierListe()) {
@@ -35,9 +34,9 @@ public class FirstComeFirstServed extends AbstractAlgorithmus {
             vergebenePlaetze.add(besterPlatz);
             passagierReihenfolge.add(ausgewaehlterPassagierIndex);
         }
-        Wagon wagon = new Wagon(getSitzplatzListe(), getPassagierListe(),
+        WagonBesetzung wagonBesetzung = new WagonBesetzung(getSitzplatzListe(), getPassagierListe(),
                 ArrayUtils.toPrimitive(passagierReihenfolge.toArray(new Integer[getPassagierListe().length])));
-        report.ende(new Generation(0, Collections.singleton(wagon), wagon.getZufriedenheit(), wagon));
-        return wagon;
+        report.ende(new Generation(0, Collections.singleton(wagonBesetzung), wagonBesetzung.getZufriedenheit(), wagonBesetzung));
+        return wagonBesetzung;
     }
 }

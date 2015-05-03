@@ -2,17 +2,17 @@ package de.thomasvolk.genexample.algorithmus;
 
 import de.thomasvolk.genexample.model.Passagier;
 import de.thomasvolk.genexample.model.Sitzplatz;
-import de.thomasvolk.genexample.model.Wagon;
+import de.thomasvolk.genexample.model.WagonBesetzung;
 
 public abstract class AbstractAlgorithmus implements Algorithmus {
     protected final Sitzplatz[] sitzplatzListe;
     protected final Passagier[] passagierListe;
-    protected Wagon wagon;
+    protected WagonBesetzung wagonBesetzung;
 
     public AbstractAlgorithmus(Sitzplatz[] sitzplatzListe, Passagier[] passagierListe) {
         this.sitzplatzListe = sitzplatzListe;
         this.passagierListe = passagierListe;
-        this.wagon = new Wagon(sitzplatzListe, passagierListe);
+        this.wagonBesetzung = new WagonBesetzung(sitzplatzListe, passagierListe);
     }
 
     public Sitzplatz[] getSitzplatzListe() {
@@ -23,7 +23,7 @@ public abstract class AbstractAlgorithmus implements Algorithmus {
         return passagierListe;
     }
 
-    public Wagon getWagon() {
-        return wagon;
+    public WagonBesetzung getWagonBesetzung() {
+        return wagonBesetzung;
     }
 }

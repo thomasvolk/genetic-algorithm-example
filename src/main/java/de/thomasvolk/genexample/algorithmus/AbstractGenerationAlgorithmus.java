@@ -4,7 +4,7 @@ import de.thomasvolk.genexample.model.Generation;
 import de.thomasvolk.genexample.report.Report;
 import de.thomasvolk.genexample.model.Passagier;
 import de.thomasvolk.genexample.model.Sitzplatz;
-import de.thomasvolk.genexample.model.Wagon;
+import de.thomasvolk.genexample.model.WagonBesetzung;
 
 public abstract class AbstractGenerationAlgorithmus extends AbstractAlgorithmus {
     private int maxEvolutions = 1000;
@@ -26,19 +26,19 @@ public abstract class AbstractGenerationAlgorithmus extends AbstractAlgorithmus 
     abstract protected Generation getGeneration(int generation);
 
     @Override
-    public Wagon berechneWagon(Report report) {
-        report.start(getWagon());
+    public WagonBesetzung berechneWagon(Report report) {
+        report.start(getWagonBesetzung());
         int nummer = 0;
         Generation gen = null;
         for (; nummer < getMaxEvolutions(); nummer++) {
             gen = getGeneration(nummer);
 
             report.evolutionsSchritt(gen);
-            if(gen.getZufriedenheit() == getWagon().getMaximaleZufriedenheit()) {
+            if(gen.getZufriedenheit() == getWagonBesetzung().getMaximaleZufriedenheit()) {
                 break;
             }
         }
         report.ende(gen);
-        return gen.getBesterWagon();
+        return gen.getBesterWagonBesetzung();
     }
 }

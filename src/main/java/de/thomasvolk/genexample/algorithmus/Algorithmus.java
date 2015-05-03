@@ -1,8 +1,8 @@
 package de.thomasvolk.genexample.algorithmus;
 
 import de.thomasvolk.genexample.report.Report;
-import de.thomasvolk.genexample.model.Wagon;
+import de.thomasvolk.genexample.model.WagonBesetzung;
 
 public interface Algorithmus {
-    Wagon berechneWagon(Report generator);
+    WagonBesetzung berechneWagon(Report generator);
 }

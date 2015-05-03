@@ -5,7 +5,7 @@ import de.thomasvolk.genexample.report.Report;
 import de.thomasvolk.genexample.algorithmus.Algorithmus;
 import de.thomasvolk.genexample.algorithmus.GeneticAlgorithmus;
 import de.thomasvolk.genexample.model.Passagier;
-import de.thomasvolk.genexample.model.Wagon;
+import de.thomasvolk.genexample.model.WagonBesetzung;
 import de.thomasvolk.genexample.model.Wertung;
 import de.thomasvolk.genexample.report.HtmlReport;
 import org.junit.Before;
@@ -37,8 +37,8 @@ public class GeneticAlgorithmusTest extends AbstractAlgorithmusTest {
     public void nullWertungen() {
         Passagier[] passagiere = getPassagiere(0, ANZAHL_SITZPLAETZE, Wertung.NULL);
         Algorithmus algorithmus = getAlgorithmus(passagiere);
-        Wagon wagon = algorithmus.berechneWagon(report);
-        assertEquals(0, wagon.getZufriedenheit(), 0);
+        WagonBesetzung wagonBesetzung = algorithmus.berechneWagon(report);
+        assertEquals(0, wagonBesetzung.getZufriedenheit(), 0);
     }
 
     @Test
@@ -46,8 +46,8 @@ public class GeneticAlgorithmusTest extends AbstractAlgorithmusTest {
         Passagier[] passagiere = getPassagiere(0, ANZAHL_SITZPLAETZE,
                 new Wertung(Wertung.EINFACHE_GEWICHTUNG,Wertung.EINFACHE_GEWICHTUNG,Wertung.EINFACHE_GEWICHTUNG));
         Algorithmus algorithmus = getAlgorithmus(passagiere);
-        Wagon wagon = new Wagon(getSitzPlaetze(), passagiere);
-        assertEquals(2500, wagon.getZufriedenheit(), 0);
+        WagonBesetzung wagonBesetzung = new WagonBesetzung(getSitzPlaetze(), passagiere);
+        assertEquals(2500, wagonBesetzung.getZufriedenheit(), 0);
         assertEquals(2500, algorithmus.berechneWagon(report).getZufriedenheit(), 0);
     }
 
@@ -56,7 +56,7 @@ public class GeneticAlgorithmusTest extends AbstractAlgorithmusTest {
     public void unterschiedlicheWertungen() throws IOException {
         Passagier[] passagiere = getPassagiere("fp,fr,ap\nfp,fr,\nfp,,");
         Algorithmus algorithmus = getAlgorithmus(passagiere);
-        assertEquals(400, new Wagon(getSitzPlaetze(), passagiere).getZufriedenheit(), 0);
+        assertEquals(400, new WagonBesetzung(getSitzPlaetze(), passagiere).getZufriedenheit(), 0);
         assertEquals(600, algorithmus.berechneWagon(report).getZufriedenheit(), 0);
     }
 }
