@@ -2,10 +2,12 @@
 def toJson(wagon) {
   def reihen = []
   def aktuelleReihe = []
+  def aktuelleReiheNummer = 0
   wagon.sitzplatzVergabeListe.each { sv ->
-    if(sv.sitzplatz.position == 0 && aktuelleReihe) {
+    if(sv.sitzplatz.reihe != aktuelleReiheNummer && aktuelleReihe) {
       reihen << aktuelleReihe
       aktuelleReihe = []
+      aktuelleReiheNummer = sv.sitzplatz.reihe
     }
     aktuelleReihe << sv
   }
