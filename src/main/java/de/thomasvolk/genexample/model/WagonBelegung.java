@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class WagonBelegung {
-    private final Sitzplatz[] sitzplatzListe;
+    private final Wagon wagon;
     private final Passagier[] passagierListe;
     private int[] passagierReihenfolge;
 
@@ -18,16 +18,16 @@ public class WagonBelegung {
         return passagierReihenfolge;
     }
 
-    public WagonBelegung(Sitzplatz[] sitzplatzListe, Passagier[] passagierListe) {
-        this(sitzplatzListe, passagierListe, getInitialPassagierReihenfolge(passagierListe.length));
+    public WagonBelegung(Wagon wagon, Passagier[] passagierListe) {
+        this(wagon, passagierListe, getInitialPassagierReihenfolge(passagierListe.length));
     }
 
-    public WagonBelegung(Sitzplatz[] sitzplatzListe, Passagier[] passagierListe, int[] passagierReihenfolge) {
-        this.sitzplatzListe = sitzplatzListe;
+    public WagonBelegung(Wagon wagon, Passagier[] passagierListe, int[] passagierReihenfolge) {
+        this.wagon = wagon;
         this.passagierListe = passagierListe;
-        if(sitzplatzListe.length != passagierListe.length) {
+        if(wagon.getSitzplatzListe().length != passagierListe.length) {
             throw new IllegalStateException(String.format(
-                    "Sitzplatzanzah %s weicht von Passagieranzahl %s ab!", sitzplatzListe.length, passagierListe.length));
+                    "Sitzplatzanzah %s weicht von Passagieranzahl %s ab!", wagon.getSitzplatzListe().length, passagierListe.length));
         }
         HashSet<Integer> sortierungSet = IntStream.of(passagierReihenfolge).mapToObj(i -> i).collect(Collectors.toCollection(HashSet::new));
         if(passagierReihenfolge.length != passagierListe.length) {
@@ -56,14 +56,14 @@ public class WagonBelegung {
         List<SitzplatzVergabe> result = new ArrayList<>();
         for(int i = 0; i < passagierReihenfolge.length; i++) {
             int sitzplatz = passagierReihenfolge[i];
-            result.add(new SitzplatzVergabe(sitzplatzListe[sitzplatz], passagierListe[i]));
+            result.add(new SitzplatzVergabe(getSitzplatzListe()[sitzplatz], passagierListe[i]));
         }
         result.sort((sv1, sv2) -> sv1.getSitzplatz().getNummer() - sv2.getSitzplatz().getNummer());
         return result;
     }
 
     public WagonBelegung copy(int[] newPassagierReihenfolge) {
-       return new WagonBelegung(sitzplatzListe, passagierListe, newPassagierReihenfolge);
+       return new WagonBelegung(wagon, passagierListe, newPassagierReihenfolge);
     }
 
     public Passagier[] getPassagierListe() {
@@ -71,7 +71,11 @@ public class WagonBelegung {
     }
 
     public Sitzplatz[] getSitzplatzListe() {
-        return sitzplatzListe;
+        return wagon.getSitzplatzListe();
+    }
+
+    public Wagon getWagon() {
+        return wagon;
     }
 
     @Override

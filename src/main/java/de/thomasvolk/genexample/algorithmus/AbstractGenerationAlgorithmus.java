@@ -1,16 +1,13 @@
 package de.thomasvolk.genexample.algorithmus;
 
-import de.thomasvolk.genexample.model.Generation;
+import de.thomasvolk.genexample.model.*;
 import de.thomasvolk.genexample.report.Report;
-import de.thomasvolk.genexample.model.Passagier;
-import de.thomasvolk.genexample.model.Sitzplatz;
-import de.thomasvolk.genexample.model.WagonBelegung;
 
 public abstract class AbstractGenerationAlgorithmus extends AbstractAlgorithmus {
     private int maxEvolutions = 1000;
 
-    public AbstractGenerationAlgorithmus(Passagier[] passagierListe, Sitzplatz[] sitzplatzListe) {
-        super(sitzplatzListe, passagierListe);
+    public AbstractGenerationAlgorithmus(Passagier[] passagierListe, Wagon wagon) {
+        super(wagon, passagierListe);
     }
 
 

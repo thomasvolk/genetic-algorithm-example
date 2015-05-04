@@ -8,6 +8,8 @@ import java.util.stream.IntStream;
 
 public class AbstractWagonTest {
     protected static final int ANZAHL_SITZPLAETZE = 15;
+    private static final int REIHEN = 5;
+    private static final int BREITE = 3;
     private final Sitzplatz[] sitzPlaetze = new SitzplatzFactory().lese("GgGaA\nGgGaA\nGgGaA").toArray(new Sitzplatz[] {});
     //                                   Einfachgewichtung                   : 21223  10112  21223
     //                                          "          ohne Fahrtrichtung: 11122  00011  11122
@@ -24,8 +26,8 @@ public class AbstractWagonTest {
 
      */
 
-    public Sitzplatz[] getSitzPlaetze() {
-        return sitzPlaetze;
+    public Wagon getWagon() {
+        return new Wagon(sitzPlaetze, REIHEN, BREITE);
     }
 
     protected Passagier[] getPassagiere(String text) throws IOException {

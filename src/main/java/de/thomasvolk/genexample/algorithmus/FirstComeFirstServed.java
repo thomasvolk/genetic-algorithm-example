@@ -8,8 +8,8 @@ import java.util.*;
 
 public class FirstComeFirstServed extends AbstractAlgorithmus {
 
-    public FirstComeFirstServed(Sitzplatz[] sitzplatzListe, Passagier[] passagierListe) {
-        super(sitzplatzListe, passagierListe);
+    public FirstComeFirstServed(Wagon wagon, Passagier[] passagierListe) {
+        super(wagon, passagierListe);
     }
 
     @Override
@@ -34,7 +34,7 @@ public class FirstComeFirstServed extends AbstractAlgorithmus {
             vergebenePlaetze.add(besterPlatz);
             passagierReihenfolge.add(ausgewaehlterPassagierIndex);
         }
-        WagonBelegung wagonBelegung = new WagonBelegung(getSitzplatzListe(), getPassagierListe(),
+        WagonBelegung wagonBelegung = new WagonBelegung(getWagonBelegung().getWagon(), getPassagierListe(),
                 ArrayUtils.toPrimitive(passagierReihenfolge.toArray(new Integer[getPassagierListe().length])));
         report.ende(new Generation(0, Collections.singleton(wagonBelegung), wagonBelegung.getZufriedenheit(), wagonBelegung));
         return wagonBelegung;

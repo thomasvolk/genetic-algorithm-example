@@ -1,10 +1,7 @@
 package de.thomasvolk.genexample.algorithmus;
 
 import de.thomasvolk.genexample.*;
-import de.thomasvolk.genexample.model.Generation;
-import de.thomasvolk.genexample.model.Passagier;
-import de.thomasvolk.genexample.model.Sitzplatz;
-import de.thomasvolk.genexample.model.WagonBelegung;
+import de.thomasvolk.genexample.model.*;
 import org.jgap.*;
 
 import java.util.List;
@@ -30,8 +27,8 @@ public class GeneticAlgorithmus extends AbstractGenerationAlgorithmus {
     private Genotype genotype;
 
 
-    public GeneticAlgorithmus(Passagier[] passagierListe, Sitzplatz[] sitzplatzListe) {
-        super(passagierListe, sitzplatzListe);
+    public GeneticAlgorithmus(Passagier[] passagierListe, Wagon wagon) {
+        super(passagierListe, wagon);
         this.genotype = JGapUtils.create(getPopulationSize(), getWagonBelegung().getPassagierReihenfolge(), new GeneticFitnesFunction(getWagonBelegung()));
     }
 

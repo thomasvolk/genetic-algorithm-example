@@ -16,7 +16,7 @@ import static org.junit.Assert.assertEquals;
 public class ShuffleAlgorithmusTest extends AbstractAlgorithmusTest {
 
     protected Algorithmus getAlgorithmus(Passagier[] passagiere) {
-        return new ShuffleAlgorithmus(passagiere, getSitzPlaetze());
+        return new ShuffleAlgorithmus(passagiere, getWagon());
     }
 
 
@@ -33,7 +33,7 @@ public class ShuffleAlgorithmusTest extends AbstractAlgorithmusTest {
         Passagier[] passagiere = getPassagiere(0, ANZAHL_SITZPLAETZE,
                 new Wertung(Wertung.EINFACHE_GEWICHTUNG,Wertung.EINFACHE_GEWICHTUNG,Wertung.EINFACHE_GEWICHTUNG));
         Algorithmus algorithmus = getAlgorithmus(passagiere);
-        WagonBelegung wagonBelegung = new WagonBelegung(getSitzPlaetze(), passagiere);
+        WagonBelegung wagonBelegung = new WagonBelegung(getWagon(), passagiere);
         assertEquals(2500, wagonBelegung.getZufriedenheit(), 0);
         assertEquals(2500, algorithmus.berechneWagon(NullReport.INSTANCE).getZufriedenheit(), 0);
     }
@@ -43,7 +43,7 @@ public class ShuffleAlgorithmusTest extends AbstractAlgorithmusTest {
     public void unterschiedlicheWertungen() throws IOException {
         Passagier[] passagiere = getPassagiere("fp,fr,ap\nfp,fr,\nfp,,");
         Algorithmus algorithmus = getAlgorithmus(passagiere);
-        assertEquals(400, new WagonBelegung(getSitzPlaetze(), passagiere).getZufriedenheit(), 0);
+        assertEquals(400, new WagonBelegung(getWagon(), passagiere).getZufriedenheit(), 0);
         assertEquals(600, algorithmus.berechneWagon(NullReport.INSTANCE).getZufriedenheit(), 0);
     }
 }

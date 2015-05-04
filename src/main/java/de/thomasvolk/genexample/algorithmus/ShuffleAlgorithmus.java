@@ -1,9 +1,6 @@
 package de.thomasvolk.genexample.algorithmus;
 
-import de.thomasvolk.genexample.model.Generation;
-import de.thomasvolk.genexample.model.Passagier;
-import de.thomasvolk.genexample.model.Sitzplatz;
-import de.thomasvolk.genexample.model.WagonBelegung;
+import de.thomasvolk.genexample.model.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,8 +11,8 @@ public class ShuffleAlgorithmus extends AbstractGenerationAlgorithmus {
     private int[] bestShuffle;
     private double hoechsteZufriedenheit;
 
-    public ShuffleAlgorithmus(Passagier[] passagierListe, Sitzplatz[] sitzplatzListe) {
-        super(passagierListe, sitzplatzListe);
+    public ShuffleAlgorithmus(Passagier[] passagierListe, Wagon wagon) {
+        super(passagierListe, wagon);
         reihenfolge =  getWagonBelegung().getPassagierReihenfolge();
         bestShuffle = reihenfolge;
         hoechsteZufriedenheit = getWagonBelegung().getZufriedenheit();
