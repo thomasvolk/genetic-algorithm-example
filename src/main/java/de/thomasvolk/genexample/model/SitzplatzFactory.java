@@ -40,15 +40,16 @@ public class SitzplatzFactory {
         return new Sitzplatz(nummer, reihe, position, fenster, inFahrtrichtung, abteil);
     }
 
-    public List<Sitzplatz> lese(InputStream is) throws IOException {
+    public Wagon lese(InputStream is) throws IOException {
         return lese(IOUtils.toString(is, "UTF-8").trim());
     }
 
-    public List<Sitzplatz> lese(String text) {
+    public Wagon lese(String text) {
         String[] lines = text.split("\\n");
         List<Sitzplatz> sitzplatzListe = new ArrayList<>();
         int breite = lines.length;
         int position = breite - 1;
+        int reihen = 0;
         for(String line: lines) {
             int reihe = 0;
             for (char eigenschaft : line.toCharArray()) {
@@ -58,9 +59,13 @@ public class SitzplatzFactory {
                 }
                 reihe++;
             }
+            if(reihe > reihen) {
+                reihen = reihe;
+            }
             position--;
         }
-        return sitzplatzListe.stream().sorted( (s1, s2) -> s1.getNummer() - s2.getNummer() ).collect(
-                Collectors.toCollection(ArrayList::new));
+        Sitzplatz[] sitzPLaetze = sitzplatzListe.stream().sorted((s1, s2) -> s1.getNummer() - s2.getNummer()).collect(
+                Collectors.toCollection(ArrayList::new)).toArray(new Sitzplatz[sitzplatzListe.size()]);
+        return new Wagon(sitzPLaetze, reihen, breite);
     }
 }

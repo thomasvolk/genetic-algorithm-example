@@ -1,5 +1,8 @@
 package de.thomasvolk.genexample.model;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,7 +13,7 @@ public class AbstractWagonTest {
     protected static final int ANZAHL_SITZPLAETZE = 15;
     private static final int REIHEN = 5;
     private static final int BREITE = 3;
-    private final Sitzplatz[] sitzPlaetze = new SitzplatzFactory().lese("GgGaA\nGgGaA\nGgGaA").toArray(new Sitzplatz[] {});
+    private final Wagon wagon = new SitzplatzFactory().lese("GgGaA\nGgGaA\nGgGaA");
     //                                   Einfachgewichtung                   : 21223  10112  21223
     //                                          "          ohne Fahrtrichtung: 11122  00011  11122
     /*
@@ -26,8 +29,14 @@ public class AbstractWagonTest {
 
      */
 
+    @Test
+    public void wagonGeometrie() {
+        Assert.assertEquals(REIHEN, wagon.getReihen());
+        Assert.assertEquals(BREITE, wagon.getBreite());
+    }
+
     public Wagon getWagon() {
-        return new Wagon(sitzPlaetze, REIHEN, BREITE);
+        return wagon;
     }
 
     protected Passagier[] getPassagiere(String text) throws IOException {

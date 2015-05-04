@@ -16,9 +16,12 @@ public class SitzplatzFactoryTest {
     @Test
     public void lesen() throws IOException {
         SitzplatzFactory factory = new SitzplatzFactory();
-        List<Sitzplatz> sitzplatzListe = factory.lese(getClass().getResourceAsStream("/wagon.txt"));
-        assertEquals(98, sitzplatzListe.size());
-        Sitzplatz sitzplatz = sitzplatzListe.get(0);
+        Wagon wagon = factory.lese(getClass().getResourceAsStream("/wagon.txt"));
+        assertEquals(26, wagon.getReihen());
+        assertEquals(4, wagon.getBreite());
+
+        assertEquals(98, wagon.getSitzplatzListe().length);
+        Sitzplatz sitzplatz = wagon.getSitzplatzListe()[0];
         assertEquals(1, sitzplatz.getNummer());
         assertEquals(0, sitzplatz.getPosition());
         assertEquals(0, sitzplatz.getReihe());
@@ -26,7 +29,7 @@ public class SitzplatzFactoryTest {
         assertFalse(sitzplatz.isAbteil());
         assertTrue(sitzplatz.isInFahrtrichtung());
 
-        sitzplatz = sitzplatzListe.get(5);
+        sitzplatz = wagon.getSitzplatzListe()[5];
         assertEquals(6, sitzplatz.getNummer());
         assertEquals(1, sitzplatz.getPosition());
         assertEquals(1, sitzplatz.getReihe());
@@ -34,7 +37,7 @@ public class SitzplatzFactoryTest {
         assertFalse(sitzplatz.isAbteil());
         assertTrue(sitzplatz.isInFahrtrichtung());
 
-        sitzplatz = sitzplatzListe.get(97);
+        sitzplatz = wagon.getSitzplatzListe()[97];
         assertEquals(104, sitzplatz.getNummer());
         assertEquals(3, sitzplatz.getPosition());
         assertEquals(25, sitzplatz.getReihe());
@@ -42,7 +45,7 @@ public class SitzplatzFactoryTest {
         assertTrue(sitzplatz.isAbteil());
         assertFalse(sitzplatz.isInFahrtrichtung());
 
-        sitzplatz = sitzplatzListe.get(94);
+        sitzplatz = wagon.getSitzplatzListe()[94];
         assertEquals(100, sitzplatz.getNummer());
         assertEquals(3, sitzplatz.getPosition());
         assertEquals(24, sitzplatz.getReihe());
@@ -50,7 +53,7 @@ public class SitzplatzFactoryTest {
         assertTrue(sitzplatz.isAbteil());
         assertTrue(sitzplatz.isInFahrtrichtung());
 
-        sitzplatz = sitzplatzListe.get(93);
+        sitzplatz = wagon.getSitzplatzListe()[93];
         assertEquals(99, sitzplatz.getNummer());
         assertEquals(2, sitzplatz.getPosition());
         assertEquals(24, sitzplatz.getReihe());
