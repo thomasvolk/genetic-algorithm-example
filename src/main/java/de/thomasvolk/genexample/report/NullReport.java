@@ -2,7 +2,7 @@ package de.thomasvolk.genexample.report;
 
 
 import de.thomasvolk.genexample.model.Generation;
-import de.thomasvolk.genexample.model.WagonBesetzung;
+import de.thomasvolk.genexample.model.WagonBelegung;
 
 public final class NullReport implements Report {
     public static final Report INSTANCE = new NullReport();
@@ -10,7 +10,7 @@ public final class NullReport implements Report {
     }
 
     @Override
-    public void start(WagonBesetzung wagonBesetzung) {
+    public void start(WagonBelegung wagonBelegung) {
 
     }
 

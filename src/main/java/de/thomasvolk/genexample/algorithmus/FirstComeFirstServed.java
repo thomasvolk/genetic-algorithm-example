@@ -13,8 +13,8 @@ public class FirstComeFirstServed extends AbstractAlgorithmus {
     }
 
     @Override
-    public WagonBesetzung berechneWagon(Report report) {
-        report.start(getWagonBesetzung());
+    public WagonBelegung berechneWagon(Report report) {
+        report.start(getWagonBelegung());
         List<Integer> passagierReihenfolge = new ArrayList<>();
         Set<SitzplatzVergabe> vergebenePlaetze = new HashSet<>();
         for (Passagier p : getPassagierListe()) {
@@ -34,9 +34,9 @@ public class FirstComeFirstServed extends AbstractAlgorithmus {
             vergebenePlaetze.add(besterPlatz);
             passagierReihenfolge.add(ausgewaehlterPassagierIndex);
         }
-        WagonBesetzung wagonBesetzung = new WagonBesetzung(getSitzplatzListe(), getPassagierListe(),
+        WagonBelegung wagonBelegung = new WagonBelegung(getSitzplatzListe(), getPassagierListe(),
                 ArrayUtils.toPrimitive(passagierReihenfolge.toArray(new Integer[getPassagierListe().length])));
-        report.ende(new Generation(0, Collections.singleton(wagonBesetzung), wagonBesetzung.getZufriedenheit(), wagonBesetzung));
-        return wagonBesetzung;
+        report.ende(new Generation(0, Collections.singleton(wagonBelegung), wagonBelegung.getZufriedenheit(), wagonBelegung));
+        return wagonBelegung;
     }
 }

@@ -30,6 +30,6 @@ def toJson(wagon) {
 %>
 data = {};
 data.startWagon=<%=toJson(startWagon)%>;
-<% generation.wagons.eachWithIndex { w, i ->
+<% generation.wagonBelegungen.eachWithIndex { w, i ->
   println "data.wagon_$i=" + toJson(w)
 } %>;

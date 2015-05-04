@@ -8,7 +8,7 @@
   </head>
   <body>
 
-  <% generation.wagons.eachWithIndex { w, i -> %>
+  <% generation.wagonBelegungen.eachWithIndex { w, i -> %>
   <canvas id="wagon_$i" width="830" height="600"></canvas>
   <script>
       wagon.zeichnen('wagon_$i', 0, 0, data.wagon_$i);

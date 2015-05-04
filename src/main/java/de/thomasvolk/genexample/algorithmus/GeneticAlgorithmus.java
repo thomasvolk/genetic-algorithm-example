@@ -4,7 +4,7 @@ import de.thomasvolk.genexample.*;
 import de.thomasvolk.genexample.model.Generation;
 import de.thomasvolk.genexample.model.Passagier;
 import de.thomasvolk.genexample.model.Sitzplatz;
-import de.thomasvolk.genexample.model.WagonBesetzung;
+import de.thomasvolk.genexample.model.WagonBelegung;
 import org.jgap.*;
 
 import java.util.List;
@@ -13,16 +13,16 @@ import java.util.stream.Stream;
 
 public class GeneticAlgorithmus extends AbstractGenerationAlgorithmus {
     private static class GeneticFitnesFunction extends FitnessFunction {
-        private final WagonBesetzung wagonBesetzung;
+        private final WagonBelegung wagonBelegung;
 
-        public GeneticFitnesFunction(WagonBesetzung wagonBesetzung) {
-            this.wagonBesetzung = wagonBesetzung;
+        public GeneticFitnesFunction(WagonBelegung wagonBelegung) {
+            this.wagonBelegung = wagonBelegung;
         }
 
         @Override
         protected double evaluate(IChromosome aSubject) {
-            int[] passagierReihenfolge = JGapUtils.asIntArray(aSubject, wagonBesetzung.getAnzahlPlaetze());
-            return wagonBesetzung.copy(passagierReihenfolge).getZufriedenheit();
+            int[] passagierReihenfolge = JGapUtils.asIntArray(aSubject, wagonBelegung.getAnzahlPlaetze());
+            return wagonBelegung.copy(passagierReihenfolge).getZufriedenheit();
         }
     }
 
@@ -32,7 +32,7 @@ public class GeneticAlgorithmus extends AbstractGenerationAlgorithmus {
 
     public GeneticAlgorithmus(Passagier[] passagierListe, Sitzplatz[] sitzplatzListe) {
         super(passagierListe, sitzplatzListe);
-        this.genotype = JGapUtils.create(getPopulationSize(), getWagonBesetzung().getPassagierReihenfolge(), new GeneticFitnesFunction(getWagonBesetzung()));
+        this.genotype = JGapUtils.create(getPopulationSize(), getWagonBelegung().getPassagierReihenfolge(), new GeneticFitnesFunction(getWagonBelegung()));
     }
 
     public int getPopulationSize() {
@@ -47,10 +47,10 @@ public class GeneticAlgorithmus extends AbstractGenerationAlgorithmus {
         genotype.evolve();
         IChromosome solution = genotype.getFittestChromosome();
         List<IChromosome> chromosomes = genotype.getPopulation().getChromosomes();
-        Stream<int[]> reihenfolgenGeneration = chromosomes.stream().map(c -> JGapUtils.asIntArray(c, getWagonBesetzung().getAnzahlPlaetze()));
-        Stream<WagonBesetzung> wagonStream = reihenfolgenGeneration.map(r -> getWagonBesetzung().copy(r));
+        Stream<int[]> reihenfolgenGeneration = chromosomes.stream().map(c -> JGapUtils.asIntArray(c, getWagonBelegung().getAnzahlPlaetze()));
+        Stream<WagonBelegung> wagonStream = reihenfolgenGeneration.map(r -> getWagonBelegung().copy(r));
         double zufriedenheit = solution.getFitnessValue();
-        WagonBesetzung besterWagonBesetzung = getWagonBesetzung().copy(JGapUtils.asIntArray(solution, getWagonBesetzung().getAnzahlPlaetze()));
-        return new Generation(generation, wagonStream.collect(Collectors.toList()), zufriedenheit, besterWagonBesetzung);
+        WagonBelegung besteWagonBelegung = getWagonBelegung().copy(JGapUtils.asIntArray(solution, getWagonBelegung().getAnzahlPlaetze()));
+        return new Generation(generation, wagonStream.collect(Collectors.toList()), zufriedenheit, besteWagonBelegung);
     }
 }

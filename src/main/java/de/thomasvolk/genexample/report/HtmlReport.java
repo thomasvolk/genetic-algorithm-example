@@ -1,7 +1,7 @@
 package de.thomasvolk.genexample.report;
 
 import de.thomasvolk.genexample.model.Generation;
-import de.thomasvolk.genexample.model.WagonBesetzung;
+import de.thomasvolk.genexample.model.WagonBelegung;
 import groovy.lang.Writable;
 import groovy.text.SimpleTemplateEngine;
 import org.apache.commons.io.FilenameUtils;
@@ -30,7 +30,7 @@ public class HtmlReport implements Report {
             binding.put("templateName", newName);
             binding.put("generation", gen);
             binding.put("generationen", generationen);
-            binding.put("startWagon", startWagonBesetzung);
+            binding.put("startWagon", startWagonBelegung);
             try (InputStreamReader reader = new InputStreamReader(getClass().getResourceAsStream("/report/" + name + "." + extension))) {
                 SimpleTemplateEngine templateEngine = new SimpleTemplateEngine();
                 groovy.text.Template template = templateEngine.createTemplate(reader);
@@ -62,7 +62,7 @@ public class HtmlReport implements Report {
     private final Template cssTemplate = new Template("default.css");
     private Generation letzteGeneration;
     private Collection<Generation> generationen = new ArrayList<>();
-    private WagonBesetzung startWagonBesetzung;
+    private WagonBelegung startWagonBelegung;
 
     public HtmlReport(String zielPfad) {
         this(zielPfad, 1);
@@ -85,8 +85,8 @@ public class HtmlReport implements Report {
     }
 
     @Override
-    public void start(WagonBesetzung wagonBesetzung) {
-        startWagonBesetzung = wagonBesetzung;
+    public void start(WagonBelegung wagonBelegung) {
+        startWagonBelegung = wagonBelegung;
     }
 
     @Override

@@ -5,7 +5,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class WagonBesetzung {
+public class WagonBelegung {
     private final Sitzplatz[] sitzplatzListe;
     private final Passagier[] passagierListe;
     private int[] passagierReihenfolge;
@@ -18,11 +18,11 @@ public class WagonBesetzung {
         return passagierReihenfolge;
     }
 
-    public WagonBesetzung(Sitzplatz[] sitzplatzListe, Passagier[] passagierListe) {
+    public WagonBelegung(Sitzplatz[] sitzplatzListe, Passagier[] passagierListe) {
         this(sitzplatzListe, passagierListe, getInitialPassagierReihenfolge(passagierListe.length));
     }
 
-    public WagonBesetzung(Sitzplatz[] sitzplatzListe, Passagier[] passagierListe, int[] passagierReihenfolge) {
+    public WagonBelegung(Sitzplatz[] sitzplatzListe, Passagier[] passagierListe, int[] passagierReihenfolge) {
         this.sitzplatzListe = sitzplatzListe;
         this.passagierListe = passagierListe;
         if(sitzplatzListe.length != passagierListe.length) {
@@ -62,8 +62,8 @@ public class WagonBesetzung {
         return result;
     }
 
-    public WagonBesetzung copy(int[] newPassagierReihenfolge) {
-       return new WagonBesetzung(sitzplatzListe, passagierListe, newPassagierReihenfolge);
+    public WagonBelegung copy(int[] newPassagierReihenfolge) {
+       return new WagonBelegung(sitzplatzListe, passagierListe, newPassagierReihenfolge);
     }
 
     public Passagier[] getPassagierListe() {
