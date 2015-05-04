@@ -13,7 +13,7 @@ public class AbstractWagonTest {
     protected static final int ANZAHL_SITZPLAETZE = 15;
     private static final int REIHEN = 5;
     private static final int BREITE = 3;
-    private final Wagon wagon = new SitzplatzFactory().lese("GgGaA\nGgGaA\nGgGaA");
+    private final Wagon wagon = new WagonFactory().lese("GgGaA\nGgGaA\nGgGaA");
     //                                   Einfachgewichtung                   : 21223  10112  21223
     //                                          "          ohne Fahrtrichtung: 11122  00011  11122
     /*

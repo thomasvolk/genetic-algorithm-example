@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SitzplatzFactory {
+public class WagonFactory {
 
     private Sitzplatz erzeuge(int reihe, int position, int breite, char eigenschaft) {
         int nummer = (reihe * breite) + position + 1;

@@ -1,21 +1,18 @@
 package de.thomasvolk.genexample.model;
 
-import de.thomasvolk.genexample.model.Sitzplatz;
-import de.thomasvolk.genexample.model.SitzplatzFactory;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 
-public class SitzplatzFactoryTest {
+public class WagonFactoryTest {
 
     @Test
     public void lesen() throws IOException {
-        SitzplatzFactory factory = new SitzplatzFactory();
+        WagonFactory factory = new WagonFactory();
         Wagon wagon = factory.lese(getClass().getResourceAsStream("/wagon.txt"));
         assertEquals(26, wagon.getReihen());
         assertEquals(4, wagon.getBreite());
