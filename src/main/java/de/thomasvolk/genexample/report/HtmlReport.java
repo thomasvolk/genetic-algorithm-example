@@ -27,6 +27,8 @@ public class HtmlReport implements Report {
 
         public void generiere(Generation gen, String newName, Writer out) {
             Map<String, Object> binding = new HashMap<>();
+            binding.put("titel", getTitel());
+            binding.put("beschreibung", getBeschreibung());
             binding.put("templateName", newName);
             binding.put("generation", gen);
             binding.put("generationen", generationen);
@@ -63,6 +65,9 @@ public class HtmlReport implements Report {
     private Generation letzteGeneration;
     private Collection<Generation> generationen = new ArrayList<>();
     private WagonBelegung startWagonBelegung;
+    private String titel = "";
+    private String beschreibung = "";
+
 
     public HtmlReport(String zielPfad) {
         this(zielPfad, 1);
@@ -82,6 +87,22 @@ public class HtmlReport implements Report {
         String name = "generation_" + generation.getName();
         generationTemplate.generiere(generation, name);
         dataJsTemplate.generiere(generation, name);
+    }
+
+    public String getTitel() {
+        return titel;
+    }
+
+    public void setTitel(String titel) {
+        this.titel = titel;
+    }
+
+    public String getBeschreibung() {
+        return beschreibung;
+    }
+
+    public void setBeschreibung(String beschreibung) {
+        this.beschreibung = beschreibung;
     }
 
     @Override
