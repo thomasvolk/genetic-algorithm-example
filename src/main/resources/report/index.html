@@ -7,14 +7,18 @@
     <script src="${templateName}.js"></script>
   </head>
   <body>
-    <h1>Ergebnisse</h1>
+    <h1>$titel</h1>
+    <p>$beschreibung</p>
     <h2>Start</h2>
     <canvas id="startWagon" width="830" height="200"></canvas>
     <script>
       wagon.zeichnen('startWagon', 0, 0, data.startWagon);
   </script>
     <h2>Ende</h2>
-    <b>Generation: <%=generation %></b>
+    <canvas id="besterWagon" width="830" height="200"></canvas>
+    <script>
+      wagon.zeichnen('besterWagon', 0, 0, data.besterWagon);
+  </script>
     <h2>Generationen</h2>
     <ul>
     <% generationen.each { g -> %>

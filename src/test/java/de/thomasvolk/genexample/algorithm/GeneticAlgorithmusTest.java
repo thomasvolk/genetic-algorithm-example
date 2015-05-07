@@ -20,7 +20,7 @@ import static org.junit.Assert.assertEquals;
 
 public class GeneticAlgorithmusTest extends AbstractAlgorithmusTest {
     private Path tempdir;
-    private Report report;
+    private HtmlReport report;
 
     protected Algorithmus getAlgorithmus(Passagier[] passagiere) {
         return new GeneticAlgorithmus(passagiere, getWagon());
@@ -33,8 +33,14 @@ public class GeneticAlgorithmusTest extends AbstractAlgorithmusTest {
         report = new HtmlReport(tempdir.toString(), 100);
     }
 
+    private void report(String titel, String beschreibung) {
+        report.setTitel(titel);
+        report.setBeschreibung(beschreibung);
+    }
+
     @Test
     public void nullWertungen() {
+        report("GeneticAlgorithmusTest.nullWertungen", "Es wurden keine Wertungen abgegeben.");
         Passagier[] passagiere = getPassagiere(0, ANZAHL_SITZPLAETZE, Wertung.NULL);
         Algorithmus algorithmus = getAlgorithmus(passagiere);
         WagonBelegung wagonBelegung = algorithmus.berechneWagon(report);
@@ -42,7 +48,8 @@ public class GeneticAlgorithmusTest extends AbstractAlgorithmusTest {
     }
 
     @Test
-    public void einfacheWertungen() throws IOException {
+    public void alleWuescheEinfacheWertungen() throws IOException {
+        report("GeneticAlgorithmusTest.alleWuescheEinfacheWertungen", "Jeder Passagier hat alle Wünsche gewählt.");
         Passagier[] passagiere = getPassagiere(0, ANZAHL_SITZPLAETZE,
                 new Wertung(Wertung.EINFACHE_GEWICHTUNG,Wertung.EINFACHE_GEWICHTUNG,Wertung.EINFACHE_GEWICHTUNG));
         Algorithmus algorithmus = getAlgorithmus(passagiere);
@@ -54,6 +61,7 @@ public class GeneticAlgorithmusTest extends AbstractAlgorithmusTest {
 
     @Test
     public void unterschiedlicheWertungen() throws IOException {
+        report("GeneticAlgorithmusTest.unterschiedlicheWertungen", "Die Passagier haben unterschiedliche wünsche.");
         Passagier[] passagiere = getPassagiere("fp,fr,ap\nfp,fr,\nfp,,");
         Algorithmus algorithmus = getAlgorithmus(passagiere);
         assertEquals(400, new WagonBelegung(getWagon(), passagiere).getZufriedenheit(), 0);
