@@ -9,6 +9,9 @@
   <url>http://maven.apache.org</url>
     <properties>
         <jdk.home>/usr/lib/jvm/java-8-openjdk-i386</jdk.home>
+        <!--
+        <jdk.home>c:/Program Files/Java/jdk1.8.0_31</jdk.home>
+         -->
     </properties>
   <dependencies>
     <dependency>
