@@ -7,6 +7,9 @@
   <version>1.0-SNAPSHOT</version>
   <name>genetischeAlgorithmen</name>
   <url>http://maven.apache.org</url>
+    <properties>
+        <jdk.home>/usr/lib/jvm/java-8-openjdk-i386</jdk.home>
+    </properties>
   <dependencies>
     <dependency>
       <groupId>net.sf.jgap</groupId>
@@ -33,6 +36,14 @@
       <artifactId>commons-io</artifactId>
       <version>2.4</version>
     </dependency>
+
+      <dependency>
+          <groupId>com.oracle</groupId>
+          <artifactId>javafx</artifactId>
+          <version>2.2.3</version>
+          <scope>system</scope>
+          <systemPath>${jdk.home}/jre/lib/ext/jfxrt.jar</systemPath>
+      </dependency>
 
     <dependency>
       <groupId>junit</groupId>
