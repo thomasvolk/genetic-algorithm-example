@@ -44,7 +44,7 @@ public class AbstractWagonTest {
     }
 
     protected Passagier[] getPassagiere(String text, int len) throws IOException {
-        return new PassagierFactory().lese(new ByteArrayInputStream(("Fensterplatz,\"in Fahrtrichtung\",Abteil\n" +
+        return new CSVPassagierFactory().lese(new ByteArrayInputStream(("Fensterplatz,\"in Fahrtrichtung\",Abteil\n" +
                 text).getBytes()), len).toArray(new Passagier[] {});
     }
 

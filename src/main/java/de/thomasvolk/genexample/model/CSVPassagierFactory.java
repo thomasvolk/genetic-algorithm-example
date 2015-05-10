@@ -13,14 +13,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class PassagierFactory {
+public class CSVPassagierFactory extends AbstractPassagierFactory {
 
-    public static final String ABTEIL = "Abteil";
-    public static final String FENSTERPLATZ = "Fensterplatz";
-    public static final String IN_FAHRTRICHTUNG = "in Fahrtrichtung";
-
-    public List<Passagier> lese(InputStream is, int anzahl) throws IOException {
-        List<Passagier> passagiere = new ArrayList<Passagier>();
+    @Override
+    protected List<Passagier> lesePassagiere(InputStream is, int anzahl) throws IOException {
+        List<Passagier> passagiere = new ArrayList<>();
         Reader in = new InputStreamReader(is);
         Iterator<CSVRecord> records = CSVFormat.EXCEL.withHeader().parse(in).iterator();
         int i = 0;
@@ -33,22 +30,7 @@ public class PassagierFactory {
             Wertung wertung = new Wertung(fensterplatz, abteil, fahrtrichtung);
             passagiere.add(new Passagier(i, wertung));
         }
-        while(i < anzahl) {
-            i++;
-            passagiere.add(new Passagier(i, Wertung.NULL));
-        }
         return passagiere;
     }
 
-    private int getWertung(String inEingabe) {
-        String eingabe = inEingabe.trim();
-        if(StringUtils.isEmpty(eingabe)) {
-            return Wertung.NULL_GEWICHTUNG;
-        }
-        try {
-            return Integer.valueOf(eingabe);
-        } catch (NumberFormatException e) {
-            return Wertung.EINFACHE_GEWICHTUNG;
-        }
-    }
 }
