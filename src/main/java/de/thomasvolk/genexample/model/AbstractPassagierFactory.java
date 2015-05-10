@@ -7,9 +7,9 @@ import java.io.InputStream;
 import java.util.List;
 
 public abstract class AbstractPassagierFactory {
-    public static final String ABTEIL = "Abteil";
     public static final String FENSTERPLATZ = "Fensterplatz";
     public static final String IN_FAHRTRICHTUNG = "in Fahrtrichtung";
+    public static final String ABTEIL = "Abteil";
 
     public List<Passagier> lese(InputStream is, int anzahl) throws IOException {
         List<Passagier> passagiere = lesePassagiere(is, anzahl);
@@ -20,8 +20,6 @@ public abstract class AbstractPassagierFactory {
         }
         return passagiere;
     }
-
-    protected abstract List<Passagier> lesePassagiere(InputStream is, int anzahl) throws IOException;
 
     protected int getWertung(String inEingabe) {
         String eingabe = inEingabe.trim();
@@ -34,4 +32,6 @@ public abstract class AbstractPassagierFactory {
             return Wertung.EINFACHE_GEWICHTUNG;
         }
     }
+
+    protected abstract List<Passagier> lesePassagiere(InputStream is, int anzahl) throws IOException;
 }
