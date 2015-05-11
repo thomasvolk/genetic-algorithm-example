@@ -18,7 +18,7 @@ public class FirstComeFirstServedTest extends AbstractAlgorithmusTest {
 
 
     protected Algorithmus getAlgorithmus(Passagier[]passagiere) {
-        return new FirstComeFirstServed(getWagon(), passagiere);
+        return new FirstComeFirstServed(passagiere, getWagon());
     }
 
 

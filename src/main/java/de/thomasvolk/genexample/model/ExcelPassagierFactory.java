@@ -18,7 +18,7 @@ public class ExcelPassagierFactory extends AbstractPassagierFactory {
     @Override
     protected List<Passagier> lesePassagiere(InputStream is, int anzahl) throws IOException {
         List<Passagier> passagiere = new ArrayList<>();
-        OPCPackage pkg = null;
+        OPCPackage pkg;
         try {
             pkg = OPCPackage.open(is);
         } catch (InvalidFormatException e) {

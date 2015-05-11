@@ -8,7 +8,7 @@ import java.util.*;
 
 public class FirstComeFirstServed extends AbstractAlgorithmus {
 
-    public FirstComeFirstServed(Wagon wagon, Passagier[] passagierListe) {
+    public FirstComeFirstServed(Passagier[] passagierListe, Wagon wagon) {
         super(wagon, passagierListe);
     }
 

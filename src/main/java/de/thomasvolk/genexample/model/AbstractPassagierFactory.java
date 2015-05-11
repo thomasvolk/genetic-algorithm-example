@@ -6,11 +6,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-public abstract class AbstractPassagierFactory {
+public abstract class AbstractPassagierFactory implements PassagierFactory {
     public static final String FENSTERPLATZ = "Fensterplatz";
     public static final String IN_FAHRTRICHTUNG = "in Fahrtrichtung";
     public static final String ABTEIL = "Abteil";
 
+    @Override
     public List<Passagier> lese(InputStream is, int anzahl) throws IOException {
         List<Passagier> passagiere = lesePassagiere(is, anzahl);
         int count = passagiere.size();
