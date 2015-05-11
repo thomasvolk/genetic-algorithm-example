@@ -6,10 +6,7 @@ import groovy.lang.Writable;
 import groovy.text.SimpleTemplateEngine;
 import org.apache.commons.io.FilenameUtils;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Writer;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -76,6 +73,7 @@ public class HtmlReport implements Report {
     public HtmlReport(String zielPfad, int schritte) {
         this.zielPfad = zielPfad;
         this.schritte = schritte;
+        new File(zielPfad).mkdirs();
     }
 
     private String getTargetPath(String name) {

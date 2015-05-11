@@ -32,9 +32,9 @@ public class Main {
     }
 
     public void berechnen(AlgorithmusTyp algTyp, String passagierDatei, String wagonDatei, String inReportDir) throws IOException {
-        String reportDir = StringUtils.isBlank(inReportDir) ? "." : inReportDir;
+        String reportDir = StringUtils.isBlank(inReportDir) ? "target/report" : inReportDir;
         try(InputStream wagonSrc = getSource(wagonDatei, "/wagon.txt");
-            InputStream passagierQuelle = getSource(passagierDatei, "/passagier.xlsx")) {
+            InputStream passagierQuelle = getSource(passagierDatei, "/passagiere.xlsx")) {
             Wagon wagon = wagonFactory.lese(wagonSrc);
             List<Passagier> passagierListe = passagierFactory.lese(passagierQuelle, wagon.getSitzplatzListe().length);
             AlgorithmusFactory algorithmusFactory = new AlgorithmusFactory();
