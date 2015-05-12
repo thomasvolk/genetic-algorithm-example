@@ -27,10 +27,11 @@ public class ExcelPassagierFactory extends AbstractPassagierFactory {
         XSSFWorkbook xssfwb = new XSSFWorkbook(pkg);
         SXSSFWorkbook workbook = new SXSSFWorkbook(xssfwb, 100);
         Sheet sheet = workbook.getSheetAt(0);
+        Iterator<Row> rowIterator = sheet.rowIterator();
         int i = 1;
-        while (i < anzahl) {
+        while (i < anzahl && rowIterator.hasNext()) {
             i++;
-            Row row = sheet.getRow(i);
+            Row row = rowIterator.next();
             if(row != null) {
                 int fensterPlatz = getWertung(row.getCell(0).getStringCellValue());
                 int fahrtRichtung = getWertung(row.getCell(1).getStringCellValue());
