@@ -15,12 +15,6 @@ public class PassagierFactoryTest {
         doTest(factory, "/passagiere.csv");
     }
 
-    @Test
-    public void leseExcel() throws IOException {
-        ExcelPassagierFactory factory = new ExcelPassagierFactory();
-        doTest(factory, "/passagiere.xlsx");
-    }
-
     private void doTest(PassagierFactory factory, String src) throws IOException {
         Collection<Passagier> pasagiere = factory.lese(getClass().getResourceAsStream(src), 10);
         assertEquals(10, pasagiere.size());
