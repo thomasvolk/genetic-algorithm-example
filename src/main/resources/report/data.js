@@ -39,6 +39,10 @@ def toJson(wagonBelegung) {
             ]
        })
     }  )
+    werte {
+         zufriedenheit(wagonBelegung.zufriedenheit)
+         maximaleZufriedenheit(wagonBelegung.maximaleZufriedenheit)
+      }
   }
   jb.toPrettyString()
 }
