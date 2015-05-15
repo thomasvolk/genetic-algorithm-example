@@ -58,10 +58,16 @@ public class GenAlg {
             if(passagierDatei == null) {
                 passagierDatei = erzeugeBeispielDatei("passagiere.csv");
             }
+            System.out.println("Wagon Datein: " + wagonDatei);
+            System.out.println("Passagier Datei: " + passagierDatei);
+            System.out.println("Bericht: " + reportDir);
+            System.out.println("Bericht schreibe in Schritten: " + schritte);
+
             WagonFactory wagonFactory = new WagonFactory();
             PassagierFactory passagierFactory = new CSVPassagierFactory();
             GenAlg genAlg = new GenAlg(wagonFactory, passagierFactory);
             for(AlgorithmusTyp algorithmusTyp: alg) {
+                System.out.println("Algorithmus: " + algorithmusTyp);
                 genAlg.berechnen(algorithmusTyp, passagierDatei, wagonDatei, reportDir, schritte);
             }
         } catch (ParseException e) {
