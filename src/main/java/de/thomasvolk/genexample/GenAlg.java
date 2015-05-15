@@ -28,9 +28,9 @@ public class GenAlg {
         if(cmd.hasOption('s')) {
             schritte = Integer.valueOf(cmd.getOptionValue('s'));
         }
-        AlgorithmusTyp alg = AlgorithmusTyp.GENETISCH;
+        AlgorithmusTyp[] alg = AlgorithmusTyp.values();
         if(cmd.hasOption('a')) {
-            alg = AlgorithmusTyp.valueOf(cmd.getOptionValue('a'));
+            alg = new AlgorithmusTyp[] { AlgorithmusTyp.valueOf(cmd.getOptionValue('a')) };
         }
         String reportDir = cmd.getOptionValue('d');
         reportDir = StringUtils.isBlank(reportDir) ? "report" : reportDir;
@@ -45,7 +45,9 @@ public class GenAlg {
         WagonFactory wagonFactory = new WagonFactory();
         PassagierFactory passagierFactory = new CSVPassagierFactory();
         GenAlg genAlg = new GenAlg(wagonFactory, passagierFactory);
-        genAlg.berechnen(alg, passagierDatei, wagonDatei, reportDir, schritte);
+        for(AlgorithmusTyp algorithmusTyp: alg) {
+            genAlg.berechnen(algorithmusTyp, passagierDatei, wagonDatei, reportDir, schritte);
+        }
     }
 
     private static Option option(String name, String descr) {
@@ -69,7 +71,7 @@ public class GenAlg {
             List<Passagier> passagierListe = passagierFactory.lese(passagierQuelle, wagon.getSitzplatzListe().length);
             AlgorithmusFactory algorithmusFactory = new AlgorithmusFactory();
             Algorithmus algorithmus = algorithmusFactory.erzeugeAlgorithmus(algTyp, passagierListe.toArray(new Passagier[passagierListe.size()]), wagon);
-            algorithmus.berechneWagon(new HtmlReport(reportDir, steps));
+            algorithmus.berechneWagon(new HtmlReport(reportDir + "/" + algTyp.name(), steps));
         }
     }
 
