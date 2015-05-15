@@ -77,7 +77,7 @@
                 <finalName>genetic</finalName>
                 <archive>
                     <manifest>
-                        <mainClass>de.thomasvolk.genexample.Main</mainClass>
+                        <mainClass>de.thomasvolk.genexample.GenAlg</mainClass>
                     </manifest>
                 </archive>
                 <descriptorRefs>

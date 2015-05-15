@@ -29,3 +29,6 @@ build.log
 .CVS
 .hg*
 
+report
+passagiere.csv
+wagon.txt
