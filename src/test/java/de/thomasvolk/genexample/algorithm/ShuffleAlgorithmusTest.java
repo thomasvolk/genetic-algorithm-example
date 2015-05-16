@@ -41,7 +41,7 @@ public class ShuffleAlgorithmusTest extends AbstractAlgorithmusTest {
 
     @Test
     public void unterschiedlicheWertungen() throws IOException {
-        Passagier[] passagiere = getPassagiere("fp,fr,ap\nfp,fr,\nfp,,");
+        Passagier[] passagiere = getPassagiere("x,x,x\nx,x,\nx,,");
         Algorithmus algorithmus = getAlgorithmus(passagiere);
         assertEquals(400, new WagonBelegung(getWagon(), passagiere).getZufriedenheit(), 0);
         assertEquals(600, algorithmus.berechneWagon(NullReport.INSTANCE).getZufriedenheit(), 0);

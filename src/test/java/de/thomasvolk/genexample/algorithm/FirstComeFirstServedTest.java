@@ -47,7 +47,7 @@ public class FirstComeFirstServedTest extends AbstractAlgorithmusTest {
 
     @Test
     public void unterschiedlicheWertungen() throws IOException {
-        Passagier[] passagiere = getPassagiere("fp,fr,ap\nfp,fr,\nfp,,");
+        Passagier[] passagiere = getPassagiere("x,x,x\nx,x,\nx,,");
         Algorithmus algorithmus = getAlgorithmus(passagiere);
         int[] passagierReihenfolge = algorithmus.berechneWagon(NullReport.INSTANCE).getPassagierReihenfolge();
         assertEquals(400, new WagonBelegung(getWagon(), passagiere).getZufriedenheit(), 0);

@@ -30,7 +30,8 @@ public abstract class AbstractPassagierFactory implements PassagierFactory {
         try {
             return Integer.valueOf(eingabe);
         } catch (NumberFormatException e) {
-            return Wertung.EINFACHE_GEWICHTUNG;
+            int anzahl = eingabe.length();
+            return Wertung.EINFACHE_GEWICHTUNG * anzahl;
         }
     }
 
