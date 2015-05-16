@@ -1,5 +1,6 @@
 package de.thomasvolk.genexample;
 
+import de.thomasvolk.genexample.algorithmus.AbstractGenerationAlgorithmus;
 import de.thomasvolk.genexample.algorithmus.Algorithmus;
 import de.thomasvolk.genexample.algorithmus.AlgorithmusFactory;
 import de.thomasvolk.genexample.algorithmus.AlgorithmusTyp;
@@ -24,6 +25,7 @@ public class GenAlg {
         options.addOption(option("p", "Quelldatei Passagierliste"));
         options.addOption(option("d", "Zielverzeichnis Bericht"));
         options.addOption(option("a", "Algorithmus Typ " + Arrays.asList(AlgorithmusTyp.values()).toString()));
+        options.addOption(option("i", "Anzahl der iterationen"));
         options.addOption("h", false, "Hilfe");
         CommandLineParser parser = new PosixParser();
         try {
@@ -33,6 +35,14 @@ public class GenAlg {
                 System.exit(0);
             }
             int schritte = 100;
+            int iterationen = 10000;
+            if(cmd.hasOption('i')) {
+                try {
+                    iterationen = Integer.valueOf(cmd.getOptionValue('i'));
+                } catch (NumberFormatException e) {
+                    printErrorAndExit(e, options);
+                }
+            }
             if (cmd.hasOption('s')) {
                 try {
                     schritte = Integer.valueOf(cmd.getOptionValue('s'));
@@ -68,7 +78,7 @@ public class GenAlg {
             GenAlg genAlg = new GenAlg(wagonFactory, passagierFactory);
             for(AlgorithmusTyp algorithmusTyp: alg) {
                 System.out.println("Algorithmus: " + algorithmusTyp);
-                genAlg.berechnen(algorithmusTyp, passagierDatei, wagonDatei, reportDir, schritte);
+                genAlg.berechnen(algorithmusTyp, passagierDatei, wagonDatei, reportDir, schritte, iterationen);
             }
         } catch (ParseException e) {
             printErrorAndExit(e, options);
@@ -100,14 +110,17 @@ public class GenAlg {
         this.passagierFactory = passagierFactory;
     }
 
-    public void berechnen(AlgorithmusTyp algTyp, String passagierDatei, String wagonDatei, String reportDir, int steps) throws IOException {
+    public void berechnen(AlgorithmusTyp algTyp, String passagierDatei, String wagonDatei, String reportDir, int schritte, int iterationen) throws IOException {
         try(InputStream wagonSrc = new FileInputStream(wagonDatei);
             InputStream passagierQuelle = new FileInputStream(passagierDatei)) {
             Wagon wagon = wagonFactory.lese(wagonSrc);
             List<Passagier> passagierListe = passagierFactory.lese(passagierQuelle, wagon.getSitzplatzListe().length);
             AlgorithmusFactory algorithmusFactory = new AlgorithmusFactory();
             Algorithmus algorithmus = algorithmusFactory.erzeugeAlgorithmus(algTyp, passagierListe.toArray(new Passagier[passagierListe.size()]), wagon);
-            algorithmus.berechneWagon(new HtmlReport(reportDir + "/" + algTyp.name(), steps));
+            if(algorithmus instanceof AbstractGenerationAlgorithmus) {
+                ((AbstractGenerationAlgorithmus) algorithmus).setMaxEvolutions(iterationen);
+            }
+            algorithmus.berechneWagon(new HtmlReport(reportDir + "/" + algTyp.name(), schritte));
         }
     }
 
