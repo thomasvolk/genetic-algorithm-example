@@ -32,7 +32,11 @@ public class Passagier {
     }
 
     public double getMaximaleZufriedenheit() {
-        return getWertung().getFahrtRichtung() + getWertung().getFensterPlatz() + getWertung().getAbteil();
+        return norm(getWertung().getFahrtRichtung()) + norm(getWertung().getFensterPlatz()) + norm(getWertung().getAbteil());
+    }
+
+    private int norm(int wert) {
+        return wert < 0 ? 0 : wert;
     }
 
     @Override
