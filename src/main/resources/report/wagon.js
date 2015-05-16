@@ -13,8 +13,8 @@ wagon.zeichnen = function(canvasId, startX, startY, wagon) {
 
     var border = 2
     var padding = 5;
-    var recSize = 35;
-    var space = 25;
+    var recSize = 30;
+    var space = 20;
     var recSpaceY = recSize + padding;
     var recSpaceX = recSize + space + padding;
 
@@ -77,10 +77,10 @@ wagon.zeichnen = function(canvasId, startX, startY, wagon) {
           var xOffset = sitzPlatz.fr ? recSize : 0;
           var arcOffset = sitzPlatz.fr ? 0.5 : 0;
           context.moveTo(x + xOffset, y);
-          context.arc(x + xOffset, y, padding*3, arcOffset * Math.PI, (0.5 + arcOffset) * Math.PI);
+          context.arc(x + xOffset, y, padding*2, arcOffset * Math.PI, (0.5 + arcOffset) * Math.PI);
           context.fill();
           context.moveTo(x + xOffset, y + recSize);
-          context.arc(x + xOffset, y + recSize, padding*3, (1.5 - arcOffset) * Math.PI, (arcOffset * 3) * Math.PI);
+          context.arc(x + xOffset, y + recSize, padding*2, (1.5 - arcOffset) * Math.PI, (arcOffset * 3) * Math.PI);
           context.fill();
           context.moveTo(x + xOffset, y);
           context.quadraticCurveTo(x + centerOffset, y + centerOffset, x + xOffset, y + recSize);
@@ -89,11 +89,11 @@ wagon.zeichnen = function(canvasId, startX, startY, wagon) {
           context.fill();
           // nummer
           context.beginPath();
-          context.font = '7pt Calibri';
+          context.font = '6pt Calibri';
           context.textAlign = 'center';
           context.fillStyle = '#000000';
           var xTextOffset = sitzPlatz.fr ? 0 : padding;
-          context.fillText(sitzPlatz.pid, x + xTextOffset + padding * 3, y + padding * 4);
+          context.fillText(sitzPlatz.pid, x + xTextOffset + padding * 3, y + padding * 3.5);
         }
       }
     }
