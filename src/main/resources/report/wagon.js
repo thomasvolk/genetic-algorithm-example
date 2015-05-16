@@ -93,7 +93,7 @@ wagon.zeichnen = function(canvasId, startX, startY, wagon) {
           context.textAlign = 'center';
           context.fillStyle = '#000000';
           var xTextOffset = sitzPlatz.fr ? 0 : padding;
-          context.fillText(sitzPlatz.sid, x + xTextOffset + padding * 3, y + padding * 4);
+          context.fillText(sitzPlatz.pid, x + xTextOffset + padding * 3, y + padding * 4);
         }
       }
     }
