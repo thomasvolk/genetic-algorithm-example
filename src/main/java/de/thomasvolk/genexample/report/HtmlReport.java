@@ -2,6 +2,7 @@ package de.thomasvolk.genexample.report;
 
 import de.thomasvolk.genexample.model.Generation;
 import de.thomasvolk.genexample.model.WagonBelegung;
+import de.thomasvolk.genexample.report.templates.BelegungTemplate;
 import de.thomasvolk.genexample.report.templates.GenerationTemplate;
 
 import java.io.*;
@@ -11,7 +12,7 @@ import java.util.Collection;
 public class HtmlReport implements Report {
     private final int schritte;
     private final GenerationTemplate generationTemplate;
-    private final GenerationTemplate belegungTemplate;
+    private final BelegungTemplate belegungTemplate;
     private final GenerationTemplate indexTemplate;
     private final GenerationTemplate wagonJsTemplate;
     private final GenerationTemplate dataJsTemplate;
@@ -31,7 +32,7 @@ public class HtmlReport implements Report {
         this.schritte = schritte;
         new File(zielPfad).mkdirs();
         generationTemplate = new GenerationTemplate(zielPfad, "generation.html");
-        belegungTemplate = new GenerationTemplate(zielPfad, "belegung.html");
+        belegungTemplate = new BelegungTemplate(zielPfad, "belegung.html");
         indexTemplate = new GenerationTemplate(zielPfad, "index.html");
         wagonJsTemplate = new GenerationTemplate(zielPfad, "wagon.js");
         dataJsTemplate = new GenerationTemplate(zielPfad, "data.js");
@@ -42,7 +43,9 @@ public class HtmlReport implements Report {
         int i = 0;
         for(WagonBelegung wagonBelegung: generation.getWagonBelegungen()) {
             String name = String.format("belegung_%s_%s", generation.getName(), i);
-            //belegungTemplate.generiere(wagonBelegung, name);
+            BelegungTemplate.Context ctx = new BelegungTemplate.Context();
+            ctx.setBelegung(wagonBelegung);
+            belegungTemplate.generiere(ctx, name);
             i++;
         }
 

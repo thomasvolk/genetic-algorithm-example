@@ -7,15 +7,17 @@ import java.io.Writer;
 public class BelegungTemplate extends AbstractTemplate<BelegungTemplate.Context> {
     public static class Context {
         private WagonBelegung belegung;
+
+        public WagonBelegung getBelegung() {
+            return belegung;
+        }
+
+        public void setBelegung(WagonBelegung belegung) {
+            this.belegung = belegung;
+        }
     }
 
     public BelegungTemplate(String zielPfad, String name) {
         super(zielPfad, name);
     }
-
-    @Override
-    public void generiere(Context ctx, String newName, Writer out) {
-
-    }
-
 }
