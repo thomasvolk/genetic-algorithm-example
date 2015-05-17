@@ -1,4 +1,4 @@
-AaAaAaGGGGGgggggGGGGGgggggAa
-AaAaAaGGGGGgggggGGGGGgggggAa
-AaAaAaGGGGGgggggGGGGGgggggAa
-      GGGGGgggggGGGGGggggg
+GGGGGgggggGGGGGgggggAaAaAa
+GGGGGgggggGGGGGgggggAaAaAa
+GGGGGgggggGGGGGgggggAaAaAa
+GGGGGgggggGGGGGggggg

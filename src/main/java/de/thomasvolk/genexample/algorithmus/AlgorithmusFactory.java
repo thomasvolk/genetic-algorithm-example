@@ -10,8 +10,8 @@ public class AlgorithmusFactory {
                 return new GeneticAlgorithmus(passagierListe, wagon);
             case SHUFFLE:
                 return new ShuffleAlgorithmus(passagierListe, wagon);
-            case FCFS:
-                return new FirstComeFirstServed(passagierListe, wagon);
+            case KONVENTIONELL:
+                return new KonventionellAlgorithmus(passagierListe, wagon);
             default:
                 throw new IllegalStateException("AlgorithmusTyp unbekannt: " + typ);
         }

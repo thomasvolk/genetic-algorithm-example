@@ -6,9 +6,9 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.*;
 
-public class FirstComeFirstServed extends AbstractAlgorithmus {
+public class KonventionellAlgorithmus extends AbstractAlgorithmus {
 
-    public FirstComeFirstServed(Passagier[] passagierListe, Wagon wagon) {
+    public KonventionellAlgorithmus(Passagier[] passagierListe, Wagon wagon) {
         super(wagon, passagierListe);
     }
 
@@ -17,7 +17,9 @@ public class FirstComeFirstServed extends AbstractAlgorithmus {
         report.start(getWagonBelegung());
         List<Integer> passagierReihenfolge = new ArrayList<>();
         Set<SitzplatzVergabe> vergebenePlaetze = new HashSet<>();
-        for (Passagier p : getPassagierListe()) {
+        List<Passagier> sortiertePassagierListe = Arrays.asList(getPassagierListe());
+        Collections.sort(sortiertePassagierListe, (p1, p2) -> p2.getMaximaleZufriedenheit() - p1.getMaximaleZufriedenheit());
+        for (Passagier p : sortiertePassagierListe) {
             SitzplatzVergabe besterPlatz = null;
             int index = 0;
             int ausgewaehlterPassagierIndex = 0;

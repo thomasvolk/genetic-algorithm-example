@@ -17,8 +17,8 @@ public class Passagier {
         return wertung;
     }
 
-    public double getZufriedenheit(Sitzplatz sitzplatz) {
-        double value = 0.0;
+    public int getZufriedenheit(Sitzplatz sitzplatz) {
+        int value = 0;
         if(sitzplatz.isAbteil()) {
             value += getWertung().getAbteil();
         }
@@ -31,7 +31,7 @@ public class Passagier {
         return value;
     }
 
-    public double getMaximaleZufriedenheit() {
+    public int getMaximaleZufriedenheit() {
         return norm(getWertung().getFahrtRichtung()) + norm(getWertung().getFensterPlatz()) + norm(getWertung().getAbteil());
     }
 

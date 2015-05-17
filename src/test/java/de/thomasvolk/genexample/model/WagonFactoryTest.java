@@ -13,7 +13,7 @@ public class WagonFactoryTest {
     @Test
     public void lesen() throws IOException {
         WagonFactory factory = new WagonFactory();
-        Wagon wagon = factory.lese(getClass().getResourceAsStream("/wagon.txt"));
+        Wagon wagon = factory.lese(getClass().getResourceAsStream("/wagon-test.txt"));
         assertEquals(28, wagon.getReihen());
         assertEquals(4, wagon.getBreite());
 

@@ -12,7 +12,7 @@ public class PassagierFactoryTest {
     @Test
     public void leseCsv() throws IOException {
         CSVPassagierFactory factory = new CSVPassagierFactory();
-        doTest(factory, "/passagiere.csv");
+        doTest(factory, "/passagiere-test.csv");
     }
 
     private void doTest(PassagierFactory factory, String src) throws IOException {

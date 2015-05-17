@@ -2,7 +2,7 @@ package de.thomasvolk.genexample.algorithm;
 
 
 import de.thomasvolk.genexample.algorithmus.Algorithmus;
-import de.thomasvolk.genexample.algorithmus.FirstComeFirstServed;
+import de.thomasvolk.genexample.algorithmus.KonventionellAlgorithmus;
 import de.thomasvolk.genexample.model.Passagier;
 import de.thomasvolk.genexample.model.WagonBelegung;
 import de.thomasvolk.genexample.model.Wertung;
@@ -14,11 +14,11 @@ import java.io.IOException;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
-public class FirstComeFirstServedTest extends AbstractAlgorithmusTest {
+public class KonventionellAlgorithmusTest extends AbstractAlgorithmusTest {
 
 
     protected Algorithmus getAlgorithmus(Passagier[]passagiere) {
-        return new FirstComeFirstServed(passagiere, getWagon());
+        return new KonventionellAlgorithmus(passagiere, getWagon());
     }
 
 
