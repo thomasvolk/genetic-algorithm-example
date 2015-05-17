@@ -112,5 +112,8 @@ public class HtmlReport implements Report {
         dataJsTemplate.generiere(ctx, "index");
         wagonJsTemplate.generiere(ctx);
         cssTemplate.generiere(ctx);
+        BelegungTemplate.Context belegungCtx = new BelegungTemplate.Context();
+        belegungCtx.setBelegung(gen.getBesteWagonBelegung());
+        belegungTemplate.generiere(belegungCtx);
     }
 }

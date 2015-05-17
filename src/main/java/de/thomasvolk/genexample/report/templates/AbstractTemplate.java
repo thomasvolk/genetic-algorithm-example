@@ -55,7 +55,7 @@ public abstract class AbstractTemplate<T> {
     public void generiere(T ctx, String newName, Writer out) {
         Map<String, Object> binding = new HashMap<>();
         binding.put("ctx", ctx);
-        binding.put("templateName", getName());
+        binding.put("templateName", newName);
         try (InputStreamReader reader = new InputStreamReader(getClass().getResourceAsStream("/report/" + getName() +
                 "." + getExtension()))) {
             SimpleTemplateEngine templateEngine = new SimpleTemplateEngine();

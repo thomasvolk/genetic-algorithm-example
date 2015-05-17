@@ -5,6 +5,17 @@
     <link rel="stylesheet" type="text/css" href="default.css">
   </head>
   <body>
-    <% %>
+    <table>
+        <thead>
+        <tr>
+            <td>Sitzplatz</td><td>Passagier</td>
+        </tr>
+        </thead>
+    <% ctx.belegung.sitzplatzVergabeListe.each { spv -> %>
+      <tr>
+          <td>$spv.sitzplatz.nummer</td><td>$spv.passagier.id</td>
+      </tr>
+    <% } %>
+    </table>
   </body>
 </html>      
