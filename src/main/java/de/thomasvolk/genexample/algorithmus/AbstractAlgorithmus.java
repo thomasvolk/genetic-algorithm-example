@@ -6,7 +6,7 @@ import de.thomasvolk.genexample.model.Wagon;
 import de.thomasvolk.genexample.model.WagonBelegung;
 
 public abstract class AbstractAlgorithmus implements Algorithmus {
-    protected WagonBelegung wagonBelegung;
+    private final WagonBelegung wagonBelegung;
 
     public AbstractAlgorithmus(Wagon wagon, Passagier[] passagierListe) {
         this.wagonBelegung = new WagonBelegung(wagon, passagierListe);
