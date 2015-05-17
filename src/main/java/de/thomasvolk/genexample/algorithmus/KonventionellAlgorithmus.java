@@ -17,9 +17,7 @@ public class KonventionellAlgorithmus extends AbstractAlgorithmus {
         report.start(getWagonBelegung());
         List<Integer> passagierReihenfolge = new ArrayList<>();
         Set<SitzplatzVergabe> vergebenePlaetze = new HashSet<>();
-        List<Passagier> sortiertePassagierListe = Arrays.asList(getPassagierListe());
-        Collections.sort(sortiertePassagierListe, (p1, p2) -> p2.getMaximaleZufriedenheit() - p1.getMaximaleZufriedenheit());
-        for (Passagier p : sortiertePassagierListe) {
+        for (Passagier p : getPassagierListe()) {
             SitzplatzVergabe besterPlatz = null;
             int index = 0;
             int ausgewaehlterPassagierIndex = 0;
