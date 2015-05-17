@@ -7,23 +7,23 @@
     <script src="${templateName}.js"></script>
   </head>
   <body>
-    <h1>$titel</h1>
-    <p>$beschreibung</p>
+    <h1>$ctx.titel</h1>
+    <p>$ctx.beschreibung</p>
     <h2>Start</h2>
     <canvas id="startWagon" width="2000" height="200"></canvas>
     <script>
       wagon.zeichnen('startWagon', 0, 0, data.startWagon);
   </script>
-    Zufriedenheit: <%=startWagon.zufriedenheit %> (maximal: <%=startWagon.maximaleZufriedenheit %>)
+    Zufriedenheit: <%=ctx.startWagonBelegung.zufriedenheit %> (maximal: <%=ctx.startWagonBelegung.maximaleZufriedenheit %>)
     <h2>Ende</h2>
     <canvas id="besterWagon" width="2000" height="200"></canvas>
     <script>
       wagon.zeichnen('besterWagon', 0, 0, data.besterWagon);
   </script>
-    Zufriedenheit: <%=generation.besteWagonBelegung.zufriedenheit %>
+    Zufriedenheit: <%=ctx.generation.besteWagonBelegung.zufriedenheit %>
     <h2>Generationen</h2>
     <ul>
-    <% generationen.each { g -> %>
+    <% ctx.generationen.each { g -> %>
     <li><a href="generation_${g.name}.html">Generation $g.nummer</a></li>
     <% } %>
     </ul>
