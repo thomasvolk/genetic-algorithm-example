@@ -19,8 +19,6 @@
 target
 build
 null
-tmp*
-temp*
 dist
 test-output
 build.log
@@ -29,6 +27,6 @@ build.log
 .CVS
 .hg*
 
-report
+report/*
 passagiere.csv
 wagon.txt
