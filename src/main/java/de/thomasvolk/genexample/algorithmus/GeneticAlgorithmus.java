@@ -26,10 +26,8 @@ public class GeneticAlgorithmus extends AbstractGenerationAlgorithmus {
     private int populationSize = 6;
     private Genotype genotype;
 
-
     public GeneticAlgorithmus(Passagier[] passagierListe, Wagon wagon) {
         super(passagierListe, wagon);
-        this.genotype = JGapUtils.create(getPopulationSize(), getWagonBelegung().getPassagierReihenfolge(), new GeneticFitnesFunction(getWagonBelegung()));
     }
 
     public int getPopulationSize() {
@@ -40,10 +38,17 @@ public class GeneticAlgorithmus extends AbstractGenerationAlgorithmus {
         this.populationSize = populationSize;
     }
 
+    public Genotype getGenotype() {
+        if(genotype == null) {
+            genotype = JGapUtils.create(getPopulationSize(), getWagonBelegung().getPassagierReihenfolge(), new GeneticFitnesFunction(getWagonBelegung()));
+        }
+        return genotype;
+    }
+
     protected Generation getGeneration(int generation) {
-        genotype.evolve();
-        IChromosome solution = genotype.getFittestChromosome();
-        List<IChromosome> chromosomes = genotype.getPopulation().getChromosomes();
+        getGenotype().evolve();
+        IChromosome solution = getGenotype().getFittestChromosome();
+        List<IChromosome> chromosomes = getGenotype().getPopulation().getChromosomes();
         Stream<int[]> reihenfolgenGeneration = chromosomes.stream().map(c -> JGapUtils.asIntArray(c, getWagonBelegung().getAnzahlPlaetze()));
         Stream<WagonBelegung> wagonStream = reihenfolgenGeneration.map(r -> getWagonBelegung().copy(r));
         double zufriedenheit = solution.getFitnessValue();
