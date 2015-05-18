@@ -2,8 +2,9 @@ package de.thomasvolk.genexample.report;
 
 import de.thomasvolk.genexample.model.Generation;
 import de.thomasvolk.genexample.model.WagonBelegung;
-import de.thomasvolk.genexample.report.templates.BelegungTemplate;
-import de.thomasvolk.genexample.report.templates.GenerationTemplate;
+import de.thomasvolk.genexample.report.templates.BelegungContext;
+import de.thomasvolk.genexample.report.templates.GenerationContext;
+import de.thomasvolk.genexample.report.templates.Template;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -11,12 +12,12 @@ import java.util.Collection;
 
 public class HtmlReport implements Report {
     private final int schritte;
-    private final GenerationTemplate generationTemplate;
-    private final BelegungTemplate belegungTemplate;
-    private final GenerationTemplate indexTemplate;
-    private final GenerationTemplate wagonJsTemplate;
-    private final GenerationTemplate dataJsTemplate;
-    private final GenerationTemplate cssTemplate;
+    private final Template generationTemplate;
+    private final Template belegungTemplate;
+    private final Template indexTemplate;
+    private final Template wagonJsTemplate;
+    private final Template dataJsTemplate;
+    private final Template cssTemplate;
     private Generation letzteGeneration;
     private Collection<Generation> generationen = new ArrayList<>();
     private WagonBelegung startWagonBelegung;
@@ -31,19 +32,19 @@ public class HtmlReport implements Report {
     public HtmlReport(String zielPfad, int schritte) {
         this.schritte = schritte;
         new File(zielPfad).mkdirs();
-        generationTemplate = new GenerationTemplate(zielPfad, "generation.html");
-        belegungTemplate = new BelegungTemplate(zielPfad, "belegung.html");
-        indexTemplate = new GenerationTemplate(zielPfad, "index.html");
-        wagonJsTemplate = new GenerationTemplate(zielPfad, "wagon.js");
-        dataJsTemplate = new GenerationTemplate(zielPfad, "data.js");
-        cssTemplate = new GenerationTemplate(zielPfad, "default.css");
+        generationTemplate = new Template(zielPfad, "generation.html");
+        belegungTemplate = new Template(zielPfad, "belegung.html");
+        indexTemplate = new Template(zielPfad, "index.html");
+        wagonJsTemplate = new Template(zielPfad, "wagon.js");
+        dataJsTemplate = new Template(zielPfad, "data.js");
+        cssTemplate = new Template(zielPfad, "default.css");
     }
 
     private void erzeugebelegung(Generation generation) {
         int i = 0;
         for(WagonBelegung wagonBelegung: generation.getWagonBelegungen()) {
             String name = String.format("belegung_%s_%s", generation.getName(), i);
-            BelegungTemplate.Context ctx = new BelegungTemplate.Context();
+            BelegungContext ctx = new BelegungContext();
             ctx.setBelegung(wagonBelegung);
             belegungTemplate.generiere(ctx, name);
             i++;
@@ -54,7 +55,7 @@ public class HtmlReport implements Report {
     private void erzeugeGeneration(Generation generation) {
         generationen.add(generation);
         String name = "generation_" + generation.getName();
-        GenerationTemplate.Context ctx = new GenerationTemplate.Context();
+        GenerationContext ctx = new GenerationContext();
         ctx.setTitel(getTitel());
         ctx.setBeschreibung(getBeschreibung());
         ctx.setGeneration(generation);
@@ -102,7 +103,7 @@ public class HtmlReport implements Report {
             erzeugeGeneration(letzteGeneration);
             erzeugebelegung(letzteGeneration);
         }
-        GenerationTemplate.Context ctx = new GenerationTemplate.Context();
+        GenerationContext ctx = new GenerationContext();
         ctx.setTitel(getTitel());
         ctx.setBeschreibung(getBeschreibung());
         ctx.setGeneration(gen);
@@ -112,7 +113,7 @@ public class HtmlReport implements Report {
         dataJsTemplate.generiere(ctx, "index");
         wagonJsTemplate.generiere(ctx);
         cssTemplate.generiere(ctx);
-        BelegungTemplate.Context belegungCtx = new BelegungTemplate.Context();
+        BelegungContext belegungCtx = new BelegungContext();
         belegungCtx.setBelegung(gen.getBesteWagonBelegung());
         belegungTemplate.generiere(belegungCtx);
     }

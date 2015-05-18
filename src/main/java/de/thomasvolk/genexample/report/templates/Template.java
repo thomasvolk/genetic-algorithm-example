@@ -11,13 +11,13 @@ import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class AbstractTemplate<T> {
+public class Template {
     private final String name;
     private final String extension;
     private final String zielPfad;
 
 
-    public AbstractTemplate(String zielPfad, String name) {
+    public Template(String zielPfad, String name) {
         this.zielPfad = zielPfad;
         this.name = FilenameUtils.getBaseName(name);
         this.extension = FilenameUtils.getExtension(name);
@@ -40,7 +40,7 @@ public abstract class AbstractTemplate<T> {
     }
 
 
-    public void generiere(T ctx, String newName) {
+    public void generiere(Object ctx, String newName) {
         try (FileWriter fileWriter = new FileWriter(getTargetPath(newName + "." + getExtension()))) {
             generiere(ctx, newName, fileWriter);
         } catch (IOException e) {
@@ -48,11 +48,11 @@ public abstract class AbstractTemplate<T> {
         }
     }
 
-    public void generiere(T ctx) {
+    public void generiere(Object ctx) {
         generiere(ctx, getName());
     }
 
-    public void generiere(T ctx, String newName, Writer out) {
+    public void generiere(Object ctx, String newName, Writer out) {
         Map<String, Object> binding = new HashMap<>();
         binding.put("ctx", ctx);
         binding.put("templateName", newName);
