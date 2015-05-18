@@ -33,8 +33,8 @@ public class GenAlg {
                 System.exit(0);
             }
 
-            int generationen = getNummer(options, cmd.getOptionValue('g'), 10000);
-            int populationen = getNummer(options, cmd.getOptionValue('p'), 6);
+            int generationen = getNummer(options, cmd.getOptionValue('g'), 6000);
+            int populationen = getNummer(options, cmd.getOptionValue('p'), 20);
             int schritte = getNummer(options, cmd.getOptionValue('s'), 100);
             AlgorithmusTyp[] alg = AlgorithmusTyp.values();
             if (cmd.hasOption('a')) {
