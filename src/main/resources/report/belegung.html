@@ -8,8 +8,15 @@
     <table>
     <thead>
         <tr>
-            <td>Sitzplatz</td><td>Sitzplatz Eigenschaften</td>
-            <td>Passagier</td>
+            <td colspan="4">Sitzplatz</td>
+            <td colspan="5">Passagier</td>
+        </tr>
+        <tr>
+            <td>Nummer</td>
+            <td>in Fahrtrichtung</td>
+            <td>am Fenster</td>
+            <td>im Abteil</td>
+            <td>id</td>
             <td>Fahrtrichtung</td>
             <td>Fenster</td>
             <td>Abteil</td>
@@ -20,11 +27,9 @@
     <% ctx.belegung.sitzplatzVergabeListe.each { spv -> %>
       <tr>
           <td>$spv.sitzplatz.nummer</td>
-          <td><%
-            if(spv.sitzplatz.inFahrtrichtung) print "Fahrtrichtung "
-            if(spv.sitzplatz.fenster) print "Fenster "
-            if(spv.sitzplatz.abteil) print "Abteil"
-          %></td>
+          <td><%=spv.sitzplatz.inFahrtrichtung ? 'Ja' : '' %></td>
+          <td><%=spv.sitzplatz.fenster ? 'Ja' : '' %></td>
+          <td><%=spv.sitzplatz.abteil ? 'Ja' : '' %></td>
           <td>$spv.passagier.id</td>
           <td>$spv.passagier.wertung.fahrtRichtung</td>
           <td>$spv.passagier.wertung.fensterPlatz</td>

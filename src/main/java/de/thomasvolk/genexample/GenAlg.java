@@ -1,9 +1,6 @@
 package de.thomasvolk.genexample;
 
-import de.thomasvolk.genexample.algorithmus.AbstractGenerationAlgorithmus;
-import de.thomasvolk.genexample.algorithmus.Algorithmus;
-import de.thomasvolk.genexample.algorithmus.AlgorithmusFactory;
-import de.thomasvolk.genexample.algorithmus.AlgorithmusTyp;
+import de.thomasvolk.genexample.algorithmus.*;
 import de.thomasvolk.genexample.model.*;
 import de.thomasvolk.genexample.report.HtmlReport;
 import org.apache.commons.cli.*;
@@ -22,10 +19,11 @@ public class GenAlg {
         Options options = new Options();
         options.addOption(option("s", "Jede s Generation wird im Bericht ausgegeben"));
         options.addOption(option("w", "Quelldatei Wagon"));
-        options.addOption(option("p", "Quelldatei Passagierliste"));
+        options.addOption(option("l", "Quelldatei Passagierliste"));
         options.addOption(option("d", "Zielverzeichnis Bericht"));
         options.addOption(option("a", "Algorithmus Typ " + Arrays.asList(AlgorithmusTyp.values()).toString()));
-        options.addOption(option("i", "Anzahl der iterationen"));
+        options.addOption(option("g", "Anzahl der Generationen"));
+        options.addOption(option("p", "Anzahl der Populationen"));
         options.addOption("h", false, "Hilfe");
         CommandLineParser parser = new PosixParser();
         try {
@@ -34,22 +32,10 @@ public class GenAlg {
                 printUsage(options);
                 System.exit(0);
             }
-            int schritte = 100;
-            int iterationen = 10000;
-            if(cmd.hasOption('i')) {
-                try {
-                    iterationen = Integer.valueOf(cmd.getOptionValue('i'));
-                } catch (NumberFormatException e) {
-                    printErrorAndExit(e, options);
-                }
-            }
-            if (cmd.hasOption('s')) {
-                try {
-                    schritte = Integer.valueOf(cmd.getOptionValue('s'));
-                } catch (NumberFormatException e) {
-                    printErrorAndExit(e, options);
-                }
-            }
+
+            int generationen = getNummer(options, cmd.getOptionValue('g'), 10000);
+            int populationen = getNummer(options, cmd.getOptionValue('p'), 6);
+            int schritte = getNummer(options, cmd.getOptionValue('s'), 100);
             AlgorithmusTyp[] alg = AlgorithmusTyp.values();
             if (cmd.hasOption('a')) {
                 try {
@@ -61,7 +47,7 @@ public class GenAlg {
             String reportDir = cmd.getOptionValue('d');
             reportDir = StringUtils.isBlank(reportDir) ? "report" : reportDir;
             String wagonDatei = cmd.getOptionValue('w');
-            String passagierDatei = cmd.getOptionValue('p');
+            String passagierDatei = cmd.getOptionValue('l');
             if(wagonDatei == null) {
                 wagonDatei = erzeugeBeispielDatei("wagon.txt");
             }
@@ -70,19 +56,33 @@ public class GenAlg {
             }
             System.out.println("Wagon Datein: " + wagonDatei);
             System.out.println("Passagier Datei: " + passagierDatei);
-            System.out.println("Bericht: " + reportDir);
-            System.out.println("Bericht schreibe in Schritten: " + schritte);
+            System.out.println("Bericht: " + new File(reportDir).getAbsolutePath());
+            System.out.println("Anzahl Generationen: " + generationen);
+            System.out.println("Anzahl Populationen: " + populationen);
+            System.out.printf("Protokolliere jede %dte Generation im Bericht\n", schritte);
 
             WagonFactory wagonFactory = new WagonFactory();
             PassagierFactory passagierFactory = new CSVPassagierFactory();
             GenAlg genAlg = new GenAlg(wagonFactory, passagierFactory);
             for(AlgorithmusTyp algorithmusTyp: alg) {
                 System.out.println("Algorithmus: " + algorithmusTyp);
-                genAlg.berechnen(algorithmusTyp, passagierDatei, wagonDatei, reportDir, schritte, iterationen);
+                genAlg.berechnen(algorithmusTyp, passagierDatei, wagonDatei, reportDir, schritte, generationen, populationen);
             }
         } catch (ParseException e) {
             printErrorAndExit(e, options);
         }
+    }
+
+    private static int getNummer(Options options, String value, int defaultValue) {
+        int wert = defaultValue;
+        if (value != null) {
+            try {
+                wert = Integer.valueOf(value);
+            } catch (NumberFormatException e) {
+                printErrorAndExit(e, options);
+            }
+        }
+        return wert;
     }
 
     private static void printErrorAndExit(Exception e, Options options) {
@@ -110,7 +110,8 @@ public class GenAlg {
         this.passagierFactory = passagierFactory;
     }
 
-    public void berechnen(AlgorithmusTyp algTyp, String passagierDatei, String wagonDatei, String reportDir, int schritte, int iterationen) throws IOException {
+    public void berechnen(AlgorithmusTyp algTyp, String passagierDatei, String wagonDatei, String reportDir, int schritte,
+                          int generationen, int populationen) throws IOException {
         try(InputStream wagonSrc = new FileInputStream(wagonDatei);
             InputStream passagierQuelle = new FileInputStream(passagierDatei)) {
             Wagon wagon = wagonFactory.lese(wagonSrc);
@@ -118,7 +119,10 @@ public class GenAlg {
             AlgorithmusFactory algorithmusFactory = new AlgorithmusFactory();
             Algorithmus algorithmus = algorithmusFactory.erzeugeAlgorithmus(algTyp, passagierListe.toArray(new Passagier[passagierListe.size()]), wagon);
             if(algorithmus instanceof AbstractGenerationAlgorithmus) {
-                ((AbstractGenerationAlgorithmus) algorithmus).setMaxEvolutions(iterationen);
+                ((AbstractGenerationAlgorithmus) algorithmus).setMaxEvolutions(generationen);
+            }
+            if(algorithmus instanceof GeneticAlgorithmus) {
+                ((GeneticAlgorithmus) algorithmus).setPopulationSize(populationen);
             }
             algorithmus.berechneWagon(new HtmlReport(reportDir + "/" + algTyp.name(), schritte));
         }
