@@ -10,7 +10,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class HtmlReport implements Report {
+public class HtmlAlgorithmusBericht implements AlgorithmusBericht {
     private final int schritte;
     private final Template generationTemplate;
     private final Template belegungTemplate;
@@ -25,11 +25,11 @@ public class HtmlReport implements Report {
     private String beschreibung = "";
     private final String zielPfad;
 
-    public HtmlReport(String zielPfad) {
+    public HtmlAlgorithmusBericht(String zielPfad) {
         this(zielPfad, 1);
     }
 
-    public HtmlReport(String zielPfad, int schritte) {
+    public HtmlAlgorithmusBericht(String zielPfad, int schritte) {
         this.schritte = schritte;
         new File(zielPfad).mkdirs();
         this.zielPfad = zielPfad;

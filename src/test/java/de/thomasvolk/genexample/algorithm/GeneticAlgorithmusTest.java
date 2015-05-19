@@ -6,7 +6,7 @@ import de.thomasvolk.genexample.algorithmus.GeneticAlgorithmus;
 import de.thomasvolk.genexample.model.Passagier;
 import de.thomasvolk.genexample.model.WagonBelegung;
 import de.thomasvolk.genexample.model.Wertung;
-import de.thomasvolk.genexample.bericht.HtmlReport;
+import de.thomasvolk.genexample.bericht.HtmlAlgorithmusBericht;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,7 +19,7 @@ import static org.junit.Assert.assertEquals;
 
 public class GeneticAlgorithmusTest extends AbstractAlgorithmusTest {
     private Path tempdir;
-    private HtmlReport report;
+    private HtmlAlgorithmusBericht report;
 
     protected Algorithmus getAlgorithmus(Passagier[] passagiere) {
         return new GeneticAlgorithmus(passagiere, getWagon());
@@ -29,7 +29,7 @@ public class GeneticAlgorithmusTest extends AbstractAlgorithmusTest {
     public void prepare() throws IOException {
         tempdir = Files.createTempDirectory("GeneticAlgorithmusTest");
         System.out.println("Tempdir: " + tempdir);
-        report = new HtmlReport(tempdir.toString(), 100);
+        report = new HtmlAlgorithmusBericht(tempdir.toString(), 100);
     }
 
     private void report(String titel, String beschreibung) {

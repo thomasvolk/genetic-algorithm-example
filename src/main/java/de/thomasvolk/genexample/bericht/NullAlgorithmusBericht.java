@@ -4,9 +4,9 @@ package de.thomasvolk.genexample.bericht;
 import de.thomasvolk.genexample.model.Generation;
 import de.thomasvolk.genexample.model.WagonBelegung;
 
-public final class NullReport implements Report {
-    public static final Report INSTANCE = new NullReport();
-    private NullReport() {
+public final class NullAlgorithmusBericht implements AlgorithmusBericht {
+    public static final AlgorithmusBericht INSTANCE = new NullAlgorithmusBericht();
+    private NullAlgorithmusBericht() {
     }
 
     @Override

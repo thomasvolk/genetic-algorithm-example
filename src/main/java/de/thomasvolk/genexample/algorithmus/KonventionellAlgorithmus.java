@@ -1,7 +1,7 @@
 package de.thomasvolk.genexample.algorithmus;
 
 import de.thomasvolk.genexample.model.*;
-import de.thomasvolk.genexample.bericht.Report;
+import de.thomasvolk.genexample.bericht.AlgorithmusBericht;
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.*;
@@ -13,8 +13,8 @@ public class KonventionellAlgorithmus extends AbstractAlgorithmus {
     }
 
     @Override
-    public WagonBelegung berechneWagon(Report report) {
-        report.start(getWagonBelegung());
+    public WagonBelegung berechneWagon(AlgorithmusBericht algorithmusBericht) {
+        algorithmusBericht.start(getWagonBelegung());
         List<Integer> passagierReihenfolge = new ArrayList<>();
         Set<SitzplatzVergabe> vergebenePlaetze = new HashSet<>();
         for (Passagier p : getPassagierListe()) {
@@ -36,7 +36,7 @@ public class KonventionellAlgorithmus extends AbstractAlgorithmus {
         }
         WagonBelegung wagonBelegung = new WagonBelegung(getWagonBelegung().getWagon(), getPassagierListe(),
                 ArrayUtils.toPrimitive(passagierReihenfolge.toArray(new Integer[getPassagierListe().length])));
-        report.ende(new Generation(0, Collections.singleton(wagonBelegung), wagonBelegung.getZufriedenheit(), wagonBelegung));
+        algorithmusBericht.ende(new Generation(0, Collections.singleton(wagonBelegung), wagonBelegung.getZufriedenheit(), wagonBelegung));
         return wagonBelegung;
     }
 }
