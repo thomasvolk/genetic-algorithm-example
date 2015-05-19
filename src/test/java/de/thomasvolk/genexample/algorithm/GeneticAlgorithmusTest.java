@@ -1,13 +1,12 @@
 package de.thomasvolk.genexample.algorithm;
 
 
-import de.thomasvolk.genexample.report.Report;
 import de.thomasvolk.genexample.algorithmus.Algorithmus;
 import de.thomasvolk.genexample.algorithmus.GeneticAlgorithmus;
 import de.thomasvolk.genexample.model.Passagier;
 import de.thomasvolk.genexample.model.WagonBelegung;
 import de.thomasvolk.genexample.model.Wertung;
-import de.thomasvolk.genexample.report.HtmlReport;
+import de.thomasvolk.genexample.bericht.HtmlReport;
 import org.junit.Before;
 import org.junit.Test;
 

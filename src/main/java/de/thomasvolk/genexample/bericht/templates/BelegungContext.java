@@ -1,4 +1,4 @@
-package de.thomasvolk.genexample.report.templates;
+package de.thomasvolk.genexample.bericht.templates;
 
 import de.thomasvolk.genexample.model.WagonBelegung;
 

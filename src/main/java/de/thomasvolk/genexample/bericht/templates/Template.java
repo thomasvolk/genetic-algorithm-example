@@ -1,4 +1,4 @@
-package de.thomasvolk.genexample.report.templates;
+package de.thomasvolk.genexample.bericht.templates;
 
 import groovy.lang.Writable;
 import groovy.text.SimpleTemplateEngine;
@@ -14,11 +14,9 @@ import java.util.Map;
 public class Template {
     private final String name;
     private final String extension;
-    private final String zielPfad;
 
 
-    public Template(String zielPfad, String name) {
-        this.zielPfad = zielPfad;
+    public Template(String name) {
         this.name = FilenameUtils.getBaseName(name);
         this.extension = FilenameUtils.getExtension(name);
     }
@@ -31,31 +29,31 @@ public class Template {
         return extension;
     }
 
-    public String getZielPfad() {
-        return zielPfad;
+    protected String getTargetPath(String zielPfad, String name) {
+        return FilenameUtils.concat(zielPfad, name);
     }
 
-    protected String getTargetPath(String name) {
-        return FilenameUtils.concat(getZielPfad(), name);
+    public void generiere(String zielPfad) {
+        generiere(zielPfad, (Object)null);
     }
 
+    public void generiere(String zielPfad, Object ctx) {
+        generiere(zielPfad, ctx, getName());
+    }
 
-    public void generiere(Object ctx, String newName) {
-        try (FileWriter fileWriter = new FileWriter(getTargetPath(newName + "." + getExtension()))) {
-            generiere(ctx, newName, fileWriter);
+    public void generiere(String zielPfad, Object ctx, String newName) {
+        try (FileWriter fileWriter = new FileWriter(getTargetPath(zielPfad, newName + "." + getExtension()))) {
+            Map<String, Object> binding = new HashMap<>();
+            binding.put("ctx", ctx);
+            binding.put("templateName", newName);
+            generiere(fileWriter, binding);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void generiere(Object ctx) {
-        generiere(ctx, getName());
-    }
 
-    public void generiere(Object ctx, String newName, Writer out) {
-        Map<String, Object> binding = new HashMap<>();
-        binding.put("ctx", ctx);
-        binding.put("templateName", newName);
+    public void generiere(Writer out, Map<String, Object> binding) {
         try (InputStreamReader reader = new InputStreamReader(getClass().getResourceAsStream("/report/" + getName() +
                 "." + getExtension()))) {
             SimpleTemplateEngine templateEngine = new SimpleTemplateEngine();

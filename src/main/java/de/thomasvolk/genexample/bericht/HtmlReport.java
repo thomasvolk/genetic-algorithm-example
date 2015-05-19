@@ -1,10 +1,10 @@
-package de.thomasvolk.genexample.report;
+package de.thomasvolk.genexample.bericht;
 
 import de.thomasvolk.genexample.model.Generation;
 import de.thomasvolk.genexample.model.WagonBelegung;
-import de.thomasvolk.genexample.report.templates.BelegungContext;
-import de.thomasvolk.genexample.report.templates.GenerationContext;
-import de.thomasvolk.genexample.report.templates.Template;
+import de.thomasvolk.genexample.bericht.templates.BelegungContext;
+import de.thomasvolk.genexample.bericht.templates.GenerationContext;
+import de.thomasvolk.genexample.bericht.templates.Template;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class HtmlReport implements Report {
     private WagonBelegung startWagonBelegung;
     private String titel = "";
     private String beschreibung = "";
-
+    private final String zielPfad;
 
     public HtmlReport(String zielPfad) {
         this(zielPfad, 1);
@@ -32,12 +32,13 @@ public class HtmlReport implements Report {
     public HtmlReport(String zielPfad, int schritte) {
         this.schritte = schritte;
         new File(zielPfad).mkdirs();
-        generationTemplate = new Template(zielPfad, "generation.html");
-        belegungTemplate = new Template(zielPfad, "belegung.html");
-        indexTemplate = new Template(zielPfad, "index.html");
-        wagonJsTemplate = new Template(zielPfad, "wagon.js");
-        dataJsTemplate = new Template(zielPfad, "data.js");
-        cssTemplate = new Template(zielPfad, "default.css");
+        this.zielPfad = zielPfad;
+        generationTemplate = new Template("generation.html");
+        belegungTemplate = new Template("belegung.html");
+        indexTemplate = new Template("index.html");
+        wagonJsTemplate = new Template("wagon.js");
+        dataJsTemplate = new Template("data.js");
+        cssTemplate = new Template("default.css");
     }
 
     private void erzeugebelegung(Generation generation) {
@@ -46,7 +47,7 @@ public class HtmlReport implements Report {
             String name = String.format("belegung_%s_%s", generation.getName(), i);
             BelegungContext ctx = new BelegungContext();
             ctx.setBelegung(wagonBelegung);
-            belegungTemplate.generiere(ctx, name);
+            belegungTemplate.generiere(getZielPfad(), ctx, name);
             i++;
         }
 
@@ -60,8 +61,12 @@ public class HtmlReport implements Report {
         ctx.setBeschreibung(getBeschreibung());
         ctx.setGeneration(generation);
         ctx.setStartWagonBelegung(startWagonBelegung);
-        generationTemplate.generiere(ctx, name);
-        dataJsTemplate.generiere(ctx, name);
+        generationTemplate.generiere(getZielPfad(), ctx, name);
+        dataJsTemplate.generiere(getZielPfad(), ctx, name);
+    }
+
+    public String getZielPfad() {
+        return zielPfad;
     }
 
     public String getTitel() {
@@ -109,12 +114,12 @@ public class HtmlReport implements Report {
         ctx.setGeneration(gen);
         ctx.setStartWagonBelegung(startWagonBelegung);
         ctx.setGenerationen(generationen);
-        indexTemplate.generiere(ctx);
-        dataJsTemplate.generiere(ctx, "index");
-        wagonJsTemplate.generiere(ctx);
-        cssTemplate.generiere(ctx);
+        indexTemplate.generiere(getZielPfad(), ctx);
+        dataJsTemplate.generiere(getZielPfad(), ctx, "index");
+        wagonJsTemplate.generiere(getZielPfad());
+        cssTemplate.generiere(getZielPfad());
         BelegungContext belegungCtx = new BelegungContext();
         belegungCtx.setBelegung(gen.getBesteWagonBelegung());
-        belegungTemplate.generiere(belegungCtx);
+        belegungTemplate.generiere(getZielPfad(), belegungCtx);
     }
 }

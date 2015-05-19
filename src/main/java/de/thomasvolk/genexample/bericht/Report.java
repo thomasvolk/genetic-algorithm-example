@@ -1,4 +1,4 @@
-package de.thomasvolk.genexample.report;
+package de.thomasvolk.genexample.bericht;
 
 import de.thomasvolk.genexample.model.Generation;
 import de.thomasvolk.genexample.model.WagonBelegung;

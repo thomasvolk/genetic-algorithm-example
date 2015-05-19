@@ -2,7 +2,7 @@ package de.thomasvolk.genexample;
 
 import de.thomasvolk.genexample.algorithmus.*;
 import de.thomasvolk.genexample.model.*;
-import de.thomasvolk.genexample.report.HtmlReport;
+import de.thomasvolk.genexample.bericht.HtmlReport;
 import org.apache.commons.cli.*;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;

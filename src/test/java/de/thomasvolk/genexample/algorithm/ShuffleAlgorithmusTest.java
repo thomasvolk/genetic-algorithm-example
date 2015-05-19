@@ -6,7 +6,7 @@ import de.thomasvolk.genexample.model.WagonBelegung;
 import de.thomasvolk.genexample.model.Wertung;
 import de.thomasvolk.genexample.algorithmus.Algorithmus;
 import de.thomasvolk.genexample.algorithmus.ShuffleAlgorithmus;
-import de.thomasvolk.genexample.report.NullReport;
+import de.thomasvolk.genexample.bericht.NullReport;
 import org.junit.Test;
 
 import java.io.IOException;

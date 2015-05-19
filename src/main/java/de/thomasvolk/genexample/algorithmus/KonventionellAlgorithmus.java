@@ -1,7 +1,7 @@
 package de.thomasvolk.genexample.algorithmus;
 
 import de.thomasvolk.genexample.model.*;
-import de.thomasvolk.genexample.report.Report;
+import de.thomasvolk.genexample.bericht.Report;
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.*;
