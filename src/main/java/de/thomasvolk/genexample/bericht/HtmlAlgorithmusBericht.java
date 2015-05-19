@@ -15,9 +15,7 @@ public class HtmlAlgorithmusBericht implements AlgorithmusBericht {
     private final Template generationTemplate;
     private final Template belegungTemplate;
     private final Template indexTemplate;
-    private final Template wagonJsTemplate;
     private final Template dataJsTemplate;
-    private final Template cssTemplate;
     private Generation letzteGeneration;
     private Collection<Generation> generationen = new ArrayList<>();
     private WagonBelegung startWagonBelegung;
@@ -37,8 +35,7 @@ public class HtmlAlgorithmusBericht implements AlgorithmusBericht {
         belegungTemplate = new Template("algorithmus/belegung.html");
         indexTemplate = new Template("algorithmus/index.html");
         dataJsTemplate = new Template("algorithmus/data.js");
-        wagonJsTemplate = new Template("wagon.js");
-        cssTemplate = new Template("default.css");
+
     }
 
     private void erzeugebelegung(Generation generation) {
@@ -116,8 +113,6 @@ public class HtmlAlgorithmusBericht implements AlgorithmusBericht {
         ctx.setGenerationen(generationen);
         indexTemplate.generiere(getZielPfad(), ctx);
         dataJsTemplate.generiere(getZielPfad(), ctx, "index");
-        wagonJsTemplate.generiere(getZielPfad());
-        cssTemplate.generiere(getZielPfad());
         BelegungContext belegungCtx = new BelegungContext();
         belegungCtx.setBelegung(gen.getBesteWagonBelegung());
         belegungTemplate.generiere(getZielPfad(), belegungCtx);
