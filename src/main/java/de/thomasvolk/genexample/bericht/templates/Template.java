@@ -13,11 +13,13 @@ import java.util.Map;
 
 public class Template {
     private final String name;
+    private final String dir;
     private final String extension;
 
 
     public Template(String name) {
         this.name = FilenameUtils.getBaseName(name);
+        this.dir = FilenameUtils.getPath(name);
         this.extension = FilenameUtils.getExtension(name);
     }
 
@@ -54,8 +56,8 @@ public class Template {
 
 
     public void generiere(Writer out, Map<String, Object> binding) {
-        try (InputStreamReader reader = new InputStreamReader(getClass().getResourceAsStream("/report/" + getName() +
-                "." + getExtension()))) {
+        try (InputStreamReader reader = new InputStreamReader(
+                getClass().getResourceAsStream("/report/" + getDir() + "/" + getName() + "." + getExtension()))) {
             SimpleTemplateEngine templateEngine = new SimpleTemplateEngine();
             groovy.text.Template template = templateEngine.createTemplate(reader);
             Writable writable = template.make(binding);
@@ -65,4 +67,7 @@ public class Template {
         }
     }
 
+    public String getDir() {
+        return dir;
+    }
 }

@@ -33,11 +33,11 @@ public class HtmlReport implements Report {
         this.schritte = schritte;
         new File(zielPfad).mkdirs();
         this.zielPfad = zielPfad;
-        generationTemplate = new Template("generation.html");
-        belegungTemplate = new Template("belegung.html");
-        indexTemplate = new Template("index.html");
+        generationTemplate = new Template("algorithmus/generation.html");
+        belegungTemplate = new Template("algorithmus/belegung.html");
+        indexTemplate = new Template("algorithmus/index.html");
+        dataJsTemplate = new Template("algorithmus/data.js");
         wagonJsTemplate = new Template("wagon.js");
-        dataJsTemplate = new Template("data.js");
         cssTemplate = new Template("default.css");
     }
 
