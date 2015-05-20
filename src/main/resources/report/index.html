@@ -9,5 +9,10 @@
 <body>
 <h1>Genetische Algorithmen</h1>
 <p></p>
+<ul>
+    <% ctx.algorithmusTypen.each { alg -> %>
+<li><a href="$alg/index.html">$alg</a></li>
+    <% } %>
+</ul>
 </body>
 </html>

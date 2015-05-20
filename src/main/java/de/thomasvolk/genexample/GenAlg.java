@@ -13,7 +13,7 @@ import java.util.List;
 
 public class GenAlg {
 
-    public static void main( String[] args ) throws IOException, ParseException {
+    public static void main(String[] args) throws IOException, ParseException {
         System.out.println("Genetische Algorithmen");
 
         Options options = new Options();
@@ -28,7 +28,7 @@ public class GenAlg {
         CommandLineParser parser = new PosixParser();
         try {
             CommandLine cmd = parser.parse(options, args);
-            if(cmd.hasOption('h')) {
+            if (cmd.hasOption('h')) {
                 printUsage(options);
                 System.exit(0);
             }
@@ -48,10 +48,10 @@ public class GenAlg {
             reportDir = StringUtils.isBlank(reportDir) ? "report" : reportDir;
             String wagonDatei = cmd.getOptionValue('w');
             String passagierDatei = cmd.getOptionValue('l');
-            if(wagonDatei == null) {
+            if (wagonDatei == null) {
                 wagonDatei = erzeugeBeispielDatei("wagon.txt");
             }
-            if(passagierDatei == null) {
+            if (passagierDatei == null) {
                 passagierDatei = erzeugeBeispielDatei("passagiere.csv");
             }
             System.out.println("Wagon Datein: " + wagonDatei);
@@ -63,11 +63,9 @@ public class GenAlg {
 
             WagonFactory wagonFactory = new WagonFactory();
             PassagierFactory passagierFactory = new CSVPassagierFactory();
+
             GenAlg genAlg = new GenAlg(wagonFactory, passagierFactory);
-            for(AlgorithmusTyp algorithmusTyp: alg) {
-                System.out.println("Algorithmus: " + algorithmusTyp);
-                genAlg.berechnen(algorithmusTyp, passagierDatei, wagonDatei, reportDir, schritte, generationen, populationen);
-            }
+            genAlg.run(alg, passagierDatei, wagonDatei, reportDir, schritte, generationen, populationen);
         } catch (ParseException e) {
             printErrorAndExit(e, options);
         }
@@ -93,7 +91,7 @@ public class GenAlg {
 
     private static void printUsage(Options options) {
         HelpFormatter formatter = new HelpFormatter();
-        formatter.printHelp( "java -jar genetic.jar", options );
+        formatter.printHelp("java -jar genetic.jar", options);
     }
 
     private static Option option(String name, String descr) {
@@ -110,24 +108,36 @@ public class GenAlg {
         this.passagierFactory = passagierFactory;
     }
 
-    public void berechnen(AlgorithmusTyp algTyp, String passagierDatei, String wagonDatei, String reportDir, int schritte,
-                          int generationen, int populationen) throws IOException {
-        try(InputStream wagonSrc = new FileInputStream(wagonDatei);
-            InputStream passagierQuelle = new FileInputStream(passagierDatei)) {
+    public void run(AlgorithmusTyp[] algorithmen, String passagierDatei, String wagonDatei,
+                    String reportDir, int schritte,
+                    int generationen, int populationen) throws IOException {
+        try (InputStream wagonSrc = new FileInputStream(wagonDatei);
+             InputStream passagierQuelle = new FileInputStream(passagierDatei)) {
             Wagon wagon = wagonFactory.lese(wagonSrc);
             List<Passagier> passagierListe = passagierFactory.lese(passagierQuelle, wagon.getSitzplatzListe().length);
-            AlgorithmusFactory algorithmusFactory = new AlgorithmusFactory();
-            Algorithmus algorithmus = algorithmusFactory.erzeugeAlgorithmus(algTyp, passagierListe.toArray(new Passagier[passagierListe.size()]), wagon);
-            if(algorithmus instanceof AbstractGenerationAlgorithmus) {
-                ((AbstractGenerationAlgorithmus) algorithmus).setMaxEvolutions(generationen);
+            HtmlBericht bericht = new HtmlBericht(reportDir, schritte, wagon);
+            for (AlgorithmusTyp algorithmusTyp : algorithmen) {
+                System.out.println("Algorithmus: " + algorithmusTyp);
+                berechnen(algorithmusTyp, bericht, passagierListe, wagon,
+                        generationen, populationen);
             }
-            if(algorithmus instanceof GeneticAlgorithmus) {
-                ((GeneticAlgorithmus) algorithmus).setPopulationSize(populationen);
-            }
-            HtmlBericht bericht = new HtmlBericht(reportDir, schritte);
-            algorithmus.berechneWagon(bericht.newAlgorithmusBericht(algTyp));
             bericht.generiere();
         }
+    }
+
+    private void berechnen(AlgorithmusTyp algTyp, HtmlBericht bericht,
+                           List<Passagier> passagierListe, Wagon wagon,
+                           int generationen, int populationen) throws IOException {
+        AlgorithmusFactory algorithmusFactory = new AlgorithmusFactory();
+        Algorithmus algorithmus = algorithmusFactory.erzeugeAlgorithmus(algTyp,
+                passagierListe.toArray(new Passagier[passagierListe.size()]), wagon);
+        if (algorithmus instanceof AbstractGenerationAlgorithmus) {
+            ((AbstractGenerationAlgorithmus) algorithmus).setMaxEvolutions(generationen);
+        }
+        if (algorithmus instanceof GeneticAlgorithmus) {
+            ((GeneticAlgorithmus) algorithmus).setPopulationSize(populationen);
+        }
+        algorithmus.berechneWagon(bericht.newAlgorithmusBericht(algTyp));
     }
 
     private static String erzeugeBeispielDatei(String beispielDatei) throws IOException {
