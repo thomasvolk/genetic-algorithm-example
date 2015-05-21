@@ -9,6 +9,10 @@
 <body>
 <h1>Genetische Algorithmen</h1>
 <p></p>
+<canvas id="startWagon" width="2000" height="200"></canvas>
+<script>
+      wagon.zeichnen('startWagon', 0, 0, data.startWagon, "plain");
+  </script>
 <ul>
     <% ctx.algorithmusTypen.each { alg -> %>
 <li><a href="$alg/index.html">$alg</a></li>

@@ -117,7 +117,7 @@ public class GenAlg {
             List<Passagier> passagierListe = passagierFactory.lese(passagierQuelle, wagon.getSitzplatzListe().length);
             WagonBelegung wagonBelegung = new WagonBelegung(wagon,
                     passagierListe.toArray(new Passagier[passagierListe.size()]));
-            HtmlBericht bericht = new HtmlBericht(reportDir, schritte, wagon);
+            HtmlBericht bericht = new HtmlBericht(reportDir, schritte, wagonBelegung);
             for (AlgorithmusTyp algorithmusTyp : algorithmen) {
                 System.out.println("Algorithmus: " + algorithmusTyp);
                 berechnen(algorithmusTyp, bericht, wagonBelegung,

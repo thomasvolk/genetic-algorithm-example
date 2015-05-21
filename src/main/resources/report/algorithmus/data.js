@@ -49,7 +49,12 @@ def toJson(wagonBelegung) {
 %>
 data = {};
 data.startWagon=<%=toJson(ctx.startWagonBelegung)%>;
+
+<% if(ctx.generation) { %>
+
 <% ctx.generation.wagonBelegungen.eachWithIndex { w, i ->
   println "data.wagon_$i=" + toJson(w)
 } %>;
 data.besterWagon=<%=toJson(ctx.generation.besteWagonBelegung)%>
+
+<% } /* if */ %>
