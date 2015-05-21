@@ -2,6 +2,7 @@ package de.thomasvolk.genexample.algorithm;
 
 
 import de.thomasvolk.genexample.algorithmus.Algorithmus;
+import de.thomasvolk.genexample.algorithmus.AlgorithmusTyp;
 import de.thomasvolk.genexample.algorithmus.KonventionellAlgorithmus;
 import de.thomasvolk.genexample.model.Passagier;
 import de.thomasvolk.genexample.model.WagonBelegung;
@@ -16,10 +17,6 @@ import static org.junit.Assert.assertEquals;
 
 public class KonventionellAlgorithmusTest extends AbstractAlgorithmusTest {
 
-
-    protected Algorithmus getAlgorithmus(Passagier[]passagiere) {
-        return new KonventionellAlgorithmus(passagiere, getWagon());
-    }
 
 
     @Test
@@ -56,5 +53,8 @@ public class KonventionellAlgorithmusTest extends AbstractAlgorithmusTest {
     }
 
 
-
+    @Override
+    protected AlgorithmusTyp getAlgorithmusTyp() {
+        return AlgorithmusTyp.KONVENTIONELL;
+    }
 }

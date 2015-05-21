@@ -8,8 +8,8 @@ import java.util.*;
 
 public class KonventionellAlgorithmus extends AbstractAlgorithmus {
 
-    public KonventionellAlgorithmus(Passagier[] passagierListe, Wagon wagon) {
-        super(wagon, passagierListe);
+    public KonventionellAlgorithmus(WagonBelegung wagonBelegung) {
+        super(wagonBelegung);
     }
 
     @Override

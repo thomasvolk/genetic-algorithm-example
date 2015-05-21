@@ -6,8 +6,8 @@ import de.thomasvolk.genexample.bericht.AlgorithmusBericht;
 public abstract class AbstractGenerationAlgorithmus extends AbstractAlgorithmus {
     private int maxEvolutions = 1000;
 
-    public AbstractGenerationAlgorithmus(Passagier[] passagierListe, Wagon wagon) {
-        super(wagon, passagierListe);
+    public AbstractGenerationAlgorithmus(WagonBelegung wagonBelegung) {
+        super(wagonBelegung);
     }
 
 

@@ -26,8 +26,8 @@ public class GeneticAlgorithmus extends AbstractGenerationAlgorithmus {
     private int populationSize = 6;
     private Genotype genotype;
 
-    public GeneticAlgorithmus(Passagier[] passagierListe, Wagon wagon) {
-        super(passagierListe, wagon);
+    public GeneticAlgorithmus(WagonBelegung wagonBelegung) {
+        super(wagonBelegung);
     }
 
     public int getPopulationSize() {

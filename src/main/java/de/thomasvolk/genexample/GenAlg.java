@@ -115,10 +115,12 @@ public class GenAlg {
              InputStream passagierQuelle = new FileInputStream(passagierDatei)) {
             Wagon wagon = wagonFactory.lese(wagonSrc);
             List<Passagier> passagierListe = passagierFactory.lese(passagierQuelle, wagon.getSitzplatzListe().length);
+            WagonBelegung wagonBelegung = new WagonBelegung(wagon,
+                    passagierListe.toArray(new Passagier[passagierListe.size()]));
             HtmlBericht bericht = new HtmlBericht(reportDir, schritte, wagon);
             for (AlgorithmusTyp algorithmusTyp : algorithmen) {
                 System.out.println("Algorithmus: " + algorithmusTyp);
-                berechnen(algorithmusTyp, bericht, passagierListe, wagon,
+                berechnen(algorithmusTyp, bericht, wagonBelegung,
                         generationen, populationen);
             }
             bericht.generiere();
@@ -126,11 +128,10 @@ public class GenAlg {
     }
 
     private void berechnen(AlgorithmusTyp algTyp, HtmlBericht bericht,
-                           List<Passagier> passagierListe, Wagon wagon,
+                           WagonBelegung wagonBelegung,
                            int generationen, int populationen) throws IOException {
         AlgorithmusFactory algorithmusFactory = new AlgorithmusFactory();
-        Algorithmus algorithmus = algorithmusFactory.erzeugeAlgorithmus(algTyp,
-                passagierListe.toArray(new Passagier[passagierListe.size()]), wagon);
+        Algorithmus algorithmus = algorithmusFactory.erzeugeAlgorithmus(algTyp, wagonBelegung);
         if (algorithmus instanceof AbstractGenerationAlgorithmus) {
             ((AbstractGenerationAlgorithmus) algorithmus).setMaxEvolutions(generationen);
         }

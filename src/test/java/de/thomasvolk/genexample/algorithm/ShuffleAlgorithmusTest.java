@@ -1,6 +1,7 @@
 package de.thomasvolk.genexample.algorithm;
 
 
+import de.thomasvolk.genexample.algorithmus.AlgorithmusTyp;
 import de.thomasvolk.genexample.model.Passagier;
 import de.thomasvolk.genexample.model.WagonBelegung;
 import de.thomasvolk.genexample.model.Wertung;
@@ -14,10 +15,6 @@ import java.io.IOException;
 import static org.junit.Assert.assertEquals;
 
 public class ShuffleAlgorithmusTest extends AbstractAlgorithmusTest {
-
-    protected Algorithmus getAlgorithmus(Passagier[] passagiere) {
-        return new ShuffleAlgorithmus(passagiere, getWagon());
-    }
 
 
     @Test
@@ -45,5 +42,10 @@ public class ShuffleAlgorithmusTest extends AbstractAlgorithmusTest {
         Algorithmus algorithmus = getAlgorithmus(passagiere);
         assertEquals(400, new WagonBelegung(getWagon(), passagiere).getZufriedenheit(), 0);
         assertEquals(600, algorithmus.berechneWagon(NullAlgorithmusBericht.INSTANCE).getZufriedenheit(), 0);
+    }
+
+    @Override
+    protected AlgorithmusTyp getAlgorithmusTyp() {
+        return AlgorithmusTyp.SHUFFLE;
     }
 }

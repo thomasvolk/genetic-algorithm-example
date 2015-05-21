@@ -8,8 +8,8 @@ import de.thomasvolk.genexample.model.WagonBelegung;
 public abstract class AbstractAlgorithmus implements Algorithmus {
     private final WagonBelegung wagonBelegung;
 
-    public AbstractAlgorithmus(Wagon wagon, Passagier[] passagierListe) {
-        this.wagonBelegung = new WagonBelegung(wagon, passagierListe);
+    public AbstractAlgorithmus(WagonBelegung wagonBelegung) {
+        this.wagonBelegung = wagonBelegung;
     }
 
     public Sitzplatz[] getSitzplatzListe() {

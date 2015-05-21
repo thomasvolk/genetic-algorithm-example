@@ -2,6 +2,7 @@ package de.thomasvolk.genexample.algorithm;
 
 
 import de.thomasvolk.genexample.algorithmus.Algorithmus;
+import de.thomasvolk.genexample.algorithmus.AlgorithmusTyp;
 import de.thomasvolk.genexample.algorithmus.GeneticAlgorithmus;
 import de.thomasvolk.genexample.model.Passagier;
 import de.thomasvolk.genexample.model.WagonBelegung;
@@ -21,9 +22,6 @@ public class GeneticAlgorithmusTest extends AbstractAlgorithmusTest {
     private Path tempdir;
     private HtmlAlgorithmusBericht report;
 
-    protected Algorithmus getAlgorithmus(Passagier[] passagiere) {
-        return new GeneticAlgorithmus(passagiere, getWagon());
-    }
 
     @Before
     public void prepare() throws IOException {
@@ -65,5 +63,10 @@ public class GeneticAlgorithmusTest extends AbstractAlgorithmusTest {
         Algorithmus algorithmus = getAlgorithmus(passagiere);
         assertEquals(400, new WagonBelegung(getWagon(), passagiere).getZufriedenheit(), 0);
         assertEquals(600, algorithmus.berechneWagon(report).getZufriedenheit(), 0);
+    }
+
+    @Override
+    protected AlgorithmusTyp getAlgorithmusTyp() {
+        return AlgorithmusTyp.GENETISCH;
     }
 }

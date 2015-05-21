@@ -11,8 +11,8 @@ public class ShuffleAlgorithmus extends AbstractGenerationAlgorithmus {
     private int[] bestShuffle;
     private double hoechsteZufriedenheit;
 
-    public ShuffleAlgorithmus(Passagier[] passagierListe, Wagon wagon) {
-        super(passagierListe, wagon);
+    public ShuffleAlgorithmus(WagonBelegung wagonBelegung) {
+        super(wagonBelegung);
         reihenfolge =  getWagonBelegung().getPassagierReihenfolge();
         bestShuffle = reihenfolge;
         hoechsteZufriedenheit = getWagonBelegung().getZufriedenheit();
