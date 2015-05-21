@@ -1,6 +1,7 @@
 wagon = {}
-wagon.zeichnen = function(canvasId, startX, startY, wagon) {
-    var sitzPlaetze = wagon.wagon.sitzPlaetze;
+wagon.zeichnen = function(canvasId, startX, startY, wagonDaten, inHighlight) {
+    var highlight = inHighlight || true;
+    var sitzPlaetze = wagonDaten.wagon.sitzPlaetze;
     var reihen = sitzPlaetze.length;
     var plaetze = reihen > 0 ? sitzPlaetze[0].length : 0;
 
@@ -38,7 +39,7 @@ wagon.zeichnen = function(canvasId, startX, startY, wagon) {
       for(var p = 0; p < reihe.length; p++) {
         var sitzPlatz = reihe[p];
         sitzFarbe = '#fff'
-        if(sitzPlatz.z >= 0) {
+        if(sitzPlatz.z >= 0 && highlight) {
           var red = parseInt(( 1.0 - sitzPlatz.z) * 255);
           var green = parseInt(sitzPlatz.z * 255);
           sitzFarbe = 'rgb(' + red +  ', ' + green + ', 0)';
@@ -87,13 +88,15 @@ wagon.zeichnen = function(canvasId, startX, startY, wagon) {
           context.stroke();
           context.fillStyle = '#666666';
           context.fill();
-          // nummer
-          context.beginPath();
-          context.font = '6pt Calibri';
-          context.textAlign = 'center';
-          context.fillStyle = '#000000';
-          var xTextOffset = sitzPlatz.fr ? 0 : padding;
-          context.fillText(sitzPlatz.pid, x + xTextOffset + padding * 3, y + padding * 3.5);
+          // Passagier Id
+          if(highlight) {
+              context.beginPath();
+              context.font = '6pt Calibri';
+              context.textAlign = 'center';
+              context.fillStyle = '#000000';
+              var xTextOffset = sitzPlatz.fr ? 0 : padding;
+              context.fillText(sitzPlatz.pid, x + xTextOffset + padding * 3, y + padding * 3.5);
+          }
         }
       }
     }
