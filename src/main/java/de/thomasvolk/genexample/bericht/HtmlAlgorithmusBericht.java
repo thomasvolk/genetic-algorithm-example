@@ -34,7 +34,7 @@ public class HtmlAlgorithmusBericht implements AlgorithmusBericht {
         generationTemplate = new Template("algorithmus/generation.html");
         belegungTemplate = new Template("algorithmus/belegung.html");
         indexTemplate = new Template("algorithmus/index.html");
-        dataJsTemplate = new Template("algorithmus/data.js");
+        dataJsTemplate = new Template("data.js");
 
     }
 

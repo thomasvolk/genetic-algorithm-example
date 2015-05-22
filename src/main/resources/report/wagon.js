@@ -1,4 +1,4 @@
-data = {};
+
 wagon = {};
 wagon.zeichnen = function(canvasId, startX, startY, wagonDaten, inModus) {
     var modus = inModus || "highlight";

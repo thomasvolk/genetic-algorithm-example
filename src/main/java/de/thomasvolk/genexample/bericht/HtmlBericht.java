@@ -23,7 +23,7 @@ public class HtmlBericht {
         wagonJsTemplate = new Template("wagon.js");
         cssTemplate = new Template("default.css");
         indexTemplate = new Template("index.html");
-        wagonBelegungDataJsTemplate = new Template("algorithmus/data.js");
+        wagonBelegungDataJsTemplate = new Template("data.js");
     }
 
     public String getZielPfad() {
