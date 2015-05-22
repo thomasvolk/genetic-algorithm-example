@@ -2,7 +2,6 @@ package de.thomasvolk.genexample.bericht;
 
 import de.thomasvolk.genexample.algorithmus.AlgorithmusTyp;
 import de.thomasvolk.genexample.bericht.templates.Template;
-import de.thomasvolk.genexample.model.Wagon;
 import de.thomasvolk.genexample.model.WagonBelegung;
 
 import java.util.*;
@@ -14,7 +13,7 @@ public class HtmlBericht {
     private final Template wagonJsTemplate;
     private final Template cssTemplate;
     private final Template indexTemplate;
-    private final Template dataJsTemplate;
+    private final Template wagonBelegungDataJsTemplate;
     private final Set<String> algorithmusTypen = new HashSet<>();
 
     public HtmlBericht(String zielPfad, int schritte, WagonBelegung wagonBelegung) {
@@ -24,7 +23,7 @@ public class HtmlBericht {
         wagonJsTemplate = new Template("wagon.js");
         cssTemplate = new Template("default.css");
         indexTemplate = new Template("index.html");
-        dataJsTemplate = new Template("algorithmus/data.js");
+        wagonBelegungDataJsTemplate = new Template("algorithmus/data.js");
     }
 
     public String getZielPfad() {
@@ -47,6 +46,6 @@ public class HtmlBericht {
         ctx.put("algorithmusTypen", algorithmusTypen);
         ctx.put("startWagonBelegung", wagonBelegung);
         indexTemplate.generiere(getZielPfad(), ctx);
-        dataJsTemplate.generiere(getZielPfad(), ctx, "index");
+        wagonBelegungDataJsTemplate.generiere(getZielPfad(), ctx, "index");
     }
 }

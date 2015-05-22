@@ -47,7 +47,6 @@ def toJson(wagonBelegung) {
   jb.toPrettyString()
 }
 %>
-data = {};
 data.startWagon=<%=toJson(ctx.startWagonBelegung)%>;
 
 <% if(ctx.generation) { %>
