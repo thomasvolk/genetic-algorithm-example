@@ -34,7 +34,7 @@
           <td>$spv.passagier.wertung.fahrtRichtung</td>
           <td>$spv.passagier.wertung.fensterPlatz</td>
           <td>$spv.passagier.wertung.abteil</td>
-          <td>$spv.zufriedenheit</td>
+          <td><%=spv.zufriedenheitFaktor >= 0 ? String.format('%.2f', spv.zufriedenheitFaktor * 100 ) + '%' : '' %></td>
       </tr>
     <% } %>
     </tbody>

@@ -41,7 +41,7 @@ public class WagonBelegung {
     }
 
     public double getZufriedenheit() {
-        return getSitzplatzVergabeListe().stream().map(SitzplatzVergabe::getZufriedenheit).reduce(0.0, (a, v) -> a + v);
+        return getSitzplatzVergabeListe().stream().map(SitzplatzVergabe::getZufriedenheit).reduce(0, (a, v) -> a + v);
     }
 
     public double getMaximaleZufriedenheit() {
