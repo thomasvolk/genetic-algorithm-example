@@ -73,25 +73,15 @@ wagon.zeichnen = function(canvasId, startX, startY, wagonDaten, inModus) {
           context.fill();
           // polster
           context.beginPath();
-          context.fillStyle = '#666666';
-          context.strokeStyle = '#666666';
-          var centerOffset = (recSize/2);
-          var xOffset = sitzPlatz.fr ? recSize : 0;
-          var arcOffset = sitzPlatz.fr ? 0.5 : 0;
-          context.moveTo(x + xOffset, y);
-          context.arc(x + xOffset, y, padding*2, arcOffset * Math.PI, (0.5 + arcOffset) * Math.PI);
-          context.fill();
-          context.moveTo(x + xOffset, y + recSize);
-          context.arc(x + xOffset, y + recSize, padding*2, (1.5 - arcOffset) * Math.PI, (arcOffset * 3) * Math.PI);
-          context.fill();
-          context.moveTo(x + xOffset, y);
-          context.quadraticCurveTo(x + centerOffset, y + centerOffset, x + xOffset, y + recSize);
-          var lehneLaenge = (recSize / 2);
-          var lehneOffset = sitzPlatz.fr ? lehneLaenge : 0;
-          context.rect(x + lehneOffset, y, lehneLaenge, padding);
-          context.rect(x + lehneOffset, y + recSize - padding, lehneLaenge, padding);
+          context.fillStyle = '#000';
+          context.strokeStyle = '#000';
+          var xOffset = sitzPlatz.fr ? recSize - border: 0;
+          var xOffsetArm = sitzPlatz.fr ? (recSize / 2) - border: 0;
+          context.rect(x + xOffset, y, border, recSize);
+          context.rect(x + xOffsetArm, y, recSize / 2, border);
+          context.rect(x + xOffsetArm, y + recSize - border, recSize / 2, border);
           context.stroke();
-          context.fillStyle = '#666666';
+          context.fillStyle = '#000';
           context.fill();
           // Passagier Id
           if(modus == "highlight") {
