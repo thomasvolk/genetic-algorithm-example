@@ -86,6 +86,10 @@ wagon.zeichnen = function(canvasId, startX, startY, wagonDaten, inModus) {
           context.fill();
           context.moveTo(x + xOffset, y);
           context.quadraticCurveTo(x + centerOffset, y + centerOffset, x + xOffset, y + recSize);
+          var lehneLaenge = (recSize / 2);
+          var lehneOffset = sitzPlatz.fr ? lehneLaenge : 0;
+          context.rect(x + lehneOffset, y, lehneLaenge, padding);
+          context.rect(x + lehneOffset, y + recSize - padding, lehneLaenge, padding);
           context.stroke();
           context.fillStyle = '#666666';
           context.fill();
