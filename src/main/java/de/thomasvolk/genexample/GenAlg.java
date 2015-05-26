@@ -142,7 +142,9 @@ public class GenAlg {
     }
 
     private static String erzeugeBeispielDatei(String beispielDatei) throws IOException {
-        IOUtils.copy(GenAlg.class.getResourceAsStream("/" + beispielDatei), new FileOutputStream(beispielDatei));
+        if(!new File(beispielDatei).exists()) {
+            IOUtils.copy(GenAlg.class.getClassLoader().getResourceAsStream(beispielDatei), new FileOutputStream(beispielDatei));
+        }
         return beispielDatei;
     }
 

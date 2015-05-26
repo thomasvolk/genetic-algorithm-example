@@ -3,7 +3,6 @@ package de.thomasvolk.genexample.bericht.templates;
 import groovy.lang.Writable;
 import groovy.text.SimpleTemplateEngine;
 import org.apache.commons.io.FilenameUtils;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -15,12 +14,14 @@ public class Template {
     private final String name;
     private final String dir;
     private final String extension;
+    private final String path;
 
 
-    public Template(String name) {
-        this.name = FilenameUtils.getBaseName(name);
-        this.dir = FilenameUtils.getPath(name);
-        this.extension = FilenameUtils.getExtension(name);
+    public Template(String path) {
+        this.name = FilenameUtils.getBaseName(path);
+        this.dir = FilenameUtils.getPath(path);
+        this.extension = FilenameUtils.getExtension(path);
+        this.path = path;
     }
 
     public String getName() {
@@ -56,14 +57,15 @@ public class Template {
 
 
     public void generiere(Writer out, Map<String, Object> binding) {
+        String tpl = "de/thomasvolk/genexample/bericht/templates/report/" + path;
         try (InputStreamReader reader = new InputStreamReader(
-                getClass().getResourceAsStream("/report/" + getDir() + "/" + getName() + "." + getExtension()))) {
+                Template.class.getClassLoader().getResourceAsStream(tpl))) {
             SimpleTemplateEngine templateEngine = new SimpleTemplateEngine();
             groovy.text.Template template = templateEngine.createTemplate(reader);
             Writable writable = template.make(binding);
             writable.writeTo(out);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e) {
+            throw new RuntimeException(tpl, e);
         }
     }
 
