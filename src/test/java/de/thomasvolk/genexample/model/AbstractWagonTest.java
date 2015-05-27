@@ -51,6 +51,7 @@ public class AbstractWagonTest {
     }
 
     protected Passagier[] getPassagiere(int von, int bis, Wertung w) {
-        return IntStream.range(von, bis).mapToObj(i -> new Passagier(i, w)).collect(Collectors.toCollection(ArrayList::new)).toArray(new Passagier[] {});
+        return IntStream.range(von, bis).mapToObj(i -> new Passagier(i, w)).collect(
+                Collectors.toCollection(ArrayList::new)).toArray(new Passagier[] {});
     }
 }

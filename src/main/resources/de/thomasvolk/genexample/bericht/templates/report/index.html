@@ -8,15 +8,38 @@
 </head>
 <body>
 <h1>Genetische Algorithmen</h1>
-<p></p>
+<h2>Algorithmen</h2>
+<ul>
+    <% ctx.algorithmusTypen.each { alg -> %>
+    <li><a href="$alg/index.html">$alg</a></li>
+    <% } %>
+</ul>
+<h2>Wagon</h2>
 <canvas id="startWagon" width="2000" height="200"></canvas>
 <script>
       wagon.zeichnen('startWagon', 0, 0, data.startWagon, "plain");
-  </script>
-<ul>
-    <% ctx.algorithmusTypen.each { alg -> %>
-<li><a href="$alg/index.html">$alg</a></li>
+</script>
+<h2>Passagiere</h2>
+<table>
+    <thead>
+    <tr>
+        <td>id</td>
+        <td>Fahrtrichtung</td>
+        <td>Fenster</td>
+        <td>Abteil</td>
+    </tr>
+    </thead>
+    <tbody>
+    <% ctx.startWagonBelegung.sitzplatzVergabeListe.each { spv -> %>
+    <tr>
+        <td>$spv.passagier.id</td>
+        <td>$spv.passagier.wertung.fahrtRichtung</td>
+        <td>$spv.passagier.wertung.fensterPlatz</td>
+        <td>$spv.passagier.wertung.abteil</td>
+    </tr>
     <% } %>
-</ul>
+    </tbody>
+</table>
+
 </body>
 </html>
