@@ -74,7 +74,7 @@
         <plugin>
             <artifactId>maven-assembly-plugin</artifactId>
             <configuration>
-                <finalName>genetic</finalName>
+                <finalName>gen</finalName>
                 <archive>
                     <manifest>
                         <mainClass>de.thomasvolk.genexample.GenAlg</mainClass>
@@ -90,6 +90,24 @@
                     <phase>package</phase>
                     <goals>
                         <goal>single</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+        <plugin>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>1.8</version>
+            <executions>
+                <execution>
+                    <phase>package</phase>
+                    <configuration>
+                        <target>
+                            <move file="${project.build.directory}/gen-jar-with-dependencies.jar"
+                                  tofile="${project.build.directory}/gen.jar"/>
+                        </target>
+                    </configuration>
+                    <goals>
+                        <goal>run</goal>
                     </goals>
                 </execution>
             </executions>

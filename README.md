@@ -7,4 +7,4 @@ Software übersetzen:
 
 Starten:
 
-    java -jar target/genetic-jar-with-dependencies.jar
+    java -jar target/gen.jar
