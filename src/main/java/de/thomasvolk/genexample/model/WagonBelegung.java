@@ -55,11 +55,11 @@ public class WagonBelegung {
         this.passagierReihenfolge = passagierReihenfolge;
     }
 
-    public double getZufriedenheit() {
+    public int getZufriedenheit() {
         return getSitzplatzVergabeListe().stream().map(SitzplatzVergabe::getZufriedenheit).reduce(0, (a, v) -> a + v);
     }
 
-    public double getMaximaleZufriedenheit() {
+    public int getMaximaleZufriedenheit() {
         return getSitzplatzVergabeListe().stream().map(SitzplatzVergabe::getPassagier).map(Passagier::getMaximaleZufriedenheit).reduce(0, (a, v) -> a + v);
     }
 

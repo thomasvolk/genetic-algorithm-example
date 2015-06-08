@@ -30,6 +30,14 @@ public class Wertung {
         this.fahrtRichtung = fahrtRichtung;
     }
 
+    public int getMaximaleZufriedenheit() {
+        return norm(getFahrtRichtung()) + norm(getFensterPlatz()) + norm(getAbteil());
+    }
+
+    private int norm(int wert) {
+        return wert < 0 ? 0 : wert;
+    }
+
     public int getFensterPlatz() {
         return fensterPlatz;
     }
