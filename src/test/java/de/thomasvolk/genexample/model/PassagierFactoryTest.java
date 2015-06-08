@@ -36,7 +36,7 @@ public class PassagierFactoryTest {
         assertEquals(10, pasagiere.size());
         Iterator<Passagier> iterator = pasagiere.iterator();
         Passagier passagier = iterator.next();
-        assertEquals(200, passagier.getWertung().getFahrtRichtung());
+        assertEquals(100, passagier.getWertung().getFahrtRichtung());
         pasagiere = factory.lese(getClass().getResourceAsStream(src), 100);
         assertEquals(100, pasagiere.size());
     }
