@@ -15,6 +15,10 @@
   </script>
   Zufriedenheit: <%=w.zufriedenheit %>
   <a href="belegung_${ctx.generation.name}_${i}.html">Belegung</a>
+
+  <p>
+      Genom: <%=w.sitzplatzVergabeListe.collect { sv -> sv.passagier.id }.join('-') %>
+  </p>
   <% } %>
   </body>
 </html>      
