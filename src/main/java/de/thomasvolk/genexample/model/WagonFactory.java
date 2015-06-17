@@ -61,27 +61,27 @@ public class WagonFactory {
     }
 
     public Wagon lese(String text) {
-        String[] lines = text.split("\\n");
+        String[] lines = text.split("\\r?\\n");
         List<Sitzplatz> sitzplatzListe = new ArrayList<>();
         int breite = lines.length;
         int position = breite - 1;
-        int reihen = 0;
+        int anzahlReihen = 0;
         for(String line: lines) {
-            int reihe = 0;
+            int reiheInZeile = 0;
             for (char eigenschaft : line.toCharArray()) {
-                Sitzplatz sitzplatz = erzeuge(reihe, position, breite, eigenschaft);
+                Sitzplatz sitzplatz = erzeuge(reiheInZeile, position, breite, eigenschaft);
                 if(sitzplatz != null) {
                     sitzplatzListe.add(sitzplatz);
                 }
-                reihe++;
+                reiheInZeile++;
             }
-            if(reihe > reihen) {
-                reihen = reihe;
+            if(reiheInZeile > anzahlReihen) {
+                anzahlReihen = reiheInZeile;
             }
             position--;
         }
         Sitzplatz[] sitzPLaetze = sitzplatzListe.stream().sorted((s1, s2) -> s1.getNummer() - s2.getNummer()).collect(
                 Collectors.toCollection(ArrayList::new)).toArray(new Sitzplatz[sitzplatzListe.size()]);
-        return new Wagon(sitzPLaetze, reihen, breite);
+        return new Wagon(sitzPLaetze, anzahlReihen, breite);
     }
 }
