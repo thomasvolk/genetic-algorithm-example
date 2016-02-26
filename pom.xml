@@ -8,9 +8,6 @@
   <name>genetischeAlgorithmen</name>
   <url>https://github.com/thomasvolk/algorithmTest</url>
 
-  <properties>
-  </properties>
-
   <dependencies>
     <dependency>
       <groupId>net.sf.jgap</groupId>
