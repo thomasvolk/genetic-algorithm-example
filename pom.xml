@@ -7,8 +7,10 @@
   <version>1.0-SNAPSHOT</version>
   <name>genetischeAlgorithmen</name>
   <url>https://github.com/thomasvolk/algorithmTest</url>
-    <properties>
-    </properties>
+
+  <properties>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>net.sf.jgap</groupId>
