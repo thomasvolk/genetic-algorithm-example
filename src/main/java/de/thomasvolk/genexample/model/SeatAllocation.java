@@ -75,7 +75,7 @@ public class SeatAllocation {
     @Override
     public String toString() {
         return "SitzplatzVergabe{" +
-                "sitzplatz=" + sitzplatz.getNummer() +
+                "sitzplatz=" + sitzplatz.getNumber() +
                 ", passagier=" + passagier.getId() +
                 ", zufriedenheit=" + getZufriedenheit() +
                 '}';

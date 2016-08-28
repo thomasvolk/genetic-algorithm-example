@@ -35,41 +35,41 @@ public class WagonFactoryTest {
 
         assertEquals(104, wagon.getSitzplatzListe().length);
         Seat sitzplatz = wagon.getSitzplatzListe()[0];
-        assertEquals(2, sitzplatz.getNummer());
+        assertEquals(2, sitzplatz.getNumber());
         assertEquals(1, sitzplatz.getPosition());
-        assertEquals(0, sitzplatz.getReihe());
+        assertEquals(0, sitzplatz.getRow());
         assertFalse(sitzplatz.isFenster());
         assertTrue(sitzplatz.isAbteil());
         assertTrue(sitzplatz.isInFahrtrichtung());
 
         sitzplatz = wagon.getSitzplatzListe()[5];
-        assertEquals(8, sitzplatz.getNummer());
+        assertEquals(8, sitzplatz.getNumber());
         assertEquals(3, sitzplatz.getPosition());
-        assertEquals(1, sitzplatz.getReihe());
+        assertEquals(1, sitzplatz.getRow());
         assertTrue(sitzplatz.isFenster());
         assertTrue(sitzplatz.isAbteil());
         assertFalse(sitzplatz.isInFahrtrichtung());
 
         sitzplatz = wagon.getSitzplatzListe()[97];
-        assertEquals(104, sitzplatz.getNummer());
+        assertEquals(104, sitzplatz.getNumber());
         assertEquals(3, sitzplatz.getPosition());
-        assertEquals(25, sitzplatz.getReihe());
+        assertEquals(25, sitzplatz.getRow());
         assertTrue(sitzplatz.isFenster());
         assertFalse(sitzplatz.isAbteil());
         assertFalse(sitzplatz.isInFahrtrichtung());
 
         sitzplatz = wagon.getSitzplatzListe()[94];
-        assertEquals(101, sitzplatz.getNummer());
+        assertEquals(101, sitzplatz.getNumber());
         assertEquals(0, sitzplatz.getPosition());
-        assertEquals(25, sitzplatz.getReihe());
+        assertEquals(25, sitzplatz.getRow());
         assertTrue(sitzplatz.isFenster());
         assertFalse(sitzplatz.isAbteil());
         assertFalse(sitzplatz.isInFahrtrichtung());
 
         sitzplatz = wagon.getSitzplatzListe()[93];
-        assertEquals(100, sitzplatz.getNummer());
+        assertEquals(100, sitzplatz.getNumber());
         assertEquals(3, sitzplatz.getPosition());
-        assertEquals(24, sitzplatz.getReihe());
+        assertEquals(24, sitzplatz.getRow());
         assertTrue(sitzplatz.isFenster());
         assertFalse(sitzplatz.isAbteil());
         assertFalse(sitzplatz.isInFahrtrichtung());

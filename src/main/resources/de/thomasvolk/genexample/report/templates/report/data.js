@@ -18,10 +18,10 @@ def toJson(wagonBelegung) {
   def aktuelleReihe = []
   def aktuelleReiheNummer = 0
   wagonBelegung.sitzplatzVergabeListe.each { sv ->
-    if(sv.sitzplatz.reihe != aktuelleReiheNummer && aktuelleReihe) {
+    if(sv.sitzplatz.row != aktuelleReiheNummer && aktuelleReihe) {
       reihen << aktuelleReihe
       aktuelleReihe = []
-      aktuelleReiheNummer = sv.sitzplatz.reihe
+      aktuelleReiheNummer = sv.sitzplatz.row
     }
     aktuelleReihe << sv
   }
@@ -30,7 +30,7 @@ def toJson(wagonBelegung) {
   jb.wagon {
     sitzPlaetze( reihen.collect { reihe ->
        reiheAuffuellen(reihe.collect { sv ->
-           [ sid: sv.sitzplatz.nummer,
+           [ sid: sv.sitzplatz.number,
               pid: sv.passagier.id,
               fr: sv.sitzplatz.inFahrtrichtung,
               a: sv.sitzplatz.abteil,

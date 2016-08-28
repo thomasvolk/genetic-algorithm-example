@@ -73,7 +73,7 @@ public class WagonAllocation {
             int sitzplatz = passagierReihenfolge[i];
             result.add(new SeatAllocation(getSitzplatzListe()[sitzplatz], passagierListe[i]));
         }
-        result.sort((sv1, sv2) -> sv1.getSitzplatz().getNummer() - sv2.getSitzplatz().getNummer());
+        result.sort((sv1, sv2) -> sv1.getSitzplatz().getNumber() - sv2.getSitzplatz().getNumber());
         return result;
     }
 

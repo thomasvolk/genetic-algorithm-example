@@ -80,7 +80,7 @@ public class WagonFactory {
             }
             position--;
         }
-        Seat[] sitzPLaetze = sitzplatzListe.stream().sorted((s1, s2) -> s1.getNummer() - s2.getNummer()).collect(
+        Seat[] sitzPLaetze = sitzplatzListe.stream().sorted((s1, s2) -> s1.getNumber() - s2.getNumber()).collect(
                 Collectors.toCollection(ArrayList::new)).toArray(new Seat[sitzplatzListe.size()]);
         return new Wagon(sitzPLaetze, anzahlReihen, breite);
     }

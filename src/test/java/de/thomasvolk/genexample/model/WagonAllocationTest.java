@@ -60,13 +60,13 @@ public class WagonAllocationTest extends AbstractWagonTest {
         List<SeatAllocation> sitzplatzVergabeListe = wagonBelegung.getSitzplatzVergabeListe();
         SeatAllocation sitzplatzVergabe = sitzplatzVergabeListe.get(0);
         assertEquals(1, sitzplatzVergabe.getPassagier().getId());
-        assertEquals(1, sitzplatzVergabe.getSitzplatz().getNummer());
+        assertEquals(1, sitzplatzVergabe.getSitzplatz().getNumber());
         sitzplatzVergabe = sitzplatzVergabeListe.get(14);
         assertEquals(0, sitzplatzVergabe.getPassagier().getId());
-        assertEquals(15, sitzplatzVergabe.getSitzplatz().getNummer());
+        assertEquals(15, sitzplatzVergabe.getSitzplatz().getNumber());
         sitzplatzVergabe = sitzplatzVergabeListe.get(5);
         assertEquals(6, sitzplatzVergabe.getPassagier().getId());
-        assertEquals(6, sitzplatzVergabe.getSitzplatz().getNummer());
+        assertEquals(6, sitzplatzVergabe.getSitzplatz().getNumber());
     }
 
 }

@@ -17,24 +17,24 @@
 package de.thomasvolk.genexample.model;
 
 public class Seat {
-    private final int nummer;
-    private final int reihe;
+    private final int number;
+    private final int row;
     private final int position;
     private final boolean inFahrtrichtung;
     private final boolean abteil;
     private final boolean fenster;
 
-    public Seat(int nummer, int reihe, int position, boolean fenster, boolean inFahrtrichtung, boolean abteil) {
-        this.nummer = nummer;
-        this.reihe = reihe;
+    public Seat(int number, int row, int position, boolean fenster, boolean inFahrtrichtung, boolean abteil) {
+        this.number = number;
+        this.row = row;
         this.position = position;
         this.fenster = fenster;
         this.inFahrtrichtung = inFahrtrichtung;
         this.abteil = abteil;
     }
 
-    public int getReihe() {
-        return reihe;
+    public int getRow() {
+        return row;
     }
 
     public int getPosition() {
@@ -53,8 +53,8 @@ public class Seat {
         return fenster;
     }
 
-    public int getNummer() {
-        return nummer;
+    public int getNumber() {
+        return number;
     }
 
     @Override
@@ -64,20 +64,20 @@ public class Seat {
 
         Seat sitzplatz = (Seat) o;
 
-        return nummer == sitzplatz.nummer;
+        return number == sitzplatz.number;
 
     }
 
     @Override
     public int hashCode() {
-        return nummer;
+        return number;
     }
 
     @Override
     public String toString() {
         return "Sitzplatz{" +
-                "nummer=" + nummer +
-                ", reihe=" + reihe +
+                "nummer=" + number +
+                ", reihe=" + row +
                 ", position=" + position +
                 ", inFahrtrichtung=" + inFahrtrichtung +
                 ", abteil=" + abteil +
