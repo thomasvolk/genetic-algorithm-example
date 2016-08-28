@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 
 public class WagonFactory {
 
-    private Sitzplatz erzeuge(int reihe, int position, int breite, char eigenschaft) {
+    private Seat erzeuge(int reihe, int position, int breite, char eigenschaft) {
         int nummer = (reihe * breite) + position + 1;
         boolean inFahrtrichtung;
         boolean abteil;
@@ -53,7 +53,7 @@ public class WagonFactory {
         int fensterRechts = breite - 1;
         int fensterLinks = 0;
         boolean fenster = position == fensterRechts || position == fensterLinks;
-        return new Sitzplatz(nummer, reihe, position, fenster, inFahrtrichtung, abteil);
+        return new Seat(nummer, reihe, position, fenster, inFahrtrichtung, abteil);
     }
 
     public Wagon lese(InputStream is) throws IOException {
@@ -62,14 +62,14 @@ public class WagonFactory {
 
     public Wagon lese(String text) {
         String[] lines = text.split("\\r?\\n");
-        List<Sitzplatz> sitzplatzListe = new ArrayList<>();
+        List<Seat> sitzplatzListe = new ArrayList<>();
         int breite = lines.length;
         int position = breite - 1;
         int anzahlReihen = 0;
         for(String line: lines) {
             int reiheInZeile = 0;
             for (char eigenschaft : line.toCharArray()) {
-                Sitzplatz sitzplatz = erzeuge(reiheInZeile, position, breite, eigenschaft);
+                Seat sitzplatz = erzeuge(reiheInZeile, position, breite, eigenschaft);
                 if(sitzplatz != null) {
                     sitzplatzListe.add(sitzplatz);
                 }
@@ -80,8 +80,8 @@ public class WagonFactory {
             }
             position--;
         }
-        Sitzplatz[] sitzPLaetze = sitzplatzListe.stream().sorted((s1, s2) -> s1.getNummer() - s2.getNummer()).collect(
-                Collectors.toCollection(ArrayList::new)).toArray(new Sitzplatz[sitzplatzListe.size()]);
+        Seat[] sitzPLaetze = sitzplatzListe.stream().sorted((s1, s2) -> s1.getNummer() - s2.getNummer()).collect(
+                Collectors.toCollection(ArrayList::new)).toArray(new Seat[sitzplatzListe.size()]);
         return new Wagon(sitzPLaetze, anzahlReihen, breite);
     }
 }

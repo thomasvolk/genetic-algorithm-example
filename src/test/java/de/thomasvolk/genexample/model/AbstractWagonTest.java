@@ -41,17 +41,17 @@ public class AbstractWagonTest {
         return wagon;
     }
 
-    protected Passagier[] getPassagiere(String text) throws IOException {
+    protected Passenger[] getPassagiere(String text) throws IOException {
         return getPassagiere(text, ANZAHL_SITZPLAETZE);
     }
 
-    protected Passagier[] getPassagiere(String text, int len) throws IOException {
-        return new CSVPassagierFactory().lese(new ByteArrayInputStream(("Fensterplatz,\"in Fahrtrichtung\",Abteil\n" +
-                text).getBytes()), len).toArray(new Passagier[] {});
+    protected Passenger[] getPassagiere(String text, int len) throws IOException {
+        return new CSVPassengerFactory().lese(new ByteArrayInputStream(("Fensterplatz,\"in Fahrtrichtung\",Abteil\n" +
+                text).getBytes()), len).toArray(new Passenger[] {});
     }
 
-    protected Passagier[] getPassagiere(int von, int bis, Wertung w) {
-        return IntStream.range(von, bis).mapToObj(i -> new Passagier(i, w)).collect(
-                Collectors.toCollection(ArrayList::new)).toArray(new Passagier[] {});
+    protected Passenger[] getPassagiere(int von, int bis, Request w) {
+        return IntStream.range(von, bis).mapToObj(i -> new Passenger(i, w)).collect(
+                Collectors.toCollection(ArrayList::new)).toArray(new Passenger[] {});
     }
 }

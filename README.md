@@ -1,10 +1,10 @@
-Genetische Algorithmen
+Genetic Algorithm
 ======================
 
-Software übersetzen:
+compile:
 
     mvn package
 
-Starten:
+start:
 
     java -jar target/gen.jar

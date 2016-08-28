@@ -21,5 +21,5 @@ import java.io.InputStream;
 import java.util.List;
 
 public interface PassagierFactory {
-    List<Passagier> lese(InputStream is, int anzahl) throws IOException;
+    List<Passenger> lese(InputStream is, int anzahl) throws IOException;
 }

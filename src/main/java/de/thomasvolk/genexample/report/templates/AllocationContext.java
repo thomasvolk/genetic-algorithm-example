@@ -14,29 +14,18 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package de.thomasvolk.genexample.model;
+package de.thomasvolk.genexample.report.templates;
 
-public class Wagon {
-    private final Seat[] sitzplatzListe;
-    private final int reihen;
-    private final int breite;
+import de.thomasvolk.genexample.model.WagonAllocation;
 
+public class AllocationContext {
+    private WagonAllocation belegung;
 
-    public Wagon(Seat[] sitzplatzListe, int reihen, int breite) {
-        this.sitzplatzListe = sitzplatzListe;
-        this.reihen = reihen;
-        this.breite = breite;
+    public WagonAllocation getBelegung() {
+        return belegung;
     }
 
-    public Seat[] getSitzplatzListe() {
-        return sitzplatzListe;
-    }
-
-    public int getReihen() {
-        return reihen;
-    }
-
-    public int getBreite() {
-        return breite;
+    public void setBelegung(WagonAllocation belegung) {
+        this.belegung = belegung;
     }
 }

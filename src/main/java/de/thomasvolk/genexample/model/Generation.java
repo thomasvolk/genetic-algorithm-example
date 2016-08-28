@@ -20,11 +20,11 @@ import java.util.Collection;
 
 public class Generation {
     private final int nummer;
-    private final Collection<WagonBelegung> wagonBelegungen;
+    private final Collection<WagonAllocation> wagonBelegungen;
     private final double zufriedenheit;
-    private final WagonBelegung besteWagonBelegung;
+    private final WagonAllocation besteWagonBelegung;
 
-    public Generation(int nummer, Collection<WagonBelegung> wagonBelegungen, double zufriedenheit, WagonBelegung besterWagon) {
+    public Generation(int nummer, Collection<WagonAllocation> wagonBelegungen, double zufriedenheit, WagonAllocation besterWagon) {
         this.nummer = nummer;
         this.wagonBelegungen = wagonBelegungen;
         this.zufriedenheit = zufriedenheit;
@@ -39,11 +39,11 @@ public class Generation {
         return nummer;
     }
 
-    public Collection<WagonBelegung> getWagonBelegungen() {
+    public Collection<WagonAllocation> getWagonBelegungen() {
         return wagonBelegungen;
     }
 
-    public WagonBelegung getBesteWagonBelegung() {
+    public WagonAllocation getBesteWagonBelegung() {
         return besteWagonBelegung;
     }
 

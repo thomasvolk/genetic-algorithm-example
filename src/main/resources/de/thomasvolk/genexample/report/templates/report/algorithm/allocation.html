@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../default.css">
+  </head>
+  <body>
+    <table>
+    <thead>
+        <tr>
+            <td colspan="4">Sitzplatz</td>
+            <td colspan="5">Passagier</td>
+        </tr>
+        <tr>
+            <td>Nummer</td>
+            <td>in Fahrtrichtung</td>
+            <td>am Fenster</td>
+            <td>im Abteil</td>
+            <td>id</td>
+            <td>Fahrtrichtung</td>
+            <td>Fenster</td>
+            <td>Abteil</td>
+            <td>Zufriedenheit</td>
+        </tr>
+    </thead>
+    <tbody>
+    <% ctx.belegung.sitzplatzVergabeListe.each { spv -> %>
+      <tr>
+          <td>$spv.sitzplatz.nummer</td>
+          <td><%=spv.sitzplatz.inFahrtrichtung ? 'Ja' : '' %></td>
+          <td><%=spv.sitzplatz.fenster ? 'Ja' : '' %></td>
+          <td><%=spv.sitzplatz.abteil ? 'Ja' : '' %></td>
+          <td>$spv.passagier.id</td>
+          <td>$spv.passagier.request.fahrtRichtung</td>
+          <td>$spv.passagier.request.fensterPlatz</td>
+          <td>$spv.passagier.request.abteil</td>
+          <td><%=spv.zufriedenheitFaktor >= 0 ? String.format('%.2f', spv.zufriedenheitFaktor * 100 ) + '%' : '' %></td>
+      </tr>
+    <% } %>
+    </tbody>
+    </table>
+  </body>
+</html>      

@@ -34,7 +34,7 @@ public class WagonFactoryTest {
         assertEquals(4, wagon.getBreite());
 
         assertEquals(104, wagon.getSitzplatzListe().length);
-        Sitzplatz sitzplatz = wagon.getSitzplatzListe()[0];
+        Seat sitzplatz = wagon.getSitzplatzListe()[0];
         assertEquals(2, sitzplatz.getNummer());
         assertEquals(1, sitzplatz.getPosition());
         assertEquals(0, sitzplatz.getReihe());

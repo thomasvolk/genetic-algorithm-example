@@ -14,29 +14,29 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package de.thomasvolk.genexample.model;
+package de.thomasvolk.genexample.algorithm;
 
-public class Wagon {
-    private final Seat[] sitzplatzListe;
-    private final int reihen;
-    private final int breite;
+import de.thomasvolk.genexample.model.Passenger;
+import de.thomasvolk.genexample.model.Seat;
+import de.thomasvolk.genexample.model.Wagon;
+import de.thomasvolk.genexample.model.WagonAllocation;
 
+public abstract class AbstractAlgorithm implements Algorithm {
+    private final WagonAllocation wagonBelegung;
 
-    public Wagon(Seat[] sitzplatzListe, int reihen, int breite) {
-        this.sitzplatzListe = sitzplatzListe;
-        this.reihen = reihen;
-        this.breite = breite;
+    public AbstractAlgorithm(WagonAllocation wagonBelegung) {
+        this.wagonBelegung = wagonBelegung;
     }
 
     public Seat[] getSitzplatzListe() {
-        return sitzplatzListe;
+        return wagonBelegung.getSitzplatzListe();
     }
 
-    public int getReihen() {
-        return reihen;
+    public Passenger[] getPassagierListe() {
+        return wagonBelegung.getPassagierListe();
     }
 
-    public int getBreite() {
-        return breite;
+    public WagonAllocation getWagonBelegung() {
+        return wagonBelegung;
     }
 }
