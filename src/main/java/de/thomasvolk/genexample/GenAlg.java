@@ -38,7 +38,7 @@ public class GenAlg {
         options.addOption(option("w", "Quelldatei Wagon"));
         options.addOption(option("l", "Quelldatei Passagierliste"));
         options.addOption(option("d", "Zielverzeichnis Bericht"));
-        options.addOption(option("a", "Algorithmus Typ " + Arrays.asList(AlgorithmTyp.values()).toString()));
+        options.addOption(option("a", "Algorithmus Typ " + Arrays.asList(AlgorithmType.values()).toString()));
         options.addOption(option("g", "Anzahl der Generationen"));
         options.addOption(option("p", "Anzahl der Populationen"));
         options.addOption("h", false, "Hilfe");
@@ -53,10 +53,10 @@ public class GenAlg {
             int generationen = getNummer(options, cmd.getOptionValue('g'), 2000);
             int populationen = getNummer(options, cmd.getOptionValue('p'), 20);
             int schritte = getNummer(options, cmd.getOptionValue('s'), 100);
-            AlgorithmTyp[] alg = AlgorithmTyp.values();
+            AlgorithmType[] alg = AlgorithmType.values();
             if (cmd.hasOption('a')) {
                 try {
-                    alg = new AlgorithmTyp[]{AlgorithmTyp.valueOf(cmd.getOptionValue('a'))};
+                    alg = new AlgorithmType[]{AlgorithmType.valueOf(cmd.getOptionValue('a'))};
                 } catch (IllegalArgumentException e) {
                     printErrorAndExit(e, options);
                 }
@@ -125,7 +125,7 @@ public class GenAlg {
         this.passagierFactory = passagierFactory;
     }
 
-    public void run(AlgorithmTyp[] algorithmen, String passagierDatei, String wagonDatei,
+    public void run(AlgorithmType[] algorithmen, String passagierDatei, String wagonDatei,
                     String reportDir, int schritte,
                     int generationen, int populationen) throws IOException {
         try (InputStream wagonSrc = new FileInputStream(wagonDatei);
@@ -135,7 +135,7 @@ public class GenAlg {
             WagonAllocation wagonBelegung = new WagonAllocation(wagon,
                     passagierListe.toArray(new Passenger[passagierListe.size()]));
             HtmlReport bericht = new HtmlReport(reportDir, schritte, wagonBelegung);
-            for (AlgorithmTyp algorithmusTyp : algorithmen) {
+            for (AlgorithmType algorithmusTyp : algorithmen) {
                 System.out.println("Algorithmus: " + algorithmusTyp);
                 berechnen(algorithmusTyp, bericht, wagonBelegung,
                         generationen, populationen);
@@ -144,7 +144,7 @@ public class GenAlg {
         }
     }
 
-    private void berechnen(AlgorithmTyp algTyp, HtmlReport bericht,
+    private void berechnen(AlgorithmType algTyp, HtmlReport bericht,
                            WagonAllocation wagonBelegung,
                            int generationen, int populationen) throws IOException {
         AlgorithmFactory algorithmusFactory = new AlgorithmFactory();

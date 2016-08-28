@@ -19,13 +19,13 @@ package de.thomasvolk.genexample.algorithm;
 import de.thomasvolk.genexample.model.WagonAllocation;
 
 public class AlgorithmFactory {
-    public Algorithm erzeugeAlgorithmus(AlgorithmTyp typ, WagonAllocation wagonBelegung) {
+    public Algorithm erzeugeAlgorithmus(AlgorithmType typ, WagonAllocation wagonBelegung) {
         switch (typ) {
-            case GENETISCH:
+            case GENETIC:
                 return new GeneticAlgorithm(wagonBelegung);
             case SHUFFLE:
                 return new ShuffleAlgorithm(wagonBelegung);
-            case KONVENTIONELL:
+            case CONVENTIONAL:
                 return new ConventionalAlgorithm(wagonBelegung);
             default:
                 throw new IllegalStateException("AlgorithmusTyp unbekannt: " + typ);

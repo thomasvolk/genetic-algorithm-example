@@ -28,5 +28,5 @@ build.log
 .hg*
 
 report/*
-/passagiere.csv
+/passengers.csv
 /wagon.txt

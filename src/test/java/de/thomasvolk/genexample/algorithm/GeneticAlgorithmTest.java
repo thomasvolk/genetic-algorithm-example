@@ -21,7 +21,7 @@ import de.thomasvolk.genexample.model.WagonAllocation;
 import de.thomasvolk.genexample.model.Request;
 import de.thomasvolk.genexample.report.HtmlAlgorithmReport;
 import de.thomasvolk.genexample.algorithm.Algorithm;
-import de.thomasvolk.genexample.algorithm.AlgorithmTyp;
+import de.thomasvolk.genexample.algorithm.AlgorithmType;
 import de.thomasvolk.genexample.algorithm.GeneticAlgorithm;
 
 import org.junit.Before;
@@ -82,7 +82,7 @@ public class GeneticAlgorithmTest extends AbstractAlgorithmTest {
     }
 
     @Override
-    protected AlgorithmTyp getAlgorithmusTyp() {
-        return AlgorithmTyp.GENETISCH;
+    protected AlgorithmType getAlgorithmusTyp() {
+        return AlgorithmType.GENETIC;
     }
 }

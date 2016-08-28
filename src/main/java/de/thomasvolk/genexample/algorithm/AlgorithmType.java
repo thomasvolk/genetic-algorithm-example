@@ -16,6 +16,6 @@
  */
 package de.thomasvolk.genexample.algorithm;
 
-public enum AlgorithmTyp {
-    GENETISCH, SHUFFLE, KONVENTIONELL;
+public enum AlgorithmType {
+    GENETIC, SHUFFLE, CONVENTIONAL; 
 }

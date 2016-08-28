@@ -27,9 +27,9 @@
     <% ctx.belegung.sitzplatzVergabeListe.each { spv -> %>
       <tr>
           <td>$spv.sitzplatz.number</td>
-          <td><%=spv.sitzplatz.inFahrtrichtung ? 'Ja' : '' %></td>
-          <td><%=spv.sitzplatz.fenster ? 'Ja' : '' %></td>
-          <td><%=spv.sitzplatz.abteil ? 'Ja' : '' %></td>
+          <td><%=spv.sitzplatz.inFahrtrichtung ? 'yes' : '' %></td>
+          <td><%=spv.sitzplatz.fenster ? 'yes' : '' %></td>
+          <td><%=spv.sitzplatz.abteil ? 'yes' : '' %></td>
           <td>$spv.passagier.id</td>
           <td>$spv.passagier.request.fahrtRichtung</td>
           <td>$spv.passagier.request.fensterPlatz</td>

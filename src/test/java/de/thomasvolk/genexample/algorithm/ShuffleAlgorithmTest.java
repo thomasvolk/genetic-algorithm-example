@@ -21,7 +21,7 @@ import de.thomasvolk.genexample.model.WagonAllocation;
 import de.thomasvolk.genexample.model.Request;
 import de.thomasvolk.genexample.report.NullAlgorithmReport;
 import de.thomasvolk.genexample.algorithm.Algorithm;
-import de.thomasvolk.genexample.algorithm.AlgorithmTyp;
+import de.thomasvolk.genexample.algorithm.AlgorithmType;
 import de.thomasvolk.genexample.algorithm.ShuffleAlgorithm;
 
 import org.junit.Test;
@@ -61,7 +61,7 @@ public class ShuffleAlgorithmTest extends AbstractAlgorithmTest {
     }
 
     @Override
-    protected AlgorithmTyp getAlgorithmusTyp() {
-        return AlgorithmTyp.SHUFFLE;
+    protected AlgorithmType getAlgorithmusTyp() {
+        return AlgorithmType.SHUFFLE;
     }
 }

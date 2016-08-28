@@ -18,7 +18,7 @@ package de.thomasvolk.genexample.algorithm;
 
 import de.thomasvolk.genexample.algorithm.Algorithm;
 import de.thomasvolk.genexample.algorithm.AlgorithmFactory;
-import de.thomasvolk.genexample.algorithm.AlgorithmTyp;
+import de.thomasvolk.genexample.algorithm.AlgorithmType;
 import de.thomasvolk.genexample.model.AbstractWagonTest;
 import de.thomasvolk.genexample.model.Passenger;
 import de.thomasvolk.genexample.model.WagonAllocation;
@@ -28,7 +28,7 @@ import static org.junit.Assert.assertEquals;
 
 public abstract class AbstractAlgorithmTest extends AbstractWagonTest {
 
-    protected abstract AlgorithmTyp getAlgorithmusTyp();
+    protected abstract AlgorithmType getAlgorithmusTyp();
 
     protected Algorithm getAlgorithmus(Passenger[] passagiere) {
         WagonAllocation wagonBelegung = new WagonAllocation(getWagon(), passagiere);

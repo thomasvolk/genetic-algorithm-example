@@ -16,7 +16,7 @@
  */
 package de.thomasvolk.genexample.report;
 
-import de.thomasvolk.genexample.algorithm.AlgorithmTyp;
+import de.thomasvolk.genexample.algorithm.AlgorithmType;
 import de.thomasvolk.genexample.model.WagonAllocation;
 import de.thomasvolk.genexample.report.templates.Template;
 
@@ -50,7 +50,7 @@ public class HtmlReport {
         return schritte;
     }
 
-    public AlgorithmReport newAlgorithmusBericht(AlgorithmTyp algTyp) {
+    public AlgorithmReport newAlgorithmusBericht(AlgorithmType algTyp) {
         algorithmusTypen.add(algTyp.name());
         return new HtmlAlgorithmReport(getZielPfad() + "/" + algTyp.name(), getSchritte());
     }
