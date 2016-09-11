@@ -25,7 +25,7 @@ public class GenerationContext {
     private String titel;
     private String beschreibung;
     private Generation generation;
-    private WagonAllocation startWagonBelegung;
+    private WagonAllocation startWagonAllocation;
     private Collection<Generation> generationen;
 
     public String getTitel() {
@@ -53,11 +53,11 @@ public class GenerationContext {
     }
 
     public WagonAllocation getStartWagonBelegung() {
-        return startWagonBelegung;
+        return startWagonAllocation;
     }
 
     public void setStartWagonBelegung(WagonAllocation startWagonBelegung) {
-        this.startWagonBelegung = startWagonBelegung;
+        this.startWagonAllocation = startWagonBelegung;
     }
 
     public Collection<Generation> getGenerationen() {

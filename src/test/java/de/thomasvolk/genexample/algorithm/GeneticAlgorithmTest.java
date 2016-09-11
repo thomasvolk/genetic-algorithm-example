@@ -56,7 +56,7 @@ public class GeneticAlgorithmTest extends AbstractAlgorithmTest {
         report("GeneticAlgorithmusTest.nullWertungen", "Es wurden keine Wertungen abgegeben.");
         Passenger[] passagiere = getPassagiere(0, ANZAHL_SITZPLAETZE, Request.NULL);
         Algorithm algorithmus = getAlgorithmus(passagiere);
-        WagonAllocation wagonBelegung = algorithmus.berechneWagon(report);
+        WagonAllocation wagonBelegung = algorithmus.calculateWagon(report);
         assertEquals(0, wagonBelegung.getZufriedenheit(), 0);
     }
 
@@ -68,7 +68,7 @@ public class GeneticAlgorithmTest extends AbstractAlgorithmTest {
         Algorithm algorithmus = getAlgorithmus(passagiere);
         WagonAllocation wagonBelegung = new WagonAllocation(getWagon(), passagiere);
         assertEquals(2500, wagonBelegung.getZufriedenheit(), 0);
-        assertEquals(2500, algorithmus.berechneWagon(report).getZufriedenheit(), 0);
+        assertEquals(2500, algorithmus.calculateWagon(report).getZufriedenheit(), 0);
     }
 
 
@@ -78,7 +78,7 @@ public class GeneticAlgorithmTest extends AbstractAlgorithmTest {
         Passenger[] passagiere = getPassagiere("x,x,x\nx,x,\nx,,");
         Algorithm algorithmus = getAlgorithmus(passagiere);
         assertEquals(400, new WagonAllocation(getWagon(), passagiere).getZufriedenheit(), 0);
-        assertEquals(600, algorithmus.berechneWagon(report).getZufriedenheit(), 0);
+        assertEquals(600, algorithmus.calculateWagon(report).getZufriedenheit(), 0);
     }
 
     @Override

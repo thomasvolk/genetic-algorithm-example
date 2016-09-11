@@ -22,8 +22,8 @@ import de.thomasvolk.genexample.report.AlgorithmReport;
 public abstract class AbstractGenerationAlgorithm extends AbstractAlgorithm {
     private int maxEvolutions = 1000;
 
-    public AbstractGenerationAlgorithm(WagonAllocation wagonBelegung) {
-        super(wagonBelegung);
+    public AbstractGenerationAlgorithm(WagonAllocation wagonAllocation) {
+        super(wagonAllocation);
     }
 
 
@@ -38,19 +38,19 @@ public abstract class AbstractGenerationAlgorithm extends AbstractAlgorithm {
     abstract protected Generation getGeneration(int generation);
 
     @Override
-    public WagonAllocation berechneWagon(AlgorithmReport algorithmusBericht) {
-        algorithmusBericht.start(getWagonBelegung());
+    public WagonAllocation calculateWagon(AlgorithmReport algorithmusReport) {
+        algorithmusReport.start(getWagonAllocation());
         int nummer = 0;
         Generation gen = null;
         for (; nummer < getMaxEvolutions(); nummer++) {
             gen = getGeneration(nummer);
 
-            algorithmusBericht.evolutionsSchritt(gen);
-            if(gen.getZufriedenheit() == getWagonBelegung().getMaximaleZufriedenheit()) {
+            algorithmusReport.evolutionsSchritt(gen);
+            if(gen.getZufriedenheit() == getWagonAllocation().getMaximaleZufriedenheit()) {
                 break;
             }
         }
-        algorithmusBericht.ende(gen);
+        algorithmusReport.ende(gen);
         return gen.getBesteWagonBelegung();
     }
 }

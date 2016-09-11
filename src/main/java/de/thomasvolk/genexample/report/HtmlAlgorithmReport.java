@@ -56,7 +56,7 @@ public class HtmlAlgorithmReport implements AlgorithmReport {
 
     private void erzeugebelegung(Generation generation) {
         int i = 0;
-        for(WagonAllocation wagonBelegung: generation.getWagonBelegungen()) {
+        for(WagonAllocation wagonBelegung: generation.getWagonAllocations()) {
             String name = String.format("belegung_%s_%s", generation.getName(), i);
             AllocationContext ctx = new AllocationContext();
             ctx.setBelegung(wagonBelegung);

@@ -155,7 +155,7 @@ public class GenAlg {
         if (algorithmus instanceof GeneticAlgorithm) {
             ((GeneticAlgorithm) algorithmus).setPopulationSize(populationen);
         }
-        algorithmus.berechneWagon(bericht.newAlgorithmusBericht(algTyp));
+        algorithmus.calculateWagon(bericht.newAlgorithmusBericht(algTyp));
     }
 
     private static String erzeugeBeispielDatei(String beispielDatei) throws IOException {

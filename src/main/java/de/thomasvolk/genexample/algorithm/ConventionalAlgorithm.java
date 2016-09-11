@@ -30,8 +30,8 @@ public class ConventionalAlgorithm extends AbstractAlgorithm {
     }
 
     @Override
-    public WagonAllocation berechneWagon(AlgorithmReport algorithmusBericht) {
-        algorithmusBericht.start(getWagonBelegung());
+    public WagonAllocation calculateWagon(AlgorithmReport algorithmusBericht) {
+        algorithmusBericht.start(getWagonAllocation());
         List<Integer> passagierReihenfolge = new ArrayList<>();
         Set<SeatAllocation> vergebenePlaetze = new HashSet<>();
         for (Passenger p : getPassagierListe()) {
@@ -51,7 +51,7 @@ public class ConventionalAlgorithm extends AbstractAlgorithm {
             vergebenePlaetze.add(besterPlatz);
             passagierReihenfolge.add(ausgewaehlterPassagierIndex);
         }
-        WagonAllocation wagonBelegung = new WagonAllocation(getWagonBelegung().getWagon(), getPassagierListe(),
+        WagonAllocation wagonBelegung = new WagonAllocation(getWagonAllocation().getWagon(), getPassagierListe(),
                 ArrayUtils.toPrimitive(passagierReihenfolge.toArray(new Integer[getPassagierListe().length])));
         algorithmusBericht.ende(new Generation(0, Collections.singleton(wagonBelegung), wagonBelegung.getZufriedenheit(), wagonBelegung));
         return wagonBelegung;

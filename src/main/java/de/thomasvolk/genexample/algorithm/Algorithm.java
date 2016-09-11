@@ -20,5 +20,5 @@ import de.thomasvolk.genexample.model.WagonAllocation;
 import de.thomasvolk.genexample.report.AlgorithmReport;
 
 public interface Algorithm {
-    WagonAllocation berechneWagon(AlgorithmReport generator);
+    WagonAllocation calculateWagon(AlgorithmReport generator);
 }

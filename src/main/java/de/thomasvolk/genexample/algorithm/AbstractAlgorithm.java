@@ -36,7 +36,7 @@ public abstract class AbstractAlgorithm implements Algorithm {
         return wagonBelegung.getPassagierListe();
     }
 
-    public WagonAllocation getWagonBelegung() {
+    public WagonAllocation getWagonAllocation() {
         return wagonBelegung;
     }
 }

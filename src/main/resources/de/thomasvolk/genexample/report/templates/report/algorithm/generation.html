@@ -8,7 +8,7 @@
   </head>
   <body>
 
-  <% ctx.generation.wagonBelegungen.eachWithIndex { w, i -> %>
+  <% ctx.generation.wagonAllocations.eachWithIndex { w, i -> %>
   <canvas id="wagon_$i" width="2000" height="200"></canvas>
   <script>
       wagon.zeichnen('wagon_$i', 0, 0, data.wagon_$i);

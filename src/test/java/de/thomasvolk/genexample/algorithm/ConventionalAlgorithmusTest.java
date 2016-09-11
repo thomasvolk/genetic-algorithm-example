@@ -39,7 +39,7 @@ public class ConventionalAlgorithmusTest extends AbstractAlgorithmTest {
     public void nullWertungen() {
         Passenger[] passagiere = getPassagiere(0, ANZAHL_SITZPLAETZE, Request.NULL);
         Algorithm algorithmus = getAlgorithmus(passagiere);
-        int[] passagierReihenfolge = algorithmus.berechneWagon(NullAlgorithmReport.INSTANCE).getPassagierReihenfolge();
+        int[] passagierReihenfolge = algorithmus.calculateWagon(NullAlgorithmReport.INSTANCE).getPassagierReihenfolge();
         assertArrayEquals(new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15}, passagierReihenfolge);
         WagonAllocation wagonBelegung = new WagonAllocation(getWagon(), passagiere, passagierReihenfolge);
         assertEquals(0, wagonBelegung.getZufriedenheit(), 0);
@@ -52,9 +52,9 @@ public class ConventionalAlgorithmusTest extends AbstractAlgorithmTest {
         Algorithm algorithmus = getAlgorithmus(passagiere);
         WagonAllocation wagonBelegung = new WagonAllocation(getWagon(), passagiere);
         assertEquals(2500, wagonBelegung.getZufriedenheit(), 0);
-        assertArrayEquals(new int[]{12, 14, 0, 2, 6, 8, 9, 11, 13, 1, 3, 5, 7, 10, 4, 15}, algorithmus.berechneWagon(NullAlgorithmReport.INSTANCE
+        assertArrayEquals(new int[]{12, 14, 0, 2, 6, 8, 9, 11, 13, 1, 3, 5, 7, 10, 4, 15}, algorithmus.calculateWagon(NullAlgorithmReport.INSTANCE
         ).getPassagierReihenfolge());
-        assertEquals(2500, algorithmus.berechneWagon(NullAlgorithmReport.INSTANCE).getZufriedenheit(), 0);
+        assertEquals(2500, algorithmus.calculateWagon(NullAlgorithmReport.INSTANCE).getZufriedenheit(), 0);
     }
 
 
@@ -62,10 +62,10 @@ public class ConventionalAlgorithmusTest extends AbstractAlgorithmTest {
     public void unterschiedlicheWertungen() throws IOException {
         Passenger[] passagiere = getPassagiere("x,x,x\nx,x,\nx,,");
         Algorithm algorithmus = getAlgorithmus(passagiere);
-        int[] passagierReihenfolge = algorithmus.berechneWagon(NullAlgorithmReport.INSTANCE).getPassagierReihenfolge();
+        int[] passagierReihenfolge = algorithmus.calculateWagon(NullAlgorithmReport.INSTANCE).getPassagierReihenfolge();
         assertEquals(400, new WagonAllocation(getWagon(), passagiere).getZufriedenheit(), 0);
         assertArrayEquals(new int[]{12, 0, 2, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15}, passagierReihenfolge);
-        assertEquals(600, new WagonAllocation(getWagon(), passagiere, algorithmus.berechneWagon(NullAlgorithmReport.INSTANCE).getPassagierReihenfolge()).getZufriedenheit(), 0);
+        assertEquals(600, new WagonAllocation(getWagon(), passagiere, algorithmus.calculateWagon(NullAlgorithmReport.INSTANCE).getPassagierReihenfolge()).getZufriedenheit(), 0);
     }
 
 

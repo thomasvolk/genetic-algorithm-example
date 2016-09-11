@@ -29,15 +29,15 @@ public class ShuffleAlgorithm extends AbstractGenerationAlgorithm {
 
     public ShuffleAlgorithm(WagonAllocation wagonBelegung) {
         super(wagonBelegung);
-        reihenfolge =  getWagonBelegung().getPassagierReihenfolge();
+        reihenfolge =  getWagonAllocation().getPassagierReihenfolge();
         bestShuffle = reihenfolge;
-        hoechsteZufriedenheit = getWagonBelegung().getZufriedenheit();
+        hoechsteZufriedenheit = getWagonAllocation().getZufriedenheit();
 
     }
 
     protected Generation getGeneration(int nummer) {
         reihenfolge = shuffle(reihenfolge);
-        WagonAllocation genWagonBelegung = getWagonBelegung().copy(reihenfolge);
+        WagonAllocation genWagonBelegung = getWagonAllocation().copy(reihenfolge);
         double zufriedenheit = genWagonBelegung.getZufriedenheit();
         Generation generation = new Generation(nummer, Collections.singleton(genWagonBelegung), zufriedenheit, genWagonBelegung);
         if(zufriedenheit > hoechsteZufriedenheit) {
