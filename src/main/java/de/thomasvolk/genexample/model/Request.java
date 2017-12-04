@@ -20,46 +20,46 @@ public class Request {
     public static final Request NULL = new Request(0, 0, 0);
     public static final int EINFACHE_GEWICHTUNG = 100;
     public static final int NULL_GEWICHTUNG = 0;
-    private final int fensterPlatz;
+    private final int windowSeat;
     private final int cabin;
-    private final int fahrtRichtung;
+    private final int drivingDirection;
 
-    public Request(int fensterPlatz, int cabin, int fahrtRichtung) {
-        this.fensterPlatz = fensterPlatz;
+    public Request(int windowSeat, int cabin, int drivingDirection) {
+        this.windowSeat = windowSeat;
         this.cabin = cabin;
-        this.fahrtRichtung = fahrtRichtung;
+        this.drivingDirection = drivingDirection;
     }
 
     public int getMaximaleHappiness() {
-        return norm(getFahrtRichtung()) + norm(getFensterPlatz()) + norm(getCabin());
+        return norm(getDrivingDirection()) + norm(getWindowSeat()) + norm(getCabin());
     }
 
     private int norm(int wert) {
         return wert < 0 ? 0 : wert;
     }
 
-    public int getFensterPlatz() {
-        return fensterPlatz;
+    public int getWindowSeat() {
+        return windowSeat;
     }
 
     public int getCabin() {
         return cabin;
     }
 
-    public int getFahrtRichtung() {
-        return fahrtRichtung;
+    public int getDrivingDirection() {
+        return drivingDirection;
     }
 
     public boolean keineWertung() {
-        return  getCabin() == 0 && getFahrtRichtung() == 0 && getFensterPlatz() == 0;
+        return  getCabin() == 0 && getDrivingDirection() == 0 && getWindowSeat() == 0;
     }
 
     @Override
     public String toString() {
         return "Wertug{" +
-                "fensterPlatz=" + fensterPlatz +
+                "windowSeat=" + windowSeat +
                 ", cabin=" + cabin +
-                ", fahrtRichtung=" + fahrtRichtung +
+                ", drivingDirection=" + drivingDirection +
                 '}';
     }
 }

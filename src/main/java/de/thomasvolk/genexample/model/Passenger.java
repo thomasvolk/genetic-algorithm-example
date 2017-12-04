@@ -39,10 +39,10 @@ public class Passenger {
             value += getRequest().getCabin();
         }
         if(sitzplatz.isFenster()) {
-            value += getRequest().getFensterPlatz();
+            value += getRequest().getWindowSeat();
         }
         if(sitzplatz.isInFahrtrichtung()) {
-            value += getRequest().getFahrtRichtung();
+            value += getRequest().getDrivingDirection();
         }
         return value;
     }

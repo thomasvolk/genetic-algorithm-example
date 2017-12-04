@@ -40,10 +40,10 @@ public class SeatAllocation {
             value += passagier.getRequest().getCabin();
         }
         if(sitzplatz.isFenster()) {
-            value += passagier.getRequest().getFensterPlatz();
+            value += passagier.getRequest().getWindowSeat();
         }
         if(sitzplatz.isInFahrtrichtung()) {
-            value += passagier.getRequest().getFahrtRichtung();
+            value += passagier.getRequest().getDrivingDirection();
         }
         return value;
     }

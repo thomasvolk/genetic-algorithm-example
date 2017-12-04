@@ -31,8 +31,8 @@
           <td><%=spv.sitzplatz.fenster ? 'yes' : '' %></td>
           <td><%=spv.sitzplatz.cabin ? 'yes' : '' %></td>
           <td>$spv.passagier.id</td>
-          <td>$spv.passagier.request.fahrtRichtung</td>
-          <td>$spv.passagier.request.fensterPlatz</td>
+          <td>$spv.passagier.request.drivingDirection</td>
+          <td>$spv.passagier.request.windowSeat</td>
           <td>$spv.passagier.request.cabin</td>
           <td><%=spv.happinessFaktor >= 0 ? String.format('%.2f', spv.happinessFaktor * 100 ) + '%' : '' %></td>
       </tr>
