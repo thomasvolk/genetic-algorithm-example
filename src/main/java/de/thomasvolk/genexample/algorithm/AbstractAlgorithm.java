@@ -28,8 +28,8 @@ public abstract class AbstractAlgorithm implements Algorithm {
         this.wagonBelegung = wagonBelegung;
     }
 
-    public Seat[] getSitzplatzListe() {
-        return wagonBelegung.getSitzplatzListe();
+    public Seat[] getSeatList() {
+        return wagonBelegung.getSeatList();
     }
 
     public Passenger[] getPassagierListe() {

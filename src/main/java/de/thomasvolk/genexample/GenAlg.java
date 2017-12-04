@@ -131,7 +131,7 @@ public class GenAlg {
         try (InputStream wagonSrc = new FileInputStream(wagonDatei);
              InputStream passagierQuelle = new FileInputStream(passagierDatei)) {
             Wagon wagon = wagonFactory.lese(wagonSrc);
-            List<Passenger> passagierListe = passagierFactory.lese(passagierQuelle, wagon.getSitzplatzListe().length);
+            List<Passenger> passagierListe = passagierFactory.lese(passagierQuelle, wagon.getSeatList().length);
             WagonAllocation wagonBelegung = new WagonAllocation(wagon,
                     passagierListe.toArray(new Passenger[passagierListe.size()]));
             HtmlReport bericht = new HtmlReport(reportDir, schritte, wagonBelegung);

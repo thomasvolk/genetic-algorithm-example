@@ -33,8 +33,8 @@ public class WagonFactoryTest {
         assertEquals(28, wagon.getRows());
         assertEquals(4, wagon.getWidth());
 
-        assertEquals(104, wagon.getSitzplatzListe().length);
-        Seat sitzplatz = wagon.getSitzplatzListe()[0];
+        assertEquals(104, wagon.getSeatList().length);
+        Seat sitzplatz = wagon.getSeatList()[0];
         assertEquals(2, sitzplatz.getNumber());
         assertEquals(1, sitzplatz.getPosition());
         assertEquals(0, sitzplatz.getRow());
@@ -42,7 +42,7 @@ public class WagonFactoryTest {
         assertTrue(sitzplatz.isCabin());
         assertTrue(sitzplatz.isInFahrtrichtung());
 
-        sitzplatz = wagon.getSitzplatzListe()[5];
+        sitzplatz = wagon.getSeatList()[5];
         assertEquals(8, sitzplatz.getNumber());
         assertEquals(3, sitzplatz.getPosition());
         assertEquals(1, sitzplatz.getRow());
@@ -50,7 +50,7 @@ public class WagonFactoryTest {
         assertTrue(sitzplatz.isCabin());
         assertFalse(sitzplatz.isInFahrtrichtung());
 
-        sitzplatz = wagon.getSitzplatzListe()[97];
+        sitzplatz = wagon.getSeatList()[97];
         assertEquals(104, sitzplatz.getNumber());
         assertEquals(3, sitzplatz.getPosition());
         assertEquals(25, sitzplatz.getRow());
@@ -58,7 +58,7 @@ public class WagonFactoryTest {
         assertFalse(sitzplatz.isCabin());
         assertFalse(sitzplatz.isInFahrtrichtung());
 
-        sitzplatz = wagon.getSitzplatzListe()[94];
+        sitzplatz = wagon.getSeatList()[94];
         assertEquals(101, sitzplatz.getNumber());
         assertEquals(0, sitzplatz.getPosition());
         assertEquals(25, sitzplatz.getRow());
@@ -66,7 +66,7 @@ public class WagonFactoryTest {
         assertFalse(sitzplatz.isCabin());
         assertFalse(sitzplatz.isInFahrtrichtung());
 
-        sitzplatz = wagon.getSitzplatzListe()[93];
+        sitzplatz = wagon.getSeatList()[93];
         assertEquals(100, sitzplatz.getNumber());
         assertEquals(3, sitzplatz.getPosition());
         assertEquals(24, sitzplatz.getRow());

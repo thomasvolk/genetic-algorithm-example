@@ -17,19 +17,19 @@
 package de.thomasvolk.genexample.model;
 
 public class Wagon {
-    private final Seat[] sitzplatzListe;
+    private final Seat[] seatList;
     private final int rows;
     private final int width;
 
 
-    public Wagon(Seat[] sitzplatzListe, int rows, int width) {
-        this.sitzplatzListe = sitzplatzListe;
+    public Wagon(Seat[] seatList, int rows, int width) {
+        this.seatList = seatList;
         this.rows = rows;
         this.width = width;
     }
 
-    public Seat[] getSitzplatzListe() {
-        return sitzplatzListe;
+    public Seat[] getSeatList() {
+        return seatList;
     }
 
     public int getRows() {

@@ -40,9 +40,9 @@ public class WagonAllocation {
     public WagonAllocation(Wagon wagon, Passenger[] passagierListe, int[] passagierReihenfolge) {
         this.wagon = wagon;
         this.passagierListe = passagierListe;
-        if(wagon.getSitzplatzListe().length != passagierListe.length) {
+        if(wagon.getSeatList().length != passagierListe.length) {
             throw new IllegalStateException(String.format(
-                    "Sitzplatzanzah %s weicht von Passagieranzahl %s ab!", wagon.getSitzplatzListe().length, passagierListe.length));
+                    "Sitzplatzanzah %s weicht von Passagieranzahl %s ab!", wagon.getSeatList().length, passagierListe.length));
         }
         HashSet<Integer> sortierungSet = IntStream.of(passagierReihenfolge).mapToObj(i -> i).collect(Collectors.toCollection(HashSet::new));
         if(passagierReihenfolge.length != passagierListe.length) {
@@ -71,7 +71,7 @@ public class WagonAllocation {
         List<SeatAllocation> result = new ArrayList<>();
         for(int i = 0; i < passagierReihenfolge.length; i++) {
             int sitzplatz = passagierReihenfolge[i];
-            result.add(new SeatAllocation(getSitzplatzListe()[sitzplatz], passagierListe[i]));
+            result.add(new SeatAllocation(getSeatList()[sitzplatz], passagierListe[i]));
         }
         result.sort((sv1, sv2) -> sv1.getSitzplatz().getNumber() - sv2.getSitzplatz().getNumber());
         return result;
@@ -85,8 +85,8 @@ public class WagonAllocation {
         return passagierListe;
     }
 
-    public Seat[] getSitzplatzListe() {
-        return wagon.getSitzplatzListe();
+    public Seat[] getSeatList() {
+        return wagon.getSeatList();
     }
 
     public Wagon getWagon() {
@@ -102,6 +102,6 @@ public class WagonAllocation {
     }
 
     public int getAnzahlPlaetze() {
-        return getSitzplatzListe().length;
+        return getSeatList().length;
     }
 }

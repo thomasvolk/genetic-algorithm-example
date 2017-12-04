@@ -38,7 +38,7 @@ public class ConventionalAlgorithm extends AbstractAlgorithm {
             SeatAllocation besterPlatz = null;
             int index = 0;
             int ausgewaehlterPassagierIndex = 0;
-            for (Seat sp : getSitzplatzListe()) {
+            for (Seat sp : getSeatList()) {
                 SeatAllocation sitzplatzVergabe = new SeatAllocation(sp, p);
                 if (!vergebenePlaetze.contains(sitzplatzVergabe) && !passagierReihenfolge.contains(index)) {
                     if (besterPlatz == null || sitzplatzVergabe.getHappiness() > besterPlatz.getHappiness()) {
