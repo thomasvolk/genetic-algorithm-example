@@ -30,8 +30,8 @@ public class WagonFactoryTest {
     public void lesen() throws IOException {
         WagonFactory factory = new WagonFactory();
         Wagon wagon = factory.lese(getClass().getResourceAsStream("/wagon-test.txt"));
-        assertEquals(28, wagon.getReihen());
-        assertEquals(4, wagon.getBreite());
+        assertEquals(28, wagon.getRows());
+        assertEquals(4, wagon.getWidth());
 
         assertEquals(104, wagon.getSitzplatzListe().length);
         Seat sitzplatz = wagon.getSitzplatzListe()[0];

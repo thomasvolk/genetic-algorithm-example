@@ -18,8 +18,8 @@ wagon = {};
 wagon.zeichnen = function(canvasId, startX, startY, wagonDaten, inModus) {
     var modus = inModus || "highlight";
     var sitzPlaetze = wagonDaten.wagon.sitzPlaetze;
-    var reihen = sitzPlaetze.length;
-    var plaetze = reihen > 0 ? sitzPlaetze[0].length : 0;
+    var rows = sitzPlaetze.length;
+    var plaetze = rows > 0 ? sitzPlaetze[0].length : 0;
 
     var canvas = document.getElementById(canvasId);
     var context = canvas.getContext('2d');
@@ -35,7 +35,7 @@ wagon.zeichnen = function(canvasId, startX, startY, wagonDaten, inModus) {
     var recSpaceY = recSize + padding;
     var recSpaceX = recSize + space + padding;
 
-    var width = (reihen * recSpaceX) + padding;
+    var width = (rows * recSpaceX) + padding;
     var height = (plaetze * recSpaceY) + padding;
 
     context.beginPath();

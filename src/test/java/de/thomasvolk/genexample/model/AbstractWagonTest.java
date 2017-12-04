@@ -33,8 +33,8 @@ public class AbstractWagonTest {
 
     @Test
     public void wagonGeometrie() {
-        Assert.assertEquals(REIHEN, wagon.getReihen());
-        Assert.assertEquals(BREITE, wagon.getBreite());
+        Assert.assertEquals(REIHEN, wagon.getRows());
+        Assert.assertEquals(BREITE, wagon.getWidth());
     }
 
     public Wagon getWagon() {

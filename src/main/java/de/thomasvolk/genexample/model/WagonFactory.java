@@ -26,8 +26,8 @@ import java.util.stream.Collectors;
 
 public class WagonFactory {
 
-    private Seat erzeuge(int reihe, int position, int breite, char eigenschaft) {
-        int nummer = (reihe * breite) + position + 1;
+    private Seat erzeuge(int reihe, int position, int width, char eigenschaft) {
+        int nummer = (reihe * width) + position + 1;
         boolean inFahrtrichtung;
         boolean cabin;
         switch (eigenschaft) {
@@ -50,7 +50,7 @@ public class WagonFactory {
             default:
                 return null;
         }
-        int fensterRechts = breite - 1;
+        int fensterRechts = width - 1;
         int fensterLinks = 0;
         boolean fenster = position == fensterRechts || position == fensterLinks;
         return new Seat(nummer, reihe, position, fenster, inFahrtrichtung, cabin);
@@ -63,13 +63,13 @@ public class WagonFactory {
     public Wagon lese(String text) {
         String[] lines = text.split("\\r?\\n");
         List<Seat> sitzplatzListe = new ArrayList<>();
-        int breite = lines.length;
-        int position = breite - 1;
+        int width = lines.length;
+        int position = width - 1;
         int anzahlReihen = 0;
         for(String line: lines) {
             int reiheInZeile = 0;
             for (char eigenschaft : line.toCharArray()) {
-                Seat sitzplatz = erzeuge(reiheInZeile, position, breite, eigenschaft);
+                Seat sitzplatz = erzeuge(reiheInZeile, position, width, eigenschaft);
                 if(sitzplatz != null) {
                     sitzplatzListe.add(sitzplatz);
                 }
@@ -82,6 +82,6 @@ public class WagonFactory {
         }
         Seat[] sitzPLaetze = sitzplatzListe.stream().sorted((s1, s2) -> s1.getNumber() - s2.getNumber()).collect(
                 Collectors.toCollection(ArrayList::new)).toArray(new Seat[sitzplatzListe.size()]);
-        return new Wagon(sitzPLaetze, anzahlReihen, breite);
+        return new Wagon(sitzPLaetze, anzahlReihen, width);
     }
 }

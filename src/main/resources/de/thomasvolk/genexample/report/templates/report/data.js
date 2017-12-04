@@ -7,28 +7,28 @@ def toJson(wagonBelegung) {
       if(r.first().p > 0)  {
         ((r.first().p - 1)..0).each { i -> r.add(i, dummy(i)) }
       }
-      def last = wagon.breite - 1
+      def last = wagon.width - 1
       if(r.last().p < last) {
         ((r.last().p + 1)..last).each { i -> r.add(dummy(i)) }
       }
     }
     r
   }
-  def reihen = []
+  def rows = []
   def aktuelleReihe = []
   def aktuelleReiheNummer = 0
   wagonBelegung.sitzplatzVergabeListe.each { sv ->
     if(sv.sitzplatz.row != aktuelleReiheNummer && aktuelleReihe) {
-      reihen << aktuelleReihe
+      rows << aktuelleReihe
       aktuelleReihe = []
       aktuelleReiheNummer = sv.sitzplatz.row
     }
     aktuelleReihe << sv
   }
-  reihen << aktuelleReihe
+  rows << aktuelleReihe
   def jb = new groovy.json.JsonBuilder()
   jb.wagon {
-    sitzPlaetze( reihen.collect { reihe ->
+    sitzPlaetze( rows.collect { reihe ->
        reiheAuffuellen(reihe.collect { sv ->
            [ sid: sv.sitzplatz.number,
               pid: sv.passagier.id,
