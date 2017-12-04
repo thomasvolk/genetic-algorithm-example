@@ -36,8 +36,8 @@ public class SeatAllocation {
 
     public int getHappiness() {
         int value = 0;
-        if(sitzplatz.isAbteil()) {
-            value += passagier.getRequest().getAbteil();
+        if(sitzplatz.isCabin()) {
+            value += passagier.getRequest().getCabin();
         }
         if(sitzplatz.isFenster()) {
             value += passagier.getRequest().getFensterPlatz();

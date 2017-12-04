@@ -21,16 +21,16 @@ public class Seat {
     private final int row;
     private final int position;
     private final boolean inFahrtrichtung;
-    private final boolean abteil;
+    private final boolean cabin;
     private final boolean fenster;
 
-    public Seat(int number, int row, int position, boolean fenster, boolean inFahrtrichtung, boolean abteil) {
+    public Seat(int number, int row, int position, boolean fenster, boolean inFahrtrichtung, boolean cabin) {
         this.number = number;
         this.row = row;
         this.position = position;
         this.fenster = fenster;
         this.inFahrtrichtung = inFahrtrichtung;
-        this.abteil = abteil;
+        this.cabin = cabin;
     }
 
     public int getRow() {
@@ -45,8 +45,8 @@ public class Seat {
         return inFahrtrichtung;
     }
 
-    public boolean isAbteil() {
-        return abteil;
+    public boolean isCabin() {
+        return cabin;
     }
 
     public boolean isFenster() {
@@ -80,7 +80,7 @@ public class Seat {
                 ", reihe=" + row +
                 ", position=" + position +
                 ", inFahrtrichtung=" + inFahrtrichtung +
-                ", abteil=" + abteil +
+                ", cabin=" + cabin +
                 ", fenster=" + fenster +
                 '}';
     }

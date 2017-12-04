@@ -29,23 +29,23 @@ public class WagonFactory {
     private Seat erzeuge(int reihe, int position, int breite, char eigenschaft) {
         int nummer = (reihe * breite) + position + 1;
         boolean inFahrtrichtung;
-        boolean abteil;
+        boolean cabin;
         switch (eigenschaft) {
             case 'G':
                 inFahrtrichtung = true;
-                abteil = false;
+                cabin = false;
                 break;
             case 'A':
                 inFahrtrichtung = true;
-                abteil = true;
+                cabin = true;
                 break;
             case 'g':
                 inFahrtrichtung = false;
-                abteil = false;
+                cabin = false;
                 break;
             case 'a':
                 inFahrtrichtung = false;
-                abteil = true;
+                cabin = true;
                 break;
             default:
                 return null;
@@ -53,7 +53,7 @@ public class WagonFactory {
         int fensterRechts = breite - 1;
         int fensterLinks = 0;
         boolean fenster = position == fensterRechts || position == fensterLinks;
-        return new Seat(nummer, reihe, position, fenster, inFahrtrichtung, abteil);
+        return new Seat(nummer, reihe, position, fenster, inFahrtrichtung, cabin);
     }
 
     public Wagon lese(InputStream is) throws IOException {

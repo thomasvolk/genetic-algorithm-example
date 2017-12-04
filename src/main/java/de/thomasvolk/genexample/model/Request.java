@@ -21,17 +21,17 @@ public class Request {
     public static final int EINFACHE_GEWICHTUNG = 100;
     public static final int NULL_GEWICHTUNG = 0;
     private final int fensterPlatz;
-    private final int abteil;
+    private final int cabin;
     private final int fahrtRichtung;
 
-    public Request(int fensterPlatz, int abteil, int fahrtRichtung) {
+    public Request(int fensterPlatz, int cabin, int fahrtRichtung) {
         this.fensterPlatz = fensterPlatz;
-        this.abteil = abteil;
+        this.cabin = cabin;
         this.fahrtRichtung = fahrtRichtung;
     }
 
     public int getMaximaleHappiness() {
-        return norm(getFahrtRichtung()) + norm(getFensterPlatz()) + norm(getAbteil());
+        return norm(getFahrtRichtung()) + norm(getFensterPlatz()) + norm(getCabin());
     }
 
     private int norm(int wert) {
@@ -42,8 +42,8 @@ public class Request {
         return fensterPlatz;
     }
 
-    public int getAbteil() {
-        return abteil;
+    public int getCabin() {
+        return cabin;
     }
 
     public int getFahrtRichtung() {
@@ -51,14 +51,14 @@ public class Request {
     }
 
     public boolean keineWertung() {
-        return  getAbteil() == 0 && getFahrtRichtung() == 0 && getFensterPlatz() == 0;
+        return  getCabin() == 0 && getFahrtRichtung() == 0 && getFensterPlatz() == 0;
     }
 
     @Override
     public String toString() {
         return "Wertug{" +
                 "fensterPlatz=" + fensterPlatz +
-                ", abteil=" + abteil +
+                ", cabin=" + cabin +
                 ", fahrtRichtung=" + fahrtRichtung +
                 '}';
     }

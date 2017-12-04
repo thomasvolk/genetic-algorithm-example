@@ -41,8 +41,8 @@ public class CSVPassengerFactory extends AbstractPassengerFactory {
             i++;
             int fahrtrichtung = getWertung(record.get(IN_FAHRTRICHTUNG));
             int fensterplatz = getWertung(record.get(FENSTERPLATZ));
-            int abteil = getWertung(record.get(ABTEIL));
-            Request wertung = new Request(fensterplatz, abteil, fahrtrichtung);
+            int cabin = getWertung(record.get(ABTEIL));
+            Request wertung = new Request(fensterplatz, cabin, fahrtrichtung);
             passagiere.add(new Passenger(i, wertung));
         }
         return passagiere;

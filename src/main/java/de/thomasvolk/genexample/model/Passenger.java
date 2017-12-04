@@ -35,8 +35,8 @@ public class Passenger {
 
     public int getHappiness(Seat sitzplatz) {
         int value = 0;
-        if(sitzplatz.isAbteil()) {
-            value += getRequest().getAbteil();
+        if(sitzplatz.isCabin()) {
+            value += getRequest().getCabin();
         }
         if(sitzplatz.isFenster()) {
             value += getRequest().getFensterPlatz();

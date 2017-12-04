@@ -39,7 +39,7 @@ public class WagonFactoryTest {
         assertEquals(1, sitzplatz.getPosition());
         assertEquals(0, sitzplatz.getRow());
         assertFalse(sitzplatz.isFenster());
-        assertTrue(sitzplatz.isAbteil());
+        assertTrue(sitzplatz.isCabin());
         assertTrue(sitzplatz.isInFahrtrichtung());
 
         sitzplatz = wagon.getSitzplatzListe()[5];
@@ -47,7 +47,7 @@ public class WagonFactoryTest {
         assertEquals(3, sitzplatz.getPosition());
         assertEquals(1, sitzplatz.getRow());
         assertTrue(sitzplatz.isFenster());
-        assertTrue(sitzplatz.isAbteil());
+        assertTrue(sitzplatz.isCabin());
         assertFalse(sitzplatz.isInFahrtrichtung());
 
         sitzplatz = wagon.getSitzplatzListe()[97];
@@ -55,7 +55,7 @@ public class WagonFactoryTest {
         assertEquals(3, sitzplatz.getPosition());
         assertEquals(25, sitzplatz.getRow());
         assertTrue(sitzplatz.isFenster());
-        assertFalse(sitzplatz.isAbteil());
+        assertFalse(sitzplatz.isCabin());
         assertFalse(sitzplatz.isInFahrtrichtung());
 
         sitzplatz = wagon.getSitzplatzListe()[94];
@@ -63,7 +63,7 @@ public class WagonFactoryTest {
         assertEquals(0, sitzplatz.getPosition());
         assertEquals(25, sitzplatz.getRow());
         assertTrue(sitzplatz.isFenster());
-        assertFalse(sitzplatz.isAbteil());
+        assertFalse(sitzplatz.isCabin());
         assertFalse(sitzplatz.isInFahrtrichtung());
 
         sitzplatz = wagon.getSitzplatzListe()[93];
@@ -71,7 +71,7 @@ public class WagonFactoryTest {
         assertEquals(3, sitzplatz.getPosition());
         assertEquals(24, sitzplatz.getRow());
         assertTrue(sitzplatz.isFenster());
-        assertFalse(sitzplatz.isAbteil());
+        assertFalse(sitzplatz.isCabin());
         assertFalse(sitzplatz.isInFahrtrichtung());
 
     }

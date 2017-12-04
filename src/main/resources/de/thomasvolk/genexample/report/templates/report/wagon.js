@@ -64,7 +64,7 @@ wagon.zeichnen = function(canvasId, startX, startY, wagonDaten, inModus) {
           var recX = xbase + (r*recSpaceX);
           var recY = ybase + ((reihe.length - 1) * recSpaceY) - (p*recSpaceY);
           if(sitzPlatz.a) {
-            // abteil
+            // cabin
             context.beginPath();
             var p2 = padding/2;
             context.rect(recX + p2, recY + p2, recSpaceX, recSpaceY);

@@ -25,7 +25,7 @@ import java.util.List;
 public abstract class AbstractPassengerFactory implements PassagierFactory {
     public static final String FENSTERPLATZ = "Fensterplatz";
     public static final String IN_FAHRTRICHTUNG = "in Fahrtrichtung";
-    public static final String ABTEIL = "Abteil";
+    public static final String ABTEIL = "Cabin";
 
     @Override
     public List<Passenger> lese(InputStream is, int anzahl) throws IOException {

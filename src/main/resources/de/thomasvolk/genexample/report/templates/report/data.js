@@ -33,7 +33,7 @@ def toJson(wagonBelegung) {
            [ sid: sv.sitzplatz.number,
               pid: sv.passagier.id,
               fr: sv.sitzplatz.inFahrtrichtung,
-              a: sv.sitzplatz.abteil,
+              a: sv.sitzplatz.cabin,
               z: sv.happinessFaktor,
               p: sv.sitzplatz.position
             ]
