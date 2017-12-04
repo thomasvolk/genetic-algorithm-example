@@ -20,7 +20,7 @@
             <td>driving direction</td>
             <td>window</td>
             <td>cabin</td>
-            <td>satisfaction</td>
+            <td>happiness</td>
         </tr>
     </thead>
     <tbody>
@@ -34,7 +34,7 @@
           <td>$spv.passagier.request.fahrtRichtung</td>
           <td>$spv.passagier.request.fensterPlatz</td>
           <td>$spv.passagier.request.abteil</td>
-          <td><%=spv.zufriedenheitFaktor >= 0 ? String.format('%.2f', spv.zufriedenheitFaktor * 100 ) + '%' : '' %></td>
+          <td><%=spv.happinessFaktor >= 0 ? String.format('%.2f', spv.happinessFaktor * 100 ) + '%' : '' %></td>
       </tr>
     <% } %>
     </tbody>

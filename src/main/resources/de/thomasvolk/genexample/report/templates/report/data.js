@@ -34,27 +34,27 @@ def toJson(wagonBelegung) {
               pid: sv.passagier.id,
               fr: sv.sitzplatz.inFahrtrichtung,
               a: sv.sitzplatz.abteil,
-              z: sv.zufriedenheitFaktor,
+              z: sv.happinessFaktor,
               p: sv.sitzplatz.position
             ]
        })
     }  )
     werte {
-         zufriedenheit(wagonBelegung.zufriedenheit)
-         maximaleZufriedenheit(wagonBelegung.maximaleZufriedenheit)
+         happiness(wagonBelegung.happiness)
+         maximaleHappiness(wagonBelegung.maximaleHappiness)
       }
   }
   jb.toPrettyString()
 }
 %>
 data = {};
-data.startWagon=<%=toJson(ctx.startWagonBelegung)%>;
+data.startWagon=<%=toJson(ctx.startWagonAllocation)%>;
 
 <% if(ctx.generation) { %>
 
 <% ctx.generation.wagonAllocations.eachWithIndex { w, i ->
   println "data.wagon_$i=" + toJson(w)
 } %>;
-data.besterWagon=<%=toJson(ctx.generation.besteWagonBelegung)%>
+data.bestWagon=<%=toJson(ctx.generation.bestWagonAllocation)%>
 
 <% } /* if */ %>

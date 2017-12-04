@@ -41,7 +41,7 @@ public class ConventionalAlgorithm extends AbstractAlgorithm {
             for (Seat sp : getSitzplatzListe()) {
                 SeatAllocation sitzplatzVergabe = new SeatAllocation(sp, p);
                 if (!vergebenePlaetze.contains(sitzplatzVergabe) && !passagierReihenfolge.contains(index)) {
-                    if (besterPlatz == null || sitzplatzVergabe.getZufriedenheit() > besterPlatz.getZufriedenheit()) {
+                    if (besterPlatz == null || sitzplatzVergabe.getHappiness() > besterPlatz.getHappiness()) {
                         besterPlatz = sitzplatzVergabe;
                         ausgewaehlterPassagierIndex = index;
                     }
@@ -53,7 +53,7 @@ public class ConventionalAlgorithm extends AbstractAlgorithm {
         }
         WagonAllocation wagonBelegung = new WagonAllocation(getWagonAllocation().getWagon(), getPassagierListe(),
                 ArrayUtils.toPrimitive(passagierReihenfolge.toArray(new Integer[getPassagierListe().length])));
-        algorithmusBericht.ende(new Generation(0, Collections.singleton(wagonBelegung), wagonBelegung.getZufriedenheit(), wagonBelegung));
+        algorithmusBericht.ende(new Generation(0, Collections.singleton(wagonBelegung), wagonBelegung.getHappiness(), wagonBelegung));
         return wagonBelegung;
     }
 }

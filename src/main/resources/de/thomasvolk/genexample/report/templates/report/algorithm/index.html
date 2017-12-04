@@ -14,13 +14,13 @@
     <script>
       wagon.zeichnen('startWagon', 0, 0, data.startWagon);
   </script>
-    satisfaction: <%=ctx.startWagonBelegung.zufriedenheit %> (maximal: <%=ctx.startWagonBelegung.maximaleZufriedenheit %>)
+    happiness: <%=ctx.startWagonAllocation.happiness %> (maximal: <%=ctx.startWagonAllocation.maximaleHappiness %>)
     <h2>Stop</h2>
-    <canvas id="besterWagon" width="2000" height="200"></canvas>
+    <canvas id="bestWagon" width="2000" height="200"></canvas>
     <script>
-      wagon.zeichnen('besterWagon', 0, 0, data.besterWagon);
+      wagon.zeichnen('bestWagon', 0, 0, data.bestWagon);
   </script>
-    satisfaction: <%=ctx.generation.besteWagonBelegung.zufriedenheit %>
+    happiness: <%=ctx.generation.bestWagonAllocation.happiness %>
     <a href="allocation.html">Allocation</a>
     <h2>Generations</h2>
     <ul>

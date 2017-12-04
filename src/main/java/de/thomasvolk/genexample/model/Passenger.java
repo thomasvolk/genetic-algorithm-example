@@ -33,7 +33,7 @@ public class Passenger {
         return request;
     }
 
-    public int getZufriedenheit(Seat sitzplatz) {
+    public int getHappiness(Seat sitzplatz) {
         int value = 0;
         if(sitzplatz.isAbteil()) {
             value += getRequest().getAbteil();
@@ -47,8 +47,8 @@ public class Passenger {
         return value;
     }
 
-    public int getMaximaleZufriedenheit() {
-        return getRequest().getMaximaleZufriedenheit();
+    public int getMaximaleHappiness() {
+        return getRequest().getMaximaleHappiness();
     }
 
     @Override

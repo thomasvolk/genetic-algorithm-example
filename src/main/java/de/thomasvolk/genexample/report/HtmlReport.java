@@ -60,7 +60,7 @@ public class HtmlReport {
         cssTemplate.generiere(getZielPfad());
         Map<String, Object> ctx = new HashMap<>();
         ctx.put("algorithmusTypen", algorithmusTypen);
-        ctx.put("startWagonBelegung", wagonBelegung);
+        ctx.put("startWagonAllocation", wagonBelegung);
         indexTemplate.generiere(getZielPfad(), ctx);
         wagonBelegungDataJsTemplate.generiere(getZielPfad(), ctx, "index");
     }

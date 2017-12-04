@@ -46,11 +46,11 @@ public abstract class AbstractGenerationAlgorithm extends AbstractAlgorithm {
             gen = getGeneration(nummer);
 
             algorithmusReport.evolutionsSchritt(gen);
-            if(gen.getZufriedenheit() == getWagonAllocation().getMaximaleZufriedenheit()) {
+            if(gen.getHappiness() == getWagonAllocation().getMaximaleHappiness()) {
                 break;
             }
         }
         algorithmusReport.ende(gen);
-        return gen.getBesteWagonBelegung();
+        return gen.getBestWagonAllocation();
     }
 }

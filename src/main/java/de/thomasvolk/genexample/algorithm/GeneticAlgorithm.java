@@ -35,7 +35,7 @@ public class GeneticAlgorithm extends AbstractGenerationAlgorithm {
         @Override
         protected double evaluate(IChromosome aSubject) {
             int[] passagierReihenfolge = JGapUtils.asIntArray(aSubject, wagonBelegung.getAnzahlPlaetze());
-            return wagonBelegung.copy(passagierReihenfolge).getZufriedenheit();
+            return wagonBelegung.copy(passagierReihenfolge).getHappiness();
         }
     }
 
@@ -67,8 +67,8 @@ public class GeneticAlgorithm extends AbstractGenerationAlgorithm {
         List<IChromosome> chromosomes = getGenotype().getPopulation().getChromosomes();
         Stream<int[]> reihenfolgenGeneration = chromosomes.stream().map(c -> JGapUtils.asIntArray(c, getWagonAllocation().getAnzahlPlaetze()));
         Stream<WagonAllocation> wagonStream = reihenfolgenGeneration.map(r -> getWagonAllocation().copy(r));
-        double zufriedenheit = solution.getFitnessValue();
-        WagonAllocation besteWagonBelegung = getWagonAllocation().copy(JGapUtils.asIntArray(solution, getWagonAllocation().getAnzahlPlaetze()));
-        return new Generation(generation, wagonStream.collect(Collectors.toList()), zufriedenheit, besteWagonBelegung);
+        double happiness = solution.getFitnessValue();
+        WagonAllocation bestWagonAllocation = getWagonAllocation().copy(JGapUtils.asIntArray(solution, getWagonAllocation().getAnzahlPlaetze()));
+        return new Generation(generation, wagonStream.collect(Collectors.toList()), happiness, bestWagonAllocation);
     }
 }

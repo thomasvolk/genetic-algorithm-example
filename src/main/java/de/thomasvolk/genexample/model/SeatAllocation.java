@@ -25,16 +25,16 @@ public class SeatAllocation {
         this.passagier = passagier;
     }
 
-    public double getZufriedenheitFaktor() {
-        if(getPassagier().getMaximaleZufriedenheit() == 0) {
+    public double getHappinessFaktor() {
+        if(getPassagier().getMaximaleHappiness() == 0) {
             return -1;
         }
         else {
-            return ((double) getZufriedenheit()) / ((double) getPassagier().getMaximaleZufriedenheit());
+            return ((double) getHappiness()) / ((double) getPassagier().getMaximaleHappiness());
         }
     }
 
-    public int getZufriedenheit() {
+    public int getHappiness() {
         int value = 0;
         if(sitzplatz.isAbteil()) {
             value += passagier.getRequest().getAbteil();
@@ -77,7 +77,7 @@ public class SeatAllocation {
         return "SitzplatzVergabe{" +
                 "sitzplatz=" + sitzplatz.getNumber() +
                 ", passagier=" + passagier.getId() +
-                ", zufriedenheit=" + getZufriedenheit() +
+                ", happiness=" + getHappiness() +
                 '}';
     }
 }

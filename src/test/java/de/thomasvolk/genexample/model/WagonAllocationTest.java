@@ -28,7 +28,7 @@ public class WagonAllocationTest extends AbstractWagonTest {
     public void nullPassagiere() throws IOException {
         Passenger[] passagiere = getPassagiere(0, ANZAHL_SITZPLAETZE, Request.NULL);
         WagonAllocation wagonBelegung = new WagonAllocation(getWagon(), passagiere);
-        assertEquals(0.0, wagonBelegung.getZufriedenheit(), 0);
+        assertEquals(0.0, wagonBelegung.getHappiness(), 0);
     }
 
     @Test
@@ -36,7 +36,7 @@ public class WagonAllocationTest extends AbstractWagonTest {
         Passenger[] passagiere = getPassagiere(0, ANZAHL_SITZPLAETZE,
                 new Request(Request.EINFACHE_GEWICHTUNG,Request.EINFACHE_GEWICHTUNG,Request.EINFACHE_GEWICHTUNG));
         WagonAllocation wagonBelegung = new WagonAllocation(getWagon(), passagiere);
-        assertEquals(Request.EINFACHE_GEWICHTUNG * 25, wagonBelegung.getZufriedenheit(), 0);
+        assertEquals(Request.EINFACHE_GEWICHTUNG * 25, wagonBelegung.getHappiness(), 0);
     }
 
     @Test
@@ -44,7 +44,7 @@ public class WagonAllocationTest extends AbstractWagonTest {
         Passenger[] passagiere = getPassagiere(0, ANZAHL_SITZPLAETZE,
                 new Request(Request.EINFACHE_GEWICHTUNG,Request.EINFACHE_GEWICHTUNG,Request.NULL_GEWICHTUNG));
         WagonAllocation wagonBelegung = new WagonAllocation(getWagon(), passagiere);
-        assertEquals(Request.EINFACHE_GEWICHTUNG * 16, wagonBelegung.getZufriedenheit(), 0);
+        assertEquals(Request.EINFACHE_GEWICHTUNG * 16, wagonBelegung.getHappiness(), 0);
     }
 
     @Test(expected = ArrayStoreException.class)

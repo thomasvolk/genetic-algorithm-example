@@ -30,7 +30,7 @@ public class Request {
         this.fahrtRichtung = fahrtRichtung;
     }
 
-    public int getMaximaleZufriedenheit() {
+    public int getMaximaleHappiness() {
         return norm(getFahrtRichtung()) + norm(getFensterPlatz()) + norm(getAbteil());
     }
 

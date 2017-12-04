@@ -52,12 +52,12 @@ public class GenerationContext {
         this.generation = generation;
     }
 
-    public WagonAllocation getStartWagonBelegung() {
+    public WagonAllocation getStartWagonAllocation() {
         return startWagonAllocation;
     }
 
-    public void setStartWagonBelegung(WagonAllocation startWagonBelegung) {
-        this.startWagonAllocation = startWagonBelegung;
+    public void setStartWagonAllocation(WagonAllocation startWagonAllocation) {
+        this.startWagonAllocation = startWagonAllocation;
     }
 
     public Collection<Generation> getGenerationen() {

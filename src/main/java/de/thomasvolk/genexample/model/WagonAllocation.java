@@ -55,12 +55,12 @@ public class WagonAllocation {
         this.passagierReihenfolge = passagierReihenfolge;
     }
 
-    public int getZufriedenheit() {
-        return getSitzplatzVergabeListe().stream().map(SeatAllocation::getZufriedenheit).reduce(0, (a, v) -> a + v);
+    public int getHappiness() {
+        return getSitzplatzVergabeListe().stream().map(SeatAllocation::getHappiness).reduce(0, (a, v) -> a + v);
     }
 
-    public int getMaximaleZufriedenheit() {
-        return getSitzplatzVergabeListe().stream().map(SeatAllocation::getPassagier).map(Passenger::getMaximaleZufriedenheit).reduce(0, (a, v) -> a + v);
+    public int getMaximaleHappiness() {
+        return getSitzplatzVergabeListe().stream().map(SeatAllocation::getPassagier).map(Passenger::getMaximaleHappiness).reduce(0, (a, v) -> a + v);
     }
 
     public int[] getPassagierReihenfolge() {

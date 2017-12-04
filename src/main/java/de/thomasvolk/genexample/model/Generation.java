@@ -21,18 +21,18 @@ import java.util.Collection;
 public class Generation {
     private final int nummer;
     private final Collection<WagonAllocation> wagonAllocations;
-    private final double zufriedenheit;
-    private final WagonAllocation besteWagonBelegung;
+    private final double happiness;
+    private final WagonAllocation bestWagonAllocation;
 
-    public Generation(int nummer, Collection<WagonAllocation> wagonAllocations, double zufriedenheit, WagonAllocation besterWagon) {
+    public Generation(int nummer, Collection<WagonAllocation> wagonAllocations, double happiness, WagonAllocation bestWagon) {
         this.nummer = nummer;
         this.wagonAllocations = wagonAllocations;
-        this.zufriedenheit = zufriedenheit;
-        this.besteWagonBelegung = besterWagon;
+        this.happiness = happiness;
+        this.bestWagonAllocation = bestWagon;
     }
 
-    public double getZufriedenheit() {
-        return zufriedenheit;
+    public double getHappiness() {
+        return happiness;
     }
 
     public int getNummer() {
@@ -43,8 +43,8 @@ public class Generation {
         return wagonAllocations;
     }
 
-    public WagonAllocation getBesteWagonBelegung() {
-        return besteWagonBelegung;
+    public WagonAllocation getBestWagonAllocation() {
+        return bestWagonAllocation;
     }
 
     public String getName() {

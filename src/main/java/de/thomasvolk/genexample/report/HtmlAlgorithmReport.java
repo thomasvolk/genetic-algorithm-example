@@ -34,7 +34,7 @@ public class HtmlAlgorithmReport implements AlgorithmReport {
     private final Template dataJsTemplate;
     private Generation letzteGeneration;
     private Collection<Generation> generationen = new ArrayList<>();
-    private WagonAllocation startWagonBelegung;
+    private WagonAllocation startWagonAllocation;
     private String titel = "";
     private String beschreibung = "";
     private final String zielPfad;
@@ -73,7 +73,7 @@ public class HtmlAlgorithmReport implements AlgorithmReport {
         ctx.setTitel(getTitel());
         ctx.setBeschreibung(getBeschreibung());
         ctx.setGeneration(generation);
-        ctx.setStartWagonBelegung(startWagonBelegung);
+        ctx.setStartWagonAllocation(startWagonAllocation);
         generationTemplate.generiere(getZielPfad(), ctx, name);
         dataJsTemplate.generiere(getZielPfad(), ctx, name);
     }
@@ -100,7 +100,7 @@ public class HtmlAlgorithmReport implements AlgorithmReport {
 
     @Override
     public void start(WagonAllocation wagonBelegung) {
-        startWagonBelegung = wagonBelegung;
+        startWagonAllocation = wagonBelegung;
     }
 
     @Override
@@ -125,12 +125,12 @@ public class HtmlAlgorithmReport implements AlgorithmReport {
         ctx.setTitel(getTitel());
         ctx.setBeschreibung(getBeschreibung());
         ctx.setGeneration(gen);
-        ctx.setStartWagonBelegung(startWagonBelegung);
+        ctx.setStartWagonAllocation(startWagonAllocation);
         ctx.setGenerationen(generationen);
         indexTemplate.generiere(getZielPfad(), ctx);
         dataJsTemplate.generiere(getZielPfad(), ctx, "index");
         AllocationContext belegungCtx = new AllocationContext();
-        belegungCtx.setBelegung(gen.getBesteWagonBelegung());
+        belegungCtx.setBelegung(gen.getBestWagonAllocation());
         belegungTemplate.generiere(getZielPfad(), belegungCtx);
     }
 }
